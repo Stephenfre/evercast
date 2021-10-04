@@ -13,6 +13,56 @@ const data = {
     currentState: "AZ",
     currentWind: 12,
     precipitation: "12%",
+    hourlyForcast: [
+        {
+            id: 1,
+            time: "7am",
+            condition: "partly cloudy",
+            temp: 74,
+        },
+        {
+            id: 2,
+            time: "8am",
+            condition: "partly cloudy",
+            temp: 79,
+        },
+        {
+            id: 3,
+            time: "9am",
+            condition: "partly cloudy",
+            temp: 83,
+        },
+        {
+            id: 4,
+            time: "10am",
+            condition: "partly cloudy",
+            temp: 86,
+        },
+        {
+            id: 5,
+            time: "11am",
+            condition: "partly cloudy",
+            temp: 88,
+        },
+        {
+            id: 6,
+            time: "12pm",
+            condition: "partly cloudy",
+            temp: 91,
+        },
+        {
+            id: 7,
+            time: "1pm",
+            condition: "partly cloudy",
+            temp: 94,
+        },
+        {
+            id: 8,
+            time: "2pm",
+            condition: "partly cloudy",
+            temp: 96,
+        },
+    ],
     weeklyForcast: [
         {
             id: 1,
@@ -83,8 +133,16 @@ function CurrentWeather() {
                     <Text style={styles.details}>{data.currentWind} kh/m</Text>
                 </View>
             </View>
-            <View style={styles.middleContent}>
-                <Text>Middle</Text>
+            <View style={styles.middleContainer}>
+                {data.hourlyForcast.map((res) => {
+                    return (
+                        <View style={styles.middleContent}>
+                            <Text>{res.time}</Text>
+                            <Text style={{ backgroundColor: "grey", width: 30, height: 30 }}></Text>
+                            <Text>{res.temp}</Text>
+                        </View>
+                    );
+                })}
             </View>
             <View style={styles.bottomContent}>
                 <Text>Bottom</Text>
@@ -102,6 +160,9 @@ const styles = StyleSheet.create({
         // justifyContent: "center",
         alignItems: "center",
     },
+
+    // * TOP CONTAINER
+
     topContainer: {
         height: 250,
         width: "100%",
@@ -109,6 +170,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         marginTop: 50,
     },
+
     topContent: {
         flex: 2,
         flexDirection: "row",
@@ -116,6 +178,7 @@ const styles = StyleSheet.create({
         paddingTop: 70,
         paddingBottom: 50,
     },
+
     rightColumn: {
         height: 200,
         paddingRight: 30,
@@ -123,16 +186,19 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
         alignItems: "center",
     },
+
     cityText: {
         color: "white",
         fontSize: 24,
         fontFamily: "Helvetica",
         letterSpacing: 2,
     },
+
     rigthTempText: {
         color: "white",
         fontSize: 88,
     },
+
     condition: {
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -145,6 +211,7 @@ const styles = StyleSheet.create({
 
         backgroundColor: "gold",
     },
+
     conditionText: {
         color: "white",
         textAlign: "center",
@@ -153,6 +220,7 @@ const styles = StyleSheet.create({
         fontFamily: "Helvetica",
         letterSpacing: 1,
     },
+
     hiloTemp: {
         fontSize: 14,
         fontWeight: "bold",
@@ -160,28 +228,42 @@ const styles = StyleSheet.create({
         fontFamily: "Helvetica",
         paddingTop: 5,
     },
-    currentDetails: {
-        backgroundColor: "darkred",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        width: "60%",
-    },
-    details: {
-        padding: 5,
-        color: "white",
-        fontSize: 14,
-    },
+
     Image: {
         width: 200,
         height: 200,
         marginBottom: 20,
     },
-    middleContent: {
-        height: 50,
+
+    currentDetails: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        width: "60%",
+    },
+
+    details: {
+        padding: 5,
+        color: "white",
+        fontSize: 14,
+    },
+
+    // * MIDDLE CONTAINER
+
+    middleContainer: {
+        height: 100,
         width: "100%",
         backgroundColor: "blue",
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        alignItems: "center",
     },
+
+    middleContent: {
+        alignItems: "center",
+        color: "white",
+    },
+
     bottomContent: {
         height: 50,
         width: "100%",

@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, SafeAreaView, Text, View, Image, Dimensions } from "react-native";
 
+import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -102,10 +103,18 @@ const data = {
         },
     ],
 };
+// background: rgb(206,148,0);
+// background: linear-gradient(51deg, rgba(206,148,0,1) 0%, rgba(183,0,66,1) 96%);
 
 function CurrentWeather() {
     return (
         <View style={styles.container}>
+            <LinearGradient
+                start={{ x: 1, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                colors={["rgb(255,184,0)", "transparent"]}
+                style={styles.background}
+            />
             <SafeAreaView style={styles.topContainer}>
                 <View style={styles.topContent}>
                     <View style={styles.rightColumn}>
@@ -144,9 +153,9 @@ function CurrentWeather() {
                     );
                 })}
             </View>
-            <View style={styles.bottomContent}>
+            {/* <View style={styles.bottomContent}>
                 <Text>Bottom</Text>
-            </View>
+            </View> */}
         </View>
     );
 }
@@ -156,9 +165,17 @@ const styles = StyleSheet.create({
         flex: 3,
         height: "100%",
         width: "100%",
-        backgroundColor: "#FFC700",
+        backgroundColor: "rgb(255, 48, 123)",
         // justifyContent: "center",
         alignItems: "center",
+    },
+
+    background: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        height: "100%",
     },
 
     // * TOP CONTAINER

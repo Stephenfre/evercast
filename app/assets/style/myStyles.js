@@ -75,10 +75,7 @@ export default StyleSheet.create({
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         borderBottomLeftRadius: 10,
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingRight: 5,
-        paddingLeft: 5,
+        padding: 1,
 
         backgroundColor: "gold",
     },

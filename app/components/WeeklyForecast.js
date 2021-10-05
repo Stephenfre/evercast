@@ -97,7 +97,7 @@ const data = {
         {
             id: 6,
             day: "Saturday",
-            hiTemp: 100,
+            hiTemp: 72,
             lowTemp: 62,
         },
     ],
@@ -107,7 +107,6 @@ function WeeklyForecast() {
     return (
         <View style={styles.bottomContent}>
             {data.weeklyForecast.map((res) => {
-                console.log(res.hiTemp === 90);
                 return (
                     <View style={styles.weeklyCast}>
                         <View style={styles.day}>

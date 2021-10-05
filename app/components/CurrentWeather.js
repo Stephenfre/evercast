@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, ScrollView, Text, View, Dimensions } from "react-native";
+import { SafeAreaView, Text, View, Button } from "react-native";
 
 import Partly from "../assets/images/partly.svg";
 import styles from "../assets/style/myStyles";
@@ -19,6 +19,7 @@ const data = {
     currentState: "AZ",
     currentWind: 12,
     precipitation: "12%",
+    raining: "no",
     hourlyForcast: [
         {
             id: 1,
@@ -125,7 +126,12 @@ function CurrentWeather() {
                         <Text style={styles.cityText}>{data.currentCity}</Text>
                         <Text style={styles.rigthTempText}>{data.currentTemp}</Text>
                         <View style={styles.condition}>
-                            <Text style={styles.conditionText}>{data.currentCondition}</Text>
+                            <Button
+                                onPress={() => console.log("you clicked me")}
+                                // style={styles.conditionText}
+                                color="white"
+                                title={data.currentCondition}
+                            />
                         </View>
                         <Text style={styles.hiloTemp}>
                             H:{data.hiTemp} L:{data.lowTemp}
@@ -146,6 +152,11 @@ function CurrentWeather() {
                     <Text style={styles.details}>{data.currentWind} kh/m</Text>
                 </View>
             </View>
+            {data.raining === "yes" ? (
+                <View>
+                    <Text>YES</Text>
+                </View>
+            ) : null}
             <View style={styles.middleContainer}>
                 <View style={styles.opacityMiddleBackground}></View>
                 <View style={{ width: "95%", height: "100%" }}>

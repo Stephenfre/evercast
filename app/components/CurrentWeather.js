@@ -7,7 +7,8 @@ import styles from "../assets/style/CurrentWeatherStyles";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import HourlyForcast from "./HourlyForcast";
+import HourlyForecast from "./HourlyForecast";
+import WeeklyForecast from "./WeeklyForecast";
 
 const data = {
     currentTemp: 88,
@@ -146,11 +147,11 @@ function CurrentWeather() {
                 </View>
             </View>
             <View style={styles.middleContainer}>
-                <HourlyForcast />
+                <HourlyForecast />
             </View>
-            {/* <View style={styles.bottomContent}>
-                <Text>Bottom</Text>
-            </View> */}
+            <View style={styles.bottomContent}>
+                <WeeklyForecast />
+            </View>
         </View>
     );
 }

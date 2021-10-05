@@ -104,7 +104,7 @@ const data = {
     ],
 };
 
-export default function HourlyForcast() {
+export default function HourlyForecast() {
     // componentDidMount() {
     // 	setTimeout(() => {this.scrollView.scrollTo({x: -30}) }, 1) // scroll view position fix
     // }
@@ -117,12 +117,12 @@ export default function HourlyForcast() {
             decelerationRate={0}
             snapToInterval={width - 60}
             snapToAlignment={"center"}
-            contentInset={{
-                top: 0,
-                left: 30,
-                bottom: 0,
-                right: 30,
-            }}
+            // contentInset={{
+            //     top: 0,
+            //     left: 30,
+            //     bottom: 0,
+            //     right: 30,
+            // }}
         >
             {data.hourlyForcast.map((res) => {
                 return (

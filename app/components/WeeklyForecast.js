@@ -97,7 +97,7 @@ const data = {
         {
             id: 6,
             day: "Saturday",
-            hiTemp: 100,
+            hiTemp: 75,
             lowTemp: 62,
         },
     ],
@@ -107,7 +107,6 @@ function WeeklyForecast() {
     return (
         <View style={styles.bottomContent}>
             {data.weeklyForecast.map((res) => {
-                console.log(res.hiTemp === 90);
                 return (
                     <View style={styles.weeklyCast}>
                         <View style={styles.day}>
@@ -120,15 +119,15 @@ function WeeklyForecast() {
                                 alignItems: "center",
                                 justifyContent: "flex-end",
                                 marginLeft: 100,
+                                // width: 160,
+                                // backgroundColor: "red",
+                                // borderBottomColor: "blue",
+                                // borderBottomWidth: 2,
                             }}
                         >
                             <Text style={styles.lowTemp}>{res.lowTemp}</Text>
                             <Text style={{ color: "white", fontSize: 20 }}> | </Text>
-                            {res.temp === 90 ? (
-                                <Text style={styles.hiTempA}>{res.hiTemp}</Text>
-                            ) : (
-                                <Text style={styles.hiTempB}>{res.hiTemp}</Text>
-                            )}
+                            <Text style={styles.hiTemp}>{res.hiTemp}</Text>
                         </View>
                     </View>
                 );

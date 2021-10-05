@@ -131,9 +131,44 @@ export default StyleSheet.create({
         color: "white",
     },
 
+    // * BOTTOM CONTAINER
+
     bottomContent: {
         height: 50,
-        width: "100%",
-        backgroundColor: "green",
+        width: width,
+        // backgroundColor: "green",
+    },
+
+    weeklyCast: {
+        flexDirection: "row",
+        height: 75,
+        alignItems: "center",
+    },
+
+    day: {
+        marginLeft: 20,
+        marginRight: 50,
+        width: 100,
+    },
+
+    dayText: {
+        fontSize: 18,
+        color: "white",
+        fontFamily: "Helvetica",
+        paddingTop: 5,
+    },
+
+    hiTemp: {
+        fontSize: 20,
+        color: "white",
+        fontFamily: "Helvetica",
+        paddingTop: 5,
+    },
+
+    loTemp: {
+        fontSize: 20,
+        color: "#4E4E4E",
+        fontFamily: "Helvetica",
+        paddingTop: 5,
     },
 });

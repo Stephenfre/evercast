@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { View, StyleSheet, ScrollView, Dimensions, Text } from "react-native";
+import React from "react";
+import { ScrollView, View, Text } from "react-native";
 
-import styles from "../assets/style/CurrentWeatherStyles";
+import styles from "../assets/style/myStyles";
 import Partly from "../assets/images/partly.svg";
 
-const { width } = Dimensions.get("window");
 const data = {
     currentTemp: 88,
     hiTemp: 92,
@@ -14,7 +13,7 @@ const data = {
     currentState: "AZ",
     currentWind: 12,
     precipitation: "12%",
-    hourlyForcast: [
+    hourlyForecast: [
         {
             id: 1,
             time: "7am",
@@ -64,7 +63,7 @@ const data = {
             temp: 96,
         },
     ],
-    weeklyForcast: [
+    weeklyForecast: [
         {
             id: 1,
             day: "Monday",
@@ -104,35 +103,43 @@ const data = {
     ],
 };
 
-export default function HourlyForcast() {
-    // componentDidMount() {
-    // 	setTimeout(() => {this.scrollView.scrollTo({x: -30}) }, 1) // scroll view position fix
-    // }
-
+function WeeklyForecast() {
     return (
         <ScrollView
-            // ref={(scrollView) => { this.scrollView = scrollView; }}
+            style={styles.bottomContent}
             pagingEnabled={true}
-            horizontal={true}
             decelerationRate={0}
-            snapToInterval={width - 60}
+            showsVerticalScrollIndicator={false}
             snapToAlignment={"center"}
-            contentInset={{
-                top: 0,
-                left: 30,
-                bottom: 0,
-                right: 30,
-            }}
         >
-            {data.hourlyForcast.map((res) => {
+            {data.weeklyForecast.map((res) => {
                 return (
-                    <View style={styles.middleContent}>
-                        <Text style={styles.time}>{res.time}</Text>
+                    <View style={styles.weeklyCast}>
+                        <View style={styles.day}>
+                            <Text style={styles.dayText}>{res.day}</Text>
+                        </View>
                         <Partly width={30} height={30} />
-                        <Text style={styles.temp}>{res.temp}</Text>
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-end",
+                                marginLeft: 100,
+                                // width: 160,
+                                // backgroundColor: "red",
+                                // borderBottomColor: "blue",
+                                // borderBottomWidth: 2,
+                            }}
+                        >
+                            <Text style={styles.loTemp}>{res.lowTemp}</Text>
+                            <Text style={{ color: "white", fontSize: 20 }}> | </Text>
+                            <Text style={styles.hiTemp}>{res.hiTemp}</Text>
+                        </View>
                     </View>
                 );
             })}
         </ScrollView>
     );
 }
+
+export default WeeklyForecast;

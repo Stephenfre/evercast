@@ -105,13 +105,7 @@ const data = {
 
 function WeeklyForecast() {
     return (
-        <ScrollView
-            style={styles.bottomContent}
-            pagingEnabled={true}
-            decelerationRate={0}
-            showsVerticalScrollIndicator={false}
-            snapToAlignment={"center"}
-        >
+        <View style={styles.bottomContent}>
             {data.weeklyForecast.map((res) => {
                 return (
                     <View style={styles.weeklyCast}>
@@ -138,7 +132,7 @@ function WeeklyForecast() {
                     </View>
                 );
             })}
-        </ScrollView>
+        </View>
     );
 }
 

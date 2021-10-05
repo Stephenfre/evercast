@@ -25,9 +25,21 @@ export default StyleSheet.create({
     topContainer: {
         height: 250,
         width: "100%",
-        // backgroundColor: "red",
         flexDirection: "column",
         marginTop: 50,
+    },
+
+    opacityTopBackground: {
+        height: 300,
+        width: "95%",
+        backgroundColor: "#CEB68C",
+        position: "absolute",
+        left: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        opacity: 0.2,
     },
 
     topContent: {
@@ -85,7 +97,7 @@ export default StyleSheet.create({
         fontWeight: "bold",
         color: "white",
         fontFamily: "Helvetica",
-        paddingTop: 5,
+        paddingTop: 12,
     },
 
     Image: {
@@ -99,22 +111,41 @@ export default StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "center",
         width: "60%",
+        paddingTop: 5,
+        paddingBottom: 10,
     },
 
     details: {
         padding: 5,
+        fontSize: 15,
+        fontWeight: "bold",
         color: "white",
-        fontSize: 14,
+        fontFamily: "Helvetica",
     },
 
     // * MIDDLE CONTAINER
 
     middleContainer: {
-        height: 100,
+        height: 120,
         width: width,
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
+        paddingTop: 40,
+    },
+
+    opacityMiddleBackground: {
+        height: 85,
+        width: "95%",
+        backgroundColor: "#CEB68C",
+        position: "absolute",
+        top: 30,
+        left: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        opacity: 0.2,
     },
 
     middleContent: {
@@ -133,15 +164,34 @@ export default StyleSheet.create({
 
     // * BOTTOM CONTAINER
 
+    opacityBottomBackground: {
+        height: 400,
+        width: "100%",
+        backgroundColor: "#CEB68C",
+        position: "absolute",
+        top: 20,
+        // left: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        opacity: 0.2,
+    },
+
+    bottomContainer: {
+        width: width - 20,
+        height: 68,
+    },
+
     bottomContent: {
-        height: 50,
-        width: width,
-        // backgroundColor: "green",
+        width: "100%",
+        height: "100%",
     },
 
     weeklyCast: {
         flexDirection: "row",
-        height: 75,
+        paddingTop: 20,
+        height: "100%",
         alignItems: "center",
     },
 

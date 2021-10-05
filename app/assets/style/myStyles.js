@@ -1,11 +1,11 @@
 import { StyleSheet, Dimensions } from "react-native";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
     container: {
         flex: 3,
-        height: "100%",
+        height: 1015,
         width: width,
         backgroundColor: "rgb(255, 48, 123)",
         // justifyContent: "center",
@@ -76,7 +76,6 @@ export default StyleSheet.create({
         borderBottomRightRadius: 10,
         borderBottomLeftRadius: 10,
         padding: 1,
-
         backgroundColor: "gold",
     },
 
@@ -118,6 +117,14 @@ export default StyleSheet.create({
         fontWeight: "bold",
         color: "white",
         fontFamily: "Helvetica",
+    },
+
+    // * CONDITION CONTAINER
+
+    raining: {
+        height: 70,
+        marginTop: 30,
+        width: width - 20,
     },
 
     // * MIDDLE CONTAINER
@@ -213,7 +220,7 @@ export default StyleSheet.create({
     },
     lowTemp: {
         fontSize: 20,
-        color: "lightgrey",
+        color: "#575757",
         fontFamily: "Helvetica",
         paddingTop: 5,
     },

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, Text, View, Button } from "react-native";
+import { SafeAreaView, Text, View, Button, Dimensions } from "react-native";
+import { LineChart } from "react-native-chart-kit";
 
 import Partly from "../assets/images/partly.svg";
 import styles from "../assets/style/myStyles";
@@ -10,6 +11,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HourlyForecast from "./HourlyForecast";
 import WeeklyForecast from "./WeeklyForecast";
 
+const screenWidth = Dimensions.get("window").width;
+
 const data = {
     currentTemp: 88,
     hiTemp: 92,
@@ -19,7 +22,16 @@ const data = {
     currentState: "AZ",
     currentWind: 12,
     precipitation: "12%",
-    raining: "no",
+    raining: "yes",
+    snowing: "no",
+    datasets: [
+        {
+            data: [20, 45, 28, 80, 99, 100, 63],
+            color: (opacity = 1) => `rgba(119, 190, 255, ${opacity})`, // optional
+            strokeWidth: 3, // optional
+        },
+    ],
+    snowing: "no",
     hourlyForcast: [
         {
             id: 1,
@@ -110,6 +122,22 @@ const data = {
     ],
 };
 
+const chartConfig = {
+    backgroundGradientFrom: "#CEB68C",
+    backgroundGradientFromOpacity: 0.2,
+    backgroundGradientTo: "#CEB68C",
+    backgroundGradientToOpacity: 0.2,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false, // optional
+    propsForDots: {
+        r: "0",
+    },
+    fillShadowGradient: "#77BEFF",
+    fillShadowGradientOpacity: 2,
+};
+
 function CurrentWeather() {
     return (
         <View style={styles.container}>
@@ -128,7 +156,6 @@ function CurrentWeather() {
                         <View style={styles.condition}>
                             <Button
                                 onPress={() => console.log("you clicked me")}
-                                // style={styles.conditionText}
                                 color="white"
                                 title={data.currentCondition}
                             />
@@ -153,8 +180,29 @@ function CurrentWeather() {
                 </View>
             </View>
             {data.raining === "yes" ? (
-                <View>
-                    <Text>YES</Text>
+                <View style={styles.raining}>
+                    <LineChart
+                        data={data}
+                        width={screenWidth - 20}
+                        height={70}
+                        verticalLabelRotation={10}
+                        chartConfig={chartConfig}
+                        style={{ borderRadius: 10 }}
+                        bezier
+                    />
+                </View>
+            ) : null}
+            {data.snowing === "yes" ? (
+                <View style={styles.raining}>
+                    <LineChart
+                        data={data}
+                        width={screenWidth - 20}
+                        height={70}
+                        verticalLabelRotation={10}
+                        chartConfig={chartConfig}
+                        style={{ borderRadius: 10 }}
+                        bezier
+                    />
                 </View>
             ) : null}
             <View style={styles.middleContainer}>

@@ -124,11 +124,7 @@ function WeeklyForecast() {
                         >
                             <Text style={styles.lowTemp}>{res.lowTemp}</Text>
                             <Text style={{ color: "white", fontSize: 20 }}> | </Text>
-                            {res.temp === 90 ? (
-                                <Text style={styles.hiTempA}>{res.hiTemp}</Text>
-                            ) : (
-                                <Text style={styles.hiTempB}>{res.hiTemp}</Text>
-                            )}
+                            <Text style={styles.hiTemp}>{res.hiTemp}</Text>
                         </View>
                     </View>
                 );

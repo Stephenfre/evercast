@@ -208,20 +208,12 @@ export default StyleSheet.create({
         paddingTop: 5,
     },
 
-    hiTempA: {
-        fontSize: 20,
-        color: "#FF0000",
-        fontFamily: "Helvetica",
-        paddingTop: 5,
-    },
-
-    hiTempB: {
+    hiTemp: {
         fontSize: 20,
         color: "white",
         fontFamily: "Helvetica",
         paddingTop: 5,
     },
-
     lowTemp: {
         fontSize: 20,
         color: "lightgrey",

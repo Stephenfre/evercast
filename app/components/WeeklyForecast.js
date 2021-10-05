@@ -1,5 +1,8 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { ScrollView, View, Text } from "react-native";
+
+import styles from "../assets/style/myStyles";
+import Partly from "../assets/images/partly.svg";
 
 const data = {
     currentTemp: 88,
@@ -10,7 +13,7 @@ const data = {
     currentState: "AZ",
     currentWind: 12,
     precipitation: "12%",
-    hourlyForcast: [
+    hourlyForecast: [
         {
             id: 1,
             time: "7am",
@@ -60,7 +63,7 @@ const data = {
             temp: 96,
         },
     ],
-    weeklyForcast: [
+    weeklyForecast: [
         {
             id: 1,
             day: "Monday",
@@ -100,11 +103,42 @@ const data = {
     ],
 };
 
-function WeeklyForecast(props) {
+function WeeklyForecast() {
     return (
-        <View>
-            <Text>Hi</Text>
-        </View>
+        <ScrollView
+            style={styles.bottomContent}
+            pagingEnabled={true}
+            decelerationRate={0}
+            showsVerticalScrollIndicator={false}
+            snapToAlignment={"center"}
+        >
+            {data.weeklyForecast.map((res) => {
+                return (
+                    <View style={styles.weeklyCast}>
+                        <View style={styles.day}>
+                            <Text style={styles.dayText}>{res.day}</Text>
+                        </View>
+                        <Partly width={30} height={30} />
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-end",
+                                marginLeft: 100,
+                                // width: 160,
+                                // backgroundColor: "red",
+                                // borderBottomColor: "blue",
+                                // borderBottomWidth: 2,
+                            }}
+                        >
+                            <Text style={styles.loTemp}>{res.lowTemp}</Text>
+                            <Text style={{ color: "white", fontSize: 20 }}> | </Text>
+                            <Text style={styles.hiTemp}>{res.hiTemp}</Text>
+                        </View>
+                    </View>
+                );
+            })}
+        </ScrollView>
     );
 }
 

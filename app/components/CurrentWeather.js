@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { SafeAreaView, ScrollView, Text, View, Dimensions } from "react-native";
 
 import Partly from "../assets/images/partly.svg";
-import styles from "../assets/style/CurrentWeatherStyles";
+import styles from "../assets/style/myStyles";
 
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -149,9 +149,7 @@ function CurrentWeather() {
             <View style={styles.middleContainer}>
                 <HourlyForecast />
             </View>
-            <View style={styles.bottomContent}>
-                <WeeklyForecast />
-            </View>
+            <WeeklyForecast />
         </View>
     );
 }

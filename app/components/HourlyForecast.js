@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ScrollView, Dimensions, Text } from "react-native";
 
-import styles from "../assets/style/CurrentWeatherStyles";
+import styles from "../assets/style/myStyles";
 import Partly from "../assets/images/partly.svg";
 
 const { width } = Dimensions.get("window");
@@ -111,18 +111,11 @@ export default function HourlyForecast() {
 
     return (
         <ScrollView
-            // ref={(scrollView) => { this.scrollView = scrollView; }}
-            pagingEnabled={true}
             horizontal={true}
             decelerationRate={0}
             snapToInterval={width - 60}
             snapToAlignment={"center"}
-            // contentInset={{
-            //     top: 0,
-            //     left: 30,
-            //     bottom: 0,
-            //     right: 30,
-            // }}
+            showsHorizontalScrollIndicator={false}
         >
             {data.hourlyForcast.map((res) => {
                 return (

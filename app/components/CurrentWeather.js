@@ -108,17 +108,7 @@ const data = {
     ],
 };
 
-const { width } = Dimensions.get("window");
-
 function CurrentWeather() {
-    // const scrollView = scrollView;
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         scrollView.scrollTo({ x: -30 });
-    //     }, 1); // scroll view position fix
-    // });
-
     return (
         <View style={styles.container}>
             <LinearGradient

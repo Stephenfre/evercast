@@ -119,6 +119,7 @@ function CurrentWeather() {
                 style={styles.background}
             />
             <SafeAreaView style={styles.topContainer}>
+                <View style={styles.opacityTopBackground}></View>
                 <View style={styles.topContent}>
                     <View style={styles.rightColumn}>
                         <Text style={styles.cityText}>{data.currentCity}</Text>
@@ -131,14 +132,13 @@ function CurrentWeather() {
                         </Text>
                     </View>
                     <View style={{ marginBottom: 35, marginLeft: 10 }}>
-                        {/* <Image style={styles.Image} source={require("../assets/images/partly-white.png")} /> */}
                         <Partly width={200} height={200} />
                     </View>
                 </View>
             </SafeAreaView>
             <View style={styles.currentDetails}>
                 <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row", paddingRight: 5 }}>
-                    <Ionicons name="ios-rainy" color="white" size={14} />
+                    <Ionicons name="ios-rainy" color="white" size={15} />
                     <Text style={styles.details}>{data.precipitation}</Text>
                 </View>
                 <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row", paddingLeft: 5 }}>
@@ -147,9 +147,15 @@ function CurrentWeather() {
                 </View>
             </View>
             <View style={styles.middleContainer}>
-                <HourlyForecast />
+                <View style={styles.opacityMiddleBackground}></View>
+                <View style={{ width: "95%", height: "100%" }}>
+                    <HourlyForecast />
+                </View>
             </View>
-            <WeeklyForecast />
+            <View style={styles.bottomContainer}>
+                <View style={styles.opacityBottomBackground}></View>
+                <WeeklyForecast />
+            </View>
         </View>
     );
 }

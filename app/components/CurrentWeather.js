@@ -1,9 +1,13 @@
-import React from "react";
-import { StyleSheet, SafeAreaView, Text, View, Image, Dimensions } from "react-native";
+import React, { useEffect } from "react";
+import { SafeAreaView, ScrollView, Text, View, Dimensions } from "react-native";
+
+import Partly from "../assets/images/partly.svg";
+import styles from "../assets/style/CurrentWeatherStyles";
 
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import HourlyForcast from "./HourlyForcast";
 
 const data = {
     currentTemp: 88,
@@ -103,10 +107,18 @@ const data = {
         },
     ],
 };
-// background: rgb(206,148,0);
-// background: linear-gradient(51deg, rgba(206,148,0,1) 0%, rgba(183,0,66,1) 96%);
+
+const { width } = Dimensions.get("window");
 
 function CurrentWeather() {
+    // const scrollView = scrollView;
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         scrollView.scrollTo({ x: -30 });
+    //     }, 1); // scroll view position fix
+    // });
+
     return (
         <View style={styles.container}>
             <LinearGradient
@@ -127,8 +139,9 @@ function CurrentWeather() {
                             H:{data.hiTemp} L:{data.lowTemp}
                         </Text>
                     </View>
-                    <View>
-                        <Image style={styles.Image} source={require("../assets/images/partly-white.png")} />
+                    <View style={{ marginBottom: 35, marginLeft: 10 }}>
+                        {/* <Image style={styles.Image} source={require("../assets/images/partly-white.png")} /> */}
+                        <Partly width={200} height={200} />
                     </View>
                 </View>
             </SafeAreaView>
@@ -143,15 +156,7 @@ function CurrentWeather() {
                 </View>
             </View>
             <View style={styles.middleContainer}>
-                {data.hourlyForcast.map((res) => {
-                    return (
-                        <View style={styles.middleContent}>
-                            <Text>{res.time}</Text>
-                            <Text style={{ backgroundColor: "grey", width: 30, height: 30 }}></Text>
-                            <Text>{res.temp}</Text>
-                        </View>
-                    );
-                })}
+                <HourlyForcast />
             </View>
             {/* <View style={styles.bottomContent}>
                 <Text>Bottom</Text>
@@ -159,133 +164,5 @@ function CurrentWeather() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 3,
-        height: "100%",
-        width: "100%",
-        backgroundColor: "rgb(255, 48, 123)",
-        // justifyContent: "center",
-        alignItems: "center",
-    },
-
-    background: {
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: "100%",
-    },
-
-    // * TOP CONTAINER
-
-    topContainer: {
-        height: 250,
-        width: "100%",
-        // backgroundColor: "red",
-        flexDirection: "column",
-        marginTop: 50,
-    },
-
-    topContent: {
-        flex: 2,
-        flexDirection: "row",
-        alignItems: "center",
-        paddingTop: 70,
-        paddingBottom: 50,
-    },
-
-    rightColumn: {
-        height: 200,
-        paddingRight: 30,
-        paddingLeft: 20,
-        paddingBottom: 30,
-        alignItems: "center",
-    },
-
-    cityText: {
-        color: "white",
-        fontSize: 24,
-        fontFamily: "Helvetica",
-        letterSpacing: 2,
-    },
-
-    rigthTempText: {
-        color: "white",
-        fontSize: 88,
-    },
-
-    condition: {
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingRight: 5,
-        paddingLeft: 5,
-
-        backgroundColor: "gold",
-    },
-
-    conditionText: {
-        color: "white",
-        textAlign: "center",
-        fontSize: 14,
-        fontWeight: "bold",
-        fontFamily: "Helvetica",
-        letterSpacing: 1,
-    },
-
-    hiloTemp: {
-        fontSize: 14,
-        fontWeight: "bold",
-        color: "white",
-        fontFamily: "Helvetica",
-        paddingTop: 5,
-    },
-
-    Image: {
-        width: 200,
-        height: 200,
-        marginBottom: 20,
-    },
-
-    currentDetails: {
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        width: "60%",
-    },
-
-    details: {
-        padding: 5,
-        color: "white",
-        fontSize: 14,
-    },
-
-    // * MIDDLE CONTAINER
-
-    middleContainer: {
-        height: 100,
-        width: "100%",
-        backgroundColor: "blue",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-    },
-
-    middleContent: {
-        alignItems: "center",
-        color: "white",
-    },
-
-    bottomContent: {
-        height: 50,
-        width: "100%",
-        backgroundColor: "green",
-    },
-});
 
 export default CurrentWeather;

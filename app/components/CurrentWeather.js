@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, Text, View, Button, Dimensions } from "react-native";
+import { SafeAreaView, Text, View, Button, Dimensions, ScrollView } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 
 import Partly from "../assets/images/partly.svg";
@@ -140,82 +140,93 @@ const chartConfig = {
 
 function CurrentWeather() {
     return (
-        <View style={styles.container}>
-            <LinearGradient
-                start={{ x: 1, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                colors={["rgb(255,184,0)", "transparent"]}
-                style={styles.background}
-            />
-            <SafeAreaView style={styles.topContainer}>
-                <View style={styles.opacityTopBackground}></View>
-                <View style={styles.topContent}>
-                    <View style={styles.rightColumn}>
-                        <Text style={styles.cityText}>{data.currentCity}</Text>
-                        <Text style={styles.rigthTempText}>{data.currentTemp}</Text>
-                        <View style={styles.condition}>
-                            <Button
-                                onPress={() => console.log("you clicked me")}
-                                color="white"
-                                title={data.currentCondition}
-                            />
+        <ScrollView>
+            <View style={styles.container}>
+                <LinearGradient
+                    start={{ x: 1, y: 0 }}
+                    end={{ x: 0, y: 1 }}
+                    colors={["rgb(255,184,0)", "transparent"]}
+                    style={styles.background}
+                />
+                <SafeAreaView style={styles.topContainer}>
+                    <View style={styles.opacityTopBackground}></View>
+                    <View style={styles.topContent}>
+                        <View style={styles.rightColumn}>
+                            <Text style={styles.cityText}>{data.currentCity}</Text>
+                            <Text style={styles.rigthTempText}>{data.currentTemp}</Text>
+                            <View style={styles.condition}>
+                                <Button
+                                    onPress={() => console.log("you clicked me")}
+                                    color="white"
+                                    title={data.currentCondition}
+                                />
+                            </View>
+                            <Text style={styles.hiloTemp}>
+                                H:{data.hiTemp} L:{data.lowTemp}
+                            </Text>
                         </View>
-                        <Text style={styles.hiloTemp}>
-                            H:{data.hiTemp} L:{data.lowTemp}
-                        </Text>
+                        <View style={{ marginBottom: 35, marginLeft: 10 }}>
+                            <Partly width={200} height={200} />
+                        </View>
                     </View>
-                    <View style={{ marginBottom: 35, marginLeft: 10 }}>
-                        <Partly width={200} height={200} />
+                </SafeAreaView>
+                <View style={styles.currentDetails}>
+                    <View
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "row",
+                            paddingRight: 5,
+                        }}
+                    >
+                        <Ionicons name="ios-rainy" color="white" size={15} />
+                        <Text style={styles.details}>{data.precipitation}</Text>
+                    </View>
+                    <View
+                        style={{ justifyContent: "center", alignItems: "center", flexDirection: "row", paddingLeft: 5 }}
+                    >
+                        <MaterialCommunityIcons name="weather-windy-variant" color="white" size={14} />
+                        <Text style={styles.details}>{data.currentWind} kh/m</Text>
                     </View>
                 </View>
-            </SafeAreaView>
-            <View style={styles.currentDetails}>
-                <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row", paddingRight: 5 }}>
-                    <Ionicons name="ios-rainy" color="white" size={15} />
-                    <Text style={styles.details}>{data.precipitation}</Text>
+                {data.raining === "yes" ? (
+                    <View style={styles.raining}>
+                        <LineChart
+                            data={data}
+                            width={screenWidth - 20}
+                            height={70}
+                            verticalLabelRotation={10}
+                            chartConfig={chartConfig}
+                            style={{ borderRadius: 10 }}
+                            bezier
+                        />
+                    </View>
+                ) : null}
+                {data.snowing === "yes" ? (
+                    <View style={styles.raining}>
+                        <LineChart
+                            data={data}
+                            width={screenWidth - 20}
+                            height={70}
+                            verticalLabelRotation={10}
+                            chartConfig={chartConfig}
+                            style={{ borderRadius: 10 }}
+                            bezier
+                        />
+                    </View>
+                ) : null}
+                <View style={styles.middleContainer}>
+                    <View style={styles.opacityMiddleBackground}></View>
+                    <View style={{ width: "95%", height: "100%" }}>
+                        <HourlyForecast />
+                    </View>
                 </View>
-                <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row", paddingLeft: 5 }}>
-                    <MaterialCommunityIcons name="weather-windy-variant" color="white" size={14} />
-                    <Text style={styles.details}>{data.currentWind} kh/m</Text>
-                </View>
-            </View>
-            {data.raining === "yes" ? (
-                <View style={styles.raining}>
-                    <LineChart
-                        data={data}
-                        width={screenWidth - 20}
-                        height={70}
-                        verticalLabelRotation={10}
-                        chartConfig={chartConfig}
-                        style={{ borderRadius: 10 }}
-                        bezier
-                    />
-                </View>
-            ) : null}
-            {data.snowing === "yes" ? (
-                <View style={styles.raining}>
-                    <LineChart
-                        data={data}
-                        width={screenWidth - 20}
-                        height={70}
-                        verticalLabelRotation={10}
-                        chartConfig={chartConfig}
-                        style={{ borderRadius: 10 }}
-                        bezier
-                    />
-                </View>
-            ) : null}
-            <View style={styles.middleContainer}>
-                <View style={styles.opacityMiddleBackground}></View>
-                <View style={{ width: "95%", height: "100%" }}>
-                    <HourlyForecast />
+                <View style={styles.bottomContainer}>
+                    <View style={styles.opacityBottomBackground}></View>
+                    <WeeklyForecast />
                 </View>
             </View>
-            <View style={styles.bottomContainer}>
-                <View style={styles.opacityBottomBackground}></View>
-                <WeeklyForecast />
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 

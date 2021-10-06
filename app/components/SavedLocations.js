@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, SafeAreaView, StatusBar } from "react-native";
+import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView } from "react-native";
 
 import styles from "../assets/style/myStyles";
 import Partly from "../assets/images/partly.svg";
@@ -131,74 +131,80 @@ function SavedLocations(props) {
     const [text, setText] = useState("");
 
     return (
-        <View style={styles.savedContainer}>
-            <StatusBar barStyle="light-content" />
-            <SafeAreaView>
-                <Text style={styles.header}> My Locations </Text>
-                <TextInput style={styles.input} onChangeText={setText} value={text} placeholder="Placeholder" />
-            </SafeAreaView>
-            <View style={styles.locations}>
-                {data.savedLocations.map((res) => {
-                    return (
-                        <View>
-                            <View style={res.temp > 66 ? styles.locationCardA : styles.locationCardB}>
-                                {res.temp > 66 ? (
-                                    <LinearGradient
-                                        start={{ x: 1, y: 0 }}
-                                        end={{ x: 0, y: 1 }}
-                                        colors={["rgb(255,184,0)", "transparent"]}
-                                        style={styles.cardBackground}
-                                    />
-                                ) : (
-                                    <LinearGradient
-                                        start={{ x: 1, y: 0 }}
-                                        end={{ x: 0, y: 1 }}
-                                        colors={["rgb(162,216,247)", "transparent"]}
-                                        style={styles.cardBackground}
-                                    />
-                                )}
+        <ScrollView>
+            <View style={styles.savedContainer}>
+                <StatusBar barStyle="light-content" />
+                <SafeAreaView>
+                    <Text style={styles.header}> My Locations </Text>
+                    <TextInput style={styles.input} onChangeText={setText} value={text} placeholder="Placeholder" />
+                </SafeAreaView>
+                <View style={styles.locations}>
+                    {data.savedLocations.map((res) => {
+                        return (
+                            <View>
+                                <View style={res.temp > 66 ? styles.locationCardA : styles.locationCardB}>
+                                    {res.temp > 66 ? (
+                                        <LinearGradient
+                                            start={{ x: 1, y: 0 }}
+                                            end={{ x: 0, y: 1 }}
+                                            colors={["rgb(255,184,0)", "transparent"]}
+                                            style={styles.cardBackground}
+                                        />
+                                    ) : (
+                                        <LinearGradient
+                                            start={{ x: 1, y: 0 }}
+                                            end={{ x: 0, y: 1 }}
+                                            colors={["rgb(162,216,247)", "transparent"]}
+                                            style={styles.cardBackground}
+                                        />
+                                    )}
 
-                                <View style={styles.topCard}>
-                                    <View style={styles.savedCity}>
-                                        <Text style={styles.locationTemp}>{res.temp}</Text>
-                                        <Text style={styles.locationCity}>{res.city}</Text>
-                                        <Text style={styles.locationCountry}>{res.country}</Text>
-                                    </View>
+                                    <View style={styles.topCard}>
+                                        <View style={styles.savedCity}>
+                                            <Text style={styles.locationTemp}>{res.temp}</Text>
+                                            <Text style={styles.locationCity}>{res.city}</Text>
+                                            <Text style={styles.locationCountry}>{res.country}</Text>
+                                        </View>
 
-                                    <View>
-                                        <Partly width={50} height={50} />
+                                        <View>
+                                            <Partly width={50} height={50} />
+                                        </View>
                                     </View>
-                                </View>
-                                <View style={styles.locationDetails}>
-                                    <View
-                                        style={{
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            flexDirection: "row",
-                                            paddingRight: 5,
-                                        }}
-                                    >
-                                        <Ionicons name="ios-rainy" color="white" size={13} />
-                                        <Text style={styles.savedDetails}>{res.precip}</Text>
-                                    </View>
-                                    <View
-                                        style={{
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            flexDirection: "row",
-                                            paddingLeft: 5,
-                                        }}
-                                    >
-                                        <MaterialCommunityIcons name="weather-windy-variant" color="white" size={13} />
-                                        <Text style={styles.savedDetails}>{res.wind} kh/m</Text>
+                                    <View style={styles.locationDetails}>
+                                        <View
+                                            style={{
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                flexDirection: "row",
+                                                paddingRight: 5,
+                                            }}
+                                        >
+                                            <Ionicons name="ios-rainy" color="white" size={13} />
+                                            <Text style={styles.savedDetails}>{res.precip}</Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                flexDirection: "row",
+                                                paddingLeft: 5,
+                                            }}
+                                        >
+                                            <MaterialCommunityIcons
+                                                name="weather-windy-variant"
+                                                color="white"
+                                                size={13}
+                                            />
+                                            <Text style={styles.savedDetails}>{res.wind} kh/m</Text>
+                                        </View>
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                    );
-                })}
+                        );
+                    })}
+                </View>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 

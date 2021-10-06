@@ -246,7 +246,10 @@ export default StyleSheet.create({
     header: {
         textAlign: "center",
         marginTop: 20,
-        color: "white",
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "#fff",
+        fontFamily: "Helvetica",
     },
 
     input: {

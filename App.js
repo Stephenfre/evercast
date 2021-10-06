@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import CurrentWeather from "./app/components/CurrentWeather";
+import SavedLocations from "./app/components/SavedLocations";
 import SplashScreen from "./app/screens/SplashScreen";
 
 const { height } = Dimensions.get("window");
@@ -11,7 +12,8 @@ export default function App() {
         <ScrollView>
             {/* <StatusBar style={{ color: "white" }} /> */}
             {/* <SplashScreen /> */}
-            <CurrentWeather />
+            {/* <CurrentWeather /> */}
+            <SavedLocations />
         </ScrollView>
     );
 }

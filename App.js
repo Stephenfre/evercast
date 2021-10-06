@@ -23,13 +23,11 @@ export default function App() {
         <NavigationContainer>
             <Tab.Navigator
                 screenOptions={{
-                    tabBarStyle: { position: "absolute" },
-                    tabBarBackground: () => (
-                        <BlurView tint="dark" intensity={100} style={{ backgroundColor: "C4551C" }} />
-                    ),
+                    tabBarStyle: { backgroundColor: "white" },
+                    tabBarBackground: () => <BlurView tint="dark" intensity={100} />,
                     headerShown: false,
+                    tabBarShowLabel: false,
                 }}
-                tabBarOptions={{ showLabel: false }}
             >
                 <Tab.Screen
                     name="Home"

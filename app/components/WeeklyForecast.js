@@ -107,8 +107,9 @@ function WeeklyForecast() {
     return (
         <View style={styles.bottomContent}>
             {data.weeklyForecast.map((res) => {
+                // console.log(res.id);
                 return (
-                    <View style={styles.weeklyCast}>
+                    <View key={res.id} style={styles.weeklyCast}>
                         <View style={styles.day}>
                             <Text style={styles.dayText}>{res.day}</Text>
                         </View>

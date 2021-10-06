@@ -105,9 +105,9 @@ const data = {
 };
 
 export default function HourlyForecast() {
-    // componentDidMount() {
-    // 	setTimeout(() => {this.scrollView.scrollTo({x: -30}) }, 1) // scroll view position fix
-    // }
+    // const keys =
+
+    // console.log(keys);
 
     return (
         <ScrollView
@@ -119,7 +119,7 @@ export default function HourlyForecast() {
         >
             {data.hourlyForcast.map((res) => {
                 return (
-                    <View style={styles.middleContent}>
+                    <View key={res.id} style={styles.middleContent}>
                         <Text style={styles.time}>{res.time}</Text>
                         <Partly width={30} height={30} />
                         <Text style={styles.temp}>{res.temp}</Text>

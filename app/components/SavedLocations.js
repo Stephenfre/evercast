@@ -141,7 +141,7 @@ function SavedLocations(props) {
                 <View style={styles.locations}>
                     {data.savedLocations.map((res) => {
                         return (
-                            <View>
+                            <View key={res.id}>
                                 <View style={res.temp > 66 ? styles.locationCardA : styles.locationCardB}>
                                     {res.temp > 66 ? (
                                         <LinearGradient

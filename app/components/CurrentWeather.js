@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, View, Button, Dimensions, ScrollView } from "react-native";
-import { LineChart } from "react-native-chart-kit";
+import axios from "axios";
 
-import Partly from "../assets/images/partly.svg";
+import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/myStyles";
 
+import Partly from "../assets/images/partly.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import HourlyForecast from "./HourlyForecast";
 import WeeklyForecast from "./WeeklyForecast";
@@ -26,7 +28,7 @@ const data = {
     snowing: "no",
     datasets: [
         {
-            data: [20, 45, 28, 80, 99, 100, 63],
+            data: [1, 5, 10],
             color: (opacity = 1) => `rgba(119, 190, 255, ${opacity})`, // optional
             strokeWidth: 3, // optional
         },
@@ -139,6 +141,10 @@ const chartConfig = {
 };
 
 function CurrentWeather() {
+    const [newdata, setData] = useState([]);
+
+    useEffect(() => {});
+
     return (
         <ScrollView>
             <View style={styles.container}>

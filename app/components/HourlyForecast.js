@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Dimensions, Text } from "react-native";
+import axios from "axios";
 
 import styles from "../assets/style/myStyles";
 import Partly from "../assets/images/partly.svg";
@@ -105,39 +106,62 @@ const data = {
 };
 
 export default function HourlyForecast() {
-    const [data, setData] = useState([]);
+    const [weatherData, setWeatherData] = useState([]);
+    const [loaded, setLoaded] = useState(true);
 
-    // useEffect(() => {
-    //     axios
-    //         .get(
-    //             "https://api.openweathermap.org/data/2.5/onecall?lat=33.50&lon=-112.04&exclude=daily&appid=a114b290305980fc2cef5dea978d1021"
-    //         )
-    //         .then((res) => {
-    //             // console.log(res.data, "res data");
-    //             setData(res.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // }, []);
+    useEffect(() => {
+        axios
+            .get(
+                "https://api.weatherapi.com/v1/forecast.json?key=5485e3a637e741aab5b24431210810&q=Phoenix&days=5&aqi=no&alerts=no"
+            )
+            .then((res) => {
+                setLoaded(false);
+                setWeatherData(res.data);
+                // console.log(weatherData.forecast.forecastday[0].hour);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
 
-    return (
-        <ScrollView
-            horizontal={true}
-            decelerationRate={0}
-            snapToInterval={width - 60}
-            snapToAlignment={"center"}
-            showsHorizontalScrollIndicator={false}
-        >
-            {/* {data.current.hourly.map((res) => {
-                return (
-                    <View key={res.id} style={styles.middleContent}>
-                        <Text style={styles.time}>{res.time}</Text>
-                        <Partly width={30} height={30} />
-                        <Text style={styles.temp}>{res.temp}</Text>
-                    </View>
-                );
-            })} */}
-        </ScrollView>
-    );
+    // var time = new Date(
+    //     weatherData.forecast.forecastday[0].hour.map((newTime) => {
+    //         newTime.time_epoch * 1000;
+    //     })
+    // );
+    // var hours = time.getHours();
+    // console.log(hours);
+
+    // Will display time in 10:30:23 format
+
+    // const loopDate = weatherData.forecast.forecastday[0].hour.map((res) => {
+    //     return res.time_epoch;
+    // });
+
+    if (!weatherData) {
+        return (
+            <SafeAreaView>
+                <Text>loading...</Text>
+            </SafeAreaView>
+        );
+    } else {
+        return (
+            <ScrollView
+                horizontal={true}
+                decelerationRate={0}
+                snapToInterval={width - 60}
+                snapToAlignment={"center"}
+                showsHorizontalScrollIndicator={false}
+            >
+                {weatherData.forecast.forecastday[0].hour.map((res) => {
+                    return (
+                        <View key={res.id} style={styles.middleContent}>
+                            <Partly width={30} height={30} />
+                            <Text style={styles.temp}>{Math.round(res.temp_f)}</Text>
+                        </View>
+                    );
+                })}
+            </ScrollView>
+        );
+    }
 }

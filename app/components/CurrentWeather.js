@@ -152,15 +152,14 @@ function CurrentWeather() {
             .then((res) => {
                 setLoaded(false);
                 setWeatherData(res.data);
-                console.log(res.data.forecast.forecastday[0].day.daily_chance_of_rain);
+                console.log(res.data.current);
             })
             .catch((error) => {
                 console.error(error);
             });
     }, []);
 
-    console.log(weatherData === {});
-    if (weatherData === {}) {
+    if (weatherData < 0) {
         return (
             <SafeAreaView>
                 <Text>loading...</Text>
@@ -244,7 +243,9 @@ function CurrentWeather() {
                     ) : null}
                     <View style={styles.middleContainer}>
                         <View style={styles.opacityMiddleBackground}></View>
-                        <View style={{ width: "95%", height: "100%" }}>{/* <HourlyForecast /> */}</View>
+                        <View style={{ width: "95%", height: "100%" }}>
+                            <HourlyForecast />
+                        </View>
                     </View>
                     <View style={styles.bottomContainer}>
                         <View style={styles.opacityBottomBackground}></View>

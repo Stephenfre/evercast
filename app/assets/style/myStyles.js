@@ -70,11 +70,8 @@ export default StyleSheet.create({
     },
 
     condition: {
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        padding: 1,
+        borderRadius: 10,
+        padding: 10,
         backgroundColor: "gold",
     },
 

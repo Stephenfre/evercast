@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Dimensions, Text } from "react-native";
 
 import styles from "../assets/style/myStyles";
@@ -105,9 +105,21 @@ const data = {
 };
 
 export default function HourlyForecast() {
-    // const keys =
+    const [data, setData] = useState([]);
 
-    // console.log(keys);
+    // useEffect(() => {
+    //     axios
+    //         .get(
+    //             "https://api.openweathermap.org/data/2.5/onecall?lat=33.50&lon=-112.04&exclude=daily&appid=a114b290305980fc2cef5dea978d1021"
+    //         )
+    //         .then((res) => {
+    //             // console.log(res.data, "res data");
+    //             setData(res.data);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }, []);
 
     return (
         <ScrollView
@@ -117,7 +129,7 @@ export default function HourlyForecast() {
             snapToAlignment={"center"}
             showsHorizontalScrollIndicator={false}
         >
-            {data.hourlyForcast.map((res) => {
+            {/* {data.current.hourly.map((res) => {
                 return (
                     <View key={res.id} style={styles.middleContent}>
                         <Text style={styles.time}>{res.time}</Text>
@@ -125,7 +137,7 @@ export default function HourlyForecast() {
                         <Text style={styles.temp}>{res.temp}</Text>
                     </View>
                 );
-            })}
+            })} */}
         </ScrollView>
     );
 }

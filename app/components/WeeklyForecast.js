@@ -106,7 +106,7 @@ const data = {
 function WeeklyForecast() {
     return (
         <View style={styles.bottomContent}>
-            {data.weeklyForecast.map((res) => {
+            {/* {data.weeklyForecast.map((res) => {
                 // console.log(res.id);
                 return (
                     <View key={res.id} style={styles.weeklyCast}>
@@ -128,7 +128,7 @@ function WeeklyForecast() {
                         </View>
                     </View>
                 );
-            })}
+            })} */}
         </View>
     );
 }

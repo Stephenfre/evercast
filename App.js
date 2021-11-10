@@ -50,13 +50,13 @@ export default function App() {
                         tabBarIcon: () => <Ionicons name="heart" color="black" size={30} />,
                     }}
                 />
-                <Tab.Screen
+                {/* <Tab.Screen
                     name="Settings"
                     component={Settings}
                     options={{
                         tabBarIcon: () => <Ionicons name="ios-settings-sharp" color="black" size={30} />,
                     }}
-                />
+                /> */}
             </Tab.Navigator>
         </NavigationContainer>
     );

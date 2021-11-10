@@ -3,11 +3,40 @@ import { StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
-    container: {
+    // ** WEATHER CONDITOION BACKGROUND COLORS //
+    earlyContainer: {
         flex: 3,
         height: 1015,
         width: width,
-        backgroundColor: "rgb(255, 48, 123)",
+        backgroundColor: "rgba(0, 4, 45, 100)",
+        alignItems: "center",
+    },
+    morningContainer: {
+        flex: 3,
+        height: 1015,
+        width: width,
+        backgroundColor: "rgb(255, 106, 60)",
+        alignItems: "center",
+    },
+    afternoonContainer: {
+        flex: 3,
+        height: 1015,
+        width: width,
+        backgroundColor: "rgb(255, 69, 136)",
+        alignItems: "center",
+    },
+    eveningContainer: {
+        flex: 3,
+        height: 1015,
+        width: width,
+        backgroundColor: "rgb(177, 43, 0)",
+        alignItems: "center",
+    },
+    nightContainer: {
+        flex: 3,
+        height: 1015,
+        width: width,
+        backgroundColor: "rgba(0, 4, 45, 100)",
         alignItems: "center",
     },
 
@@ -51,8 +80,8 @@ export default StyleSheet.create({
 
     rightColumn: {
         height: 200,
-        paddingRight: 30,
-        paddingLeft: 20,
+        paddingRight: 10,
+        paddingLeft: 15,
         paddingBottom: 30,
         alignItems: "center",
     },
@@ -67,6 +96,7 @@ export default StyleSheet.create({
     rigthTempText: {
         color: "white",
         fontSize: 88,
+        paddingLeft: 20,
     },
 
     condition: {
@@ -115,32 +145,110 @@ export default StyleSheet.create({
         fontFamily: "Helvetica",
     },
 
+    // * WEATHER ALERT CONTAINER
+
+    alert: {
+        height: 40,
+        marginTop: 20,
+        width: width - 20,
+        // backgroundColor: "red",
+        // borderWidth: 1,
+        // borderColor: "red",
+    },
+
+    opacityAlertBackground: {
+        height: "100%",
+        width: "100%",
+        backgroundColor: "#CEB68C",
+        position: "absolute",
+        // top: 5,
+        // left: 10,
+        borderTopLeftRadius: 9,
+        borderTopRightRadius: 9,
+        borderBottomLeftRadius: 9,
+        borderBottomRightRadius: 9,
+        opacity: 0.2,
+    },
+
+    alertMessage: {
+        fontSize: 14,
+        fontWeight: "bold",
+        color: "white",
+        fontFamily: "Helvetica",
+        paddingTop: 12,
+        paddingBottom: 5,
+        paddingLeft: 20,
+    },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+        // width: width,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "darkgrey",
+        borderRadius: 20,
+        padding: 20,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 8,
+        width: width - 20,
+    },
+    button: {
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2,
+    },
+    buttonOpen: {
+        backgroundColor: "black",
+    },
+    buttonClose: {
+        backgroundColor: "black",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center",
+    },
+
     // * CONDITION CONTAINER
 
     raining: {
         height: 70,
-        marginTop: 30,
+        marginTop: 15,
         width: width - 20,
     },
 
     // * MIDDLE CONTAINER
 
     middleContainer: {
-        height: 120,
-        width: width,
+        height: 100,
+        width: width - 20,
+        marginTop: 15,
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
-        paddingTop: 40,
+        // borderWidth: 1,
+        // borderColor: "red",
     },
 
     opacityMiddleBackground: {
-        height: 85,
-        width: "95%",
+        height: "100%",
+        width: "100%",
         backgroundColor: "#CEB68C",
         position: "absolute",
-        top: 30,
-        left: 10,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         borderBottomLeftRadius: 10,
@@ -156,10 +264,18 @@ export default StyleSheet.create({
 
     time: {
         color: "white",
+        fontSize: 12,
+        fontWeight: "bold",
+        color: "#fff",
+        fontFamily: "Helvetica",
     },
 
     temp: {
         color: "white",
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "#fff",
+        fontFamily: "Helvetica",
     },
 
     // * BOTTOM CONTAINER
@@ -214,6 +330,7 @@ export default StyleSheet.create({
         fontFamily: "Helvetica",
         paddingTop: 5,
     },
+
     lowTemp: {
         fontSize: 20,
         color: "#575757",

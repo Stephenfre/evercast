@@ -1,136 +1,81 @@
-import React from "react";
-import { ScrollView, View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, View, Text } from "react-native";
+
+import axios from "axios";
+import moment from "moment";
 
 import styles from "../assets/style/myStyles";
 import Partly from "../assets/images/partly.svg";
 
-const data = {
-    currentTemp: 88,
-    hiTemp: 92,
-    lowTemp: 66,
-    currentCondition: "Partly Cloudy",
-    currentCity: "Phoenix",
-    currentState: "AZ",
-    currentWind: 12,
-    precipitation: "12%",
-    hourlyForecast: [
-        {
-            id: 1,
-            time: "7am",
-            condition: "partly cloudy",
-            temp: 74,
-        },
-        {
-            id: 2,
-            time: "8am",
-            condition: "partly cloudy",
-            temp: 79,
-        },
-        {
-            id: 3,
-            time: "9am",
-            condition: "partly cloudy",
-            temp: 83,
-        },
-        {
-            id: 4,
-            time: "10am",
-            condition: "partly cloudy",
-            temp: 86,
-        },
-        {
-            id: 5,
-            time: "11am",
-            condition: "partly cloudy",
-            temp: 88,
-        },
-        {
-            id: 6,
-            time: "12pm",
-            condition: "partly cloudy",
-            temp: 91,
-        },
-        {
-            id: 7,
-            time: "1pm",
-            condition: "partly cloudy",
-            temp: 94,
-        },
-        {
-            id: 8,
-            time: "2pm",
-            condition: "partly cloudy",
-            temp: 96,
-        },
-    ],
-    weeklyForecast: [
-        {
-            id: 1,
-            day: "Monday",
-            hiTemp: 85,
-            lowTemp: 68,
-        },
-        {
-            id: 2,
-            day: "Tuesday",
-            hiTemp: 90,
-            lowTemp: 70,
-        },
-        {
-            id: 3,
-            day: "Wednesday",
-            hiTemp: 87,
-            lowTemp: 68,
-        },
-        {
-            id: 4,
-            day: "Thursday",
-            hiTemp: 79,
-            lowTemp: 65,
-        },
-        {
-            id: 5,
-            day: "Friday",
-            hiTemp: 80,
-            lowTemp: 66,
-        },
-        {
-            id: 6,
-            day: "Saturday",
-            hiTemp: 72,
-            lowTemp: 62,
-        },
-    ],
-};
-
 function WeeklyForecast() {
-    return (
-        <View style={styles.bottomContent}>
-            {/* {data.weeklyForecast.map((res) => {
-                // console.log(res.id);
-                return (
-                    <View key={res.id} style={styles.weeklyCast}>
-                        <View style={styles.day}>
-                            <Text style={styles.dayText}>{res.day}</Text>
+    // const [weatherData, setWeatherData] = useState([]);
+    const [fiveDayData, setFiveDayData] = useState([]);
+
+    const fiveDay = (weatherData) => {
+        for (let i = 4; i < weatherData.length; i += 8) {
+            let tempWeather = {
+                date: weatherData[i].dt_txt,
+                temp_max: weatherData[i].main.temp_max,
+                temp_min: weatherData[i].main.temp_min,
+                weather: weatherData[i].weather[0].main,
+                id: weatherData[i].weather[0].id,
+            };
+
+            setFiveDayData((fiveDayData) => [...fiveDayData, tempWeather]);
+            // console.log("inside function", fiveDayData);
+        }
+    };
+
+    useEffect(() => {
+        axios
+            .get(
+                "http://api.openweathermap.org/data/2.5/forecast?id=524901&units=imperial&appid=33ba408e617a0d7ec8ae29ea3ad06559"
+            )
+            .then((res) => {
+                // console.log("DATA DATA DATA ", res.data.list[0].main.temp);
+                fiveDay(res.data.list);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    // console.log("five date", fiveDayData);
+
+    if (fiveDayData.length === 0) {
+        return (
+            <SafeAreaView>
+                <Text>loading...</Text>
+            </SafeAreaView>
+        );
+    } else {
+        return (
+            <View style={styles.bottomContent}>
+                {fiveDayData.map((dates) => {
+                    return (
+                        <View style={styles.weeklyCast}>
+                            <View style={styles.day}>
+                                <Text style={styles.dayText}>{moment(dates.date).format("dddd")}</Text>
+                            </View>
+                            <Partly width={30} height={30} />
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "flex-end",
+                                    marginLeft: 99,
+                                }}
+                            >
+                                <Text style={styles.lowTemp}>{dates.temp_min}</Text>
+                                <Text style={{ color: "white", fontSize: 20 }}> | </Text>
+                                <Text style={styles.hiTemp}>{Math.round(dates.temp_max)}</Text>
+                            </View>
                         </View>
-                        <Partly width={30} height={30} />
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "flex-end",
-                                marginLeft: 100,
-                            }}
-                        >
-                            <Text style={styles.lowTemp}>{res.lowTemp}</Text>
-                            <Text style={{ color: "white", fontSize: 20 }}> | </Text>
-                            <Text style={styles.hiTemp}>{res.hiTemp}</Text>
-                        </View>
-                    </View>
-                );
-            })} */}
-        </View>
-    );
+                    );
+                })}
+            </View>
+        );
+    }
 }
 
 export default WeeklyForecast;

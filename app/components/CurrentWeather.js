@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, View, Button, Dimensions, ScrollView, Image } from "react-native";
+import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal } from "react-native";
 import axios from "axios";
 
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/myStyles";
 
+import ClearDay from "../assets/images/clear.svg";
 import Partly from "../assets/images/partly.svg";
+import Cloudy from "../assets/images/cloudy.svg";
+import RainLight from "../assets/images/rain.svg";
+import Storm from "../assets/images/storm.svg";
+import Snow from "../assets/images/snow.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -16,110 +21,11 @@ import WeeklyForecast from "./WeeklyForecast";
 const screenWidth = Dimensions.get("window").width;
 
 const data = {
-    currentTemp: 88,
-    hiTemp: 92,
-    lowTemp: 66,
-    currentCondition: "Partly Cloudy",
-    currentCity: "Phoenix",
-    currentState: "AZ",
-    currentWind: 12,
-    precipitation: "12%",
-    raining: "yes",
-    snowing: "no",
     datasets: [
         {
-            data: [1, 5, 10],
+            data: [1, 2],
             color: (opacity = 1) => `rgba(119, 190, 255, ${opacity})`, // optional
             strokeWidth: 3, // optional
-        },
-    ],
-    snowing: "no",
-    hourlyForcast: [
-        {
-            id: 1,
-            time: "7am",
-            condition: "partly cloudy",
-            temp: 74,
-        },
-        {
-            id: 2,
-            time: "8am",
-            condition: "partly cloudy",
-            temp: 79,
-        },
-        {
-            id: 3,
-            time: "9am",
-            condition: "partly cloudy",
-            temp: 83,
-        },
-        {
-            id: 4,
-            time: "10am",
-            condition: "partly cloudy",
-            temp: 86,
-        },
-        {
-            id: 5,
-            time: "11am",
-            condition: "partly cloudy",
-            temp: 88,
-        },
-        {
-            id: 6,
-            time: "12pm",
-            condition: "partly cloudy",
-            temp: 91,
-        },
-        {
-            id: 7,
-            time: "1pm",
-            condition: "partly cloudy",
-            temp: 94,
-        },
-        {
-            id: 8,
-            time: "2pm",
-            condition: "partly cloudy",
-            temp: 96,
-        },
-    ],
-    weeklyForcast: [
-        {
-            id: 1,
-            day: "Monday",
-            hiTemp: 85,
-            lowTemp: 68,
-        },
-        {
-            id: 2,
-            day: "Tuesday",
-            hiTemp: 90,
-            lowTemp: 70,
-        },
-        {
-            id: 3,
-            day: "Wednesday",
-            hiTemp: 87,
-            lowTemp: 68,
-        },
-        {
-            id: 4,
-            day: "Thursday",
-            hiTemp: 79,
-            lowTemp: 65,
-        },
-        {
-            id: 5,
-            day: "Friday",
-            hiTemp: 80,
-            lowTemp: 66,
-        },
-        {
-            id: 6,
-            day: "Saturday",
-            hiTemp: 75,
-            lowTemp: 62,
         },
     ],
 };
@@ -142,119 +48,210 @@ const chartConfig = {
 
 function CurrentWeather() {
     const [weatherData, setWeatherData] = useState([]);
-    const [loaded, setLoaded] = useState(true);
+    const [modalVisible, setModalVisible] = useState(true);
 
     useEffect(() => {
         axios
             .get(
-                "https://api.weatherapi.com/v1/forecast.json?key=5485e3a637e741aab5b24431210810&q=Phoenix&days=5&aqi=no&alerts=no"
+                "https://api.weatherapi.com/v1/forecast.json?key=5485e3a637e741aab5b24431210810&q=Seattle&days=5&aqi=no&alerts=yes"
             )
             .then((res) => {
-                setLoaded(false);
                 setWeatherData(res.data);
-                console.log(res.data.current);
             })
             .catch((error) => {
                 console.error(error);
             });
     }, []);
 
-    if (weatherData < 0) {
-        return (
-            <SafeAreaView>
-                <Text>loading...</Text>
-            </SafeAreaView>
-        );
-    } else {
-        return (
-            <ScrollView>
-                <View style={styles.container}>
+    // console.log('alert', weatherData.alerts.alert[1].desc)
+
+    var hours = new Date().getHours();
+
+    const earlyMorning = hours <= 6;
+
+    const morning = hours >= 7 && hours < 12;
+
+    const afternoon = hours >= 12 && hours < 15;
+
+    const evening = hours >= 15 && hours < 17;
+
+    const night = hours >= 17 && hours <= 24;
+
+    return weatherData.length === 0 ? (
+        <SafeAreaView>
+            <Text>loading...</Text>
+        </SafeAreaView>
+    ) : (
+        <ScrollView>
+            <View
+                style={
+                    earlyMorning
+                        ? styles.earlyContainer
+                        : morning
+                        ? styles.morningContainer
+                        : afternoon
+                        ? styles.afternoonContainer
+                        : evening
+                        ? styles.eveningContainer
+                        : night
+                        ? styles.nightContainer
+                        : null
+                }
+            >
+                {earlyMorning ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
-                        colors={["rgb(255,184,0)", "transparent"]}
+                        colors={["rgb(0, 0, 0)", "transparent"]}
                         style={styles.background}
                     />
-                    <SafeAreaView style={styles.topContainer}>
-                        <View style={styles.opacityTopBackground}></View>
-                        <View style={styles.topContent}>
-                            <View style={styles.rightColumn}>
-                                <Text style={styles.cityText}>Phoenix</Text>
-                                <Text style={styles.rigthTempText}>{Math.round(weatherData.current.temp_f)}</Text>
-                                <View style={styles.condition}>
-                                    <Text style={styles.conditionText}>{weatherData.current.condition.text}</Text>
-                                </View>
-                                <Text style={styles.hiloTemp}>
-                                    H: {Math.round(weatherData.forecast.forecastday[0].day.maxtemp_f)} L:
-                                    {Math.round(weatherData.forecast.forecastday[0].day.mintemp_f)}
-                                </Text>
+                ) : morning ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(255,184,0,100)", "transparent"]}
+                        style={styles.background}
+                    />
+                ) : afternoon ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(255,184,0,100)", "transparent"]}
+                        style={styles.background}
+                    />
+                ) : evening ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgb(202,145,0)", "transparent"]}
+                        style={styles.background}
+                    />
+                ) : night ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgb(0, 0, 0)", "transparent"]}
+                        style={styles.background}
+                    />
+                ) : null}
+
+                <SafeAreaView style={styles.topContainer}>
+                    <View style={styles.opacityTopBackground}></View>
+                    <View style={styles.topContent}>
+                        <View style={styles.rightColumn}>
+                            <Text style={styles.cityText}>Phoenix</Text>
+                            <Text style={styles.rigthTempText}>{Math.round(weatherData.current.temp_f)}°</Text>
+                            <View style={styles.condition}>
+                                <Text style={styles.conditionText}>{weatherData.current.condition.text}</Text>
                             </View>
-                            <View style={{ marginBottom: 35, marginLeft: 10 }}>
-                                <Partly style={{ width: 200, height: 200 }} />
-                            </View>
-                        </View>
-                    </SafeAreaView>
-                    <View style={styles.currentDetails}>
-                        <View
-                            style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                flexDirection: "row",
-                                paddingRight: 5,
-                            }}
-                        >
-                            <Ionicons name="ios-rainy" color="white" size={15} />
-                            {weatherData.forecast.forecastday[0].day.daily_chance_of_rain === 0 ? (
-                                <Text style={styles.details}>
-                                    {" "}
-                                    {weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %
-                                </Text>
-                            ) : (
-                                <Text style={styles.details}> 0 %</Text>
-                            )}
-                        </View>
-                        <View
-                            style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                flexDirection: "row",
-                                paddingLeft: 5,
-                            }}
-                        >
-                            <MaterialCommunityIcons name="weather-windy-variant" color="white" size={14} />
-                            <Text style={styles.details}>
-                                {weatherData.forecast.forecastday[0].day.maxwind_kph} kh/m
+                            <Text style={styles.hiloTemp}>
+                                H: {Math.round(weatherData.forecast.forecastday[0].day.maxtemp_f)}° L:
+                                {Math.round(weatherData.forecast.forecastday[0].day.mintemp_f)}°
                             </Text>
                         </View>
+                        <View style={{ marginBottom: 35, marginLeft: 10 }}>
+                            {weatherData.current.condition.text === "Clear" ? (
+                                <ClearDay style={{ width: 200, height: 200 }} />
+                            ) : weatherData.current.condition.text === "Partly cloudy" ? (
+                                <Partly style={{ width: 200, height: 200 }} />
+                            ) : weatherData.current.condition.text === "Cloudy" ? (
+                                <Cloudy style={{ width: 200, height: 200 }} />
+                            ) : weatherData.current.condition.text === "Light rain" ? (
+                                <RainLight style={{ width: 200, height: 200 }} />
+                            ) : weatherData.current.condition.text === "Heavy rain" ? (
+                                <RainLight style={{ width: 200, height: 200 }} />
+                            ) : weatherData.current.condition.text === "Light snow" ? (
+                                <Snow style={{ width: 200, height: 200 }} />
+                            ) : weatherData.current.condition.text === "Heavy snow" ? (
+                                <Snow style={{ width: 200, height: 200 }} />
+                            ) : null}
+                        </View>
                     </View>
+                </SafeAreaView>
 
-                    {weatherData.forecast.forecastday[0].day.daily_chance_of_rain > 0 ? (
-                        <View style={styles.raining}>
-                            <LineChart
-                                data={data}
-                                width={screenWidth - 20}
-                                height={70}
-                                verticalLabelRotation={10}
-                                chartConfig={chartConfig}
-                                style={{ borderRadius: 10 }}
-                                bezier
-                            />
-                        </View>
-                    ) : null}
-                    <View style={styles.middleContainer}>
-                        <View style={styles.opacityMiddleBackground}></View>
-                        <View style={{ width: "95%", height: "100%" }}>
-                            <HourlyForecast />
-                        </View>
+                <View style={styles.currentDetails}>
+                    <View
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "row",
+                            paddingRight: 5,
+                        }}
+                    >
+                        <Ionicons name="ios-rainy" color="white" size={15} />
+                        <Text style={styles.details}>
+                            {weatherData.forecast.forecastday[0].day.daily_chance_of_rain} %
+                        </Text>
                     </View>
-                    <View style={styles.bottomContainer}>
-                        <View style={styles.opacityBottomBackground}></View>
-                        {/* <WeeklyForecast /> */}
+                    <View
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "row",
+                            paddingLeft: 5,
+                        }}
+                    >
+                        <MaterialCommunityIcons name="weather-windy-variant" color="white" size={14} />
+                        <Text style={styles.details}>{weatherData.forecast.forecastday[0].day.maxwind_kph} kh/m</Text>
                     </View>
                 </View>
-            </ScrollView>
-        );
-    }
+
+                {weatherData.alerts !== null ? (
+                    <View style={styles.alert}>
+                        <View style={styles.opacityAlertBackground}></View>
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisible}
+                            onRequestClose={() => {
+                                Alert.alert("Modal has been closed.");
+                                setModalVisible(!modalVisible);
+                            }}
+                        >
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <Text style={styles.modalText}>{weatherData.alerts.alert[0].desc}</Text>
+                                    <Pressable
+                                        style={[styles.button, styles.buttonClose]}
+                                        onPress={() => setModalVisible(!modalVisible)}
+                                    >
+                                        <Text style={styles.textStyle}>Close</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </Modal>
+                        <Pressable style={styles.alertMessage} onPress={() => setModalVisible(true)}>
+                            <Text style={styles.textStyle}> Alert! {weatherData.alerts.alert[0].event}</Text>
+                        </Pressable>
+                    </View>
+                ) : null}
+
+                {weatherData.forecast.forecastday[0].day.daily_chance_of_rain > 0 ? (
+                    <View style={styles.raining}>
+                        <LineChart
+                            data={data}
+                            width={screenWidth - 20}
+                            height={70}
+                            verticalLabelRotation={10}
+                            chartConfig={chartConfig}
+                            style={{ borderRadius: 10 }}
+                            bezier
+                        />
+                    </View>
+                ) : null}
+                <View style={styles.middleContainer}>
+                    <View style={styles.opacityMiddleBackground}></View>
+                    {/* <View style={{ width: "95%", height: "100%" }}> */}
+                    <HourlyForecast />
+                    {/* </View> */}
+                </View>
+                {/* <View style={styles.bottomContainer}>
+                    <View style={styles.opacityBottomBackground}></View>
+                    <WeeklyForecast />
+                </View> */}
+            </View>
+        </ScrollView>
+    );
 }
 
 export default CurrentWeather;

@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/myStyles";
+import backgroundStyles from "../assets/style/BackgoundColors";
 
 import ClearDay from "../assets/images/clear.svg";
 import Partly from "../assets/images/partly.svg";
@@ -48,7 +49,7 @@ const chartConfig = {
 
 function CurrentWeather() {
     const [weatherData, setWeatherData] = useState([]);
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         axios
@@ -63,8 +64,8 @@ function CurrentWeather() {
             });
     }, []);
 
-    // console.log('alert', weatherData.alerts.alert[1].desc)
-
+    // console.log("alert", weatherData.alerts[0]);
+    // console.log("alert", weatherData.alerts.length !== undefined);
     var hours = new Date().getHours();
 
     const earlyMorning = hours <= 6;
@@ -84,17 +85,48 @@ function CurrentWeather() {
     ) : (
         <ScrollView>
             <View
+                // TODO: Change to switch cases
                 style={
                     earlyMorning
-                        ? styles.earlyContainer
-                        : morning
-                        ? styles.morningContainer
-                        : afternoon
-                        ? styles.afternoonContainer
-                        : evening
-                        ? styles.eveningContainer
+                        ? backgroundStyles.earlyContainer
+                        : morning && weatherData.current.condition.text === "Clear"
+                        ? backgroundStyles.morningContainer
+                        : morning && weatherData.current.condition.text === "Overcast"
+                        ? backgroundStyles.morningContainerOvercast
+                        : morning && weatherData.current.condition.text === "Light rain"
+                        ? backgroundStyles.morningContainerRain
+                        : morning && weatherData.current.condition.text === "Heavy rain"
+                        ? backgroundStyles.morningContainerRain
+                        : morning && weatherData.current.condition.text === "Light snow"
+                        ? backgroundStyles.morningContainerSnow
+                        : morning && weatherData.current.condition.text === "Heavy snow"
+                        ? backgroundStyles.morningContainerSnow
+                        : afternoon && weatherData.current.condition.text === "Clear"
+                        ? backgroundStyles.afternoonContainer
+                        : afternoon && weatherData.current.condition.text === "Overcast"
+                        ? backgroundStyles.afternoonContainerOvercast
+                        : afternoon && weatherData.current.condition.text === "Light rain"
+                        ? backgroundStyles.afternoonContainerRain
+                        : afternoon && weatherData.current.condition.text === "Heavy rain"
+                        ? backgroundStyles.afternoonContainerRain
+                        : afternoon && weatherData.current.condition.text === "Light snow"
+                        ? backgroundStyles.afternoonContainerSnow
+                        : afternoon && weatherData.current.condition.text === "Heavy snow"
+                        ? backgroundStyles.afternoonContainerSnow
+                        : evening && weatherData.current.condition.text === "Clear"
+                        ? backgroundStyles.eveningContainer
+                        : evening && weatherData.current.condition.text === "Overcast"
+                        ? backgroundStyles.eveningContainerOvercast
+                        : evening && weatherData.current.condition.text === "Light rain"
+                        ? backgroundStyles.eveningContainerRain
+                        : evening && weatherData.current.condition.text === "Heavy rain"
+                        ? backgroundStyles.eveningContainerRain
+                        : evening && weatherData.current.condition.text === "Light snow"
+                        ? backgroundStyles.eveningContainerSnow
+                        : evening && weatherData.current.condition.text === "Heavy snow"
+                        ? backgroundStyles.eveningContainerSnow
                         : night
-                        ? styles.nightContainer
+                        ? backgroundStyles.nightContainer
                         : null
                 }
             >
@@ -103,35 +135,140 @@ function CurrentWeather() {
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgb(0, 0, 0)", "transparent"]}
-                        style={styles.background}
+                        style={backgroundStyles.background}
                     />
-                ) : morning ? (
+                ) : morning && weatherData.current.condition.text === "Clear" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(255,184,0,100)", "transparent"]}
-                        style={styles.background}
+                        style={backgroundStyles.background}
                     />
-                ) : afternoon ? (
+                ) : morning && weatherData.current.condition.text === "Overcast" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
-                        colors={["rgba(255,184,0,100)", "transparent"]}
-                        style={styles.background}
+                        colors={["rgba(219, 226, 251, 100)", "transparent"]}
+                        style={backgroundStyles.background}
                     />
-                ) : evening ? (
+                ) : morning && weatherData.current.condition.text === "Light rain" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
-                        colors={["rgb(202,145,0)", "transparent"]}
-                        style={styles.background}
+                        colors={["rgba(204, 215, 255, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : morning && weatherData.current.condition.text === "Heavy rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(204, 215, 255, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : morning && weather === "Light snow" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(63, 174, 255, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : morning && weather === "Heavy snow" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(63, 174, 255, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : afternoon && weatherData.current.condition.text === "Clear" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(255, 184, 0, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : afternoon && weatherData.current.condition.text === "Overcast" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(168, 175, 198, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : afternoon && weatherData.current.condition.text === "Light rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(136, 149, 195, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : afternoon && weatherData.current.condition.text === "Heavy rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(136, 149, 195, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : afternoon && weatherData.current.condition.text === "Light snow" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(0, 50, 86, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : afternoon && weatherData.current.condition.text === "Heavy snow" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(0, 50, 86, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : evening && weatherData.current.condition.text === "Clear" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgb(202, 145, 0)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : evening && weatherData.current.condition.text === "Overcast" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(120, 124, 140, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : evening && weatherData.current.condition.text === "Light rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(99, 109, 146, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : evening && weatherData.current.condition.text === "Heavy rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(99, 109, 146 ,100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : evening && weatherData.current.condition.text === "Light snow" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(0, 24, 41, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : evening && weatherData.current.condition.text === "Heavy snow" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(52, 83, 112, 100)", "transparent"]}
+                        style={backgroundStyles.background}
                     />
                 ) : night ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgb(0, 0, 0)", "transparent"]}
-                        style={styles.background}
+                        style={backgroundStyles.background}
                     />
                 ) : null}
 
@@ -139,7 +276,7 @@ function CurrentWeather() {
                     <View style={styles.opacityTopBackground}></View>
                     <View style={styles.topContent}>
                         <View style={styles.rightColumn}>
-                            <Text style={styles.cityText}>Phoenix</Text>
+                            <Text style={styles.cityText}>{weatherData.location.name}</Text>
                             <Text style={styles.rigthTempText}>{Math.round(weatherData.current.temp_f)}°</Text>
                             <View style={styles.condition}>
                                 <Text style={styles.conditionText}>{weatherData.current.condition.text}</Text>
@@ -154,7 +291,7 @@ function CurrentWeather() {
                                 <ClearDay style={{ width: 200, height: 200 }} />
                             ) : weatherData.current.condition.text === "Partly cloudy" ? (
                                 <Partly style={{ width: 200, height: 200 }} />
-                            ) : weatherData.current.condition.text === "Cloudy" ? (
+                            ) : weatherData.current.condition.text === "Overcast" ? (
                                 <Cloudy style={{ width: 200, height: 200 }} />
                             ) : weatherData.current.condition.text === "Light rain" ? (
                                 <RainLight style={{ width: 200, height: 200 }} />
@@ -196,37 +333,40 @@ function CurrentWeather() {
                     </View>
                 </View>
 
-                {weatherData.alerts !== null ? (
-                    <View style={styles.alert}>
-                        <View style={styles.opacityAlertBackground}></View>
-                        <Modal
-                            animationType="slide"
-                            transparent={true}
-                            visible={modalVisible}
-                            onRequestClose={() => {
-                                Alert.alert("Modal has been closed.");
-                                setModalVisible(!modalVisible);
-                            }}
-                        >
-                            <View style={styles.centeredView}>
-                                <View style={styles.modalView}>
-                                    <Text style={styles.modalText}>{weatherData.alerts.alert[0].desc}</Text>
-                                    <Pressable
-                                        style={[styles.button, styles.buttonClose]}
-                                        onPress={() => setModalVisible(!modalVisible)}
-                                    >
-                                        <Text style={styles.textStyle}>Close</Text>
-                                    </Pressable>
-                                </View>
+                {/*Conditonal Alert Div*/}
+                {/* {weatherData.alerts.length === undefined ? null : (
+                <View style={styles.alert}>
+                    <View style={styles.opacityAlertBackground}></View>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                            setModalVisible(!modalVisible);
+                        }}
+                    >
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>{weatherData.alerts.alert[1].desc}</Text>
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => setModalVisible(!modalVisible)}
+                                >
+                                    <Text style={styles.textStyle}>Close</Text>
+                                </Pressable>
                             </View>
-                        </Modal>
-                        <Pressable style={styles.alertMessage} onPress={() => setModalVisible(true)}>
-                            <Text style={styles.textStyle}> Alert! {weatherData.alerts.alert[0].event}</Text>
-                        </Pressable>
-                    </View>
-                ) : null}
+                        </View>
+                    </Modal>
+                    <Pressable style={styles.alertMessage} onPress={() => setModalVisible(true)}>
+                        <Text style={styles.textStyle}> Alert! {weatherData.alerts.alert[1].event}</Text>
+                    </Pressable>
+                </View>
+                )} */}
 
-                {weatherData.forecast.forecastday[0].day.daily_chance_of_rain > 0 ? (
+                {/*Conditonal Rain or Snow Div*/}
+                {weatherData.forecast.forecastday[0].day.daily_chance_of_rain ||
+                weatherData.forecast.forecastday[0].day.daily_chance_of_snow > 0 ? (
                     <View style={styles.raining}>
                         <LineChart
                             data={data}
@@ -241,9 +381,7 @@ function CurrentWeather() {
                 ) : null}
                 <View style={styles.middleContainer}>
                     <View style={styles.opacityMiddleBackground}></View>
-                    {/* <View style={{ width: "95%", height: "100%" }}> */}
                     <HourlyForecast />
-                    {/* </View> */}
                 </View>
                 {/* <View style={styles.bottomContainer}>
                     <View style={styles.opacityBottomBackground}></View>

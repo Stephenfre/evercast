@@ -12,7 +12,7 @@ import SplashScreen from "./app/screens/SplashScreen";
 import CurrentWeather from "./app/components/CurrentWeather";
 import WeatherMap from "./app/components/WeatherMap";
 import Settings from "./app/components/Settings";
-import SavedLocations from "./app/components/SavedLocations";
+import MyLocations from "./app/components/MyLocations";
 
 const { height } = Dimensions.get("window");
 
@@ -45,7 +45,7 @@ export default function App() {
                 />
                 <Tab.Screen
                     name="Location"
-                    component={SavedLocations}
+                    component={MyLocations}
                     options={{
                         tabBarIcon: () => <Ionicons name="heart" color="black" size={30} />,
                     }}

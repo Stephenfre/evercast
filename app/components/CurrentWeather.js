@@ -3,7 +3,9 @@ import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal } fr
 import axios from "axios";
 
 import { LineChart } from "react-native-chart-kit";
-import styles from "../assets/style/myStyles";
+import styles from "../assets/style/CurrentWeather";
+import HourlyStyles from "../assets/style/HourlyForcast";
+import WeeklyStyles from "../assets/style/WeeklyForcast";
 import backgroundStyles from "../assets/style/BackgoundColors";
 
 import ClearDay from "../assets/images/clear.svg";
@@ -54,7 +56,7 @@ function CurrentWeather() {
     useEffect(() => {
         axios
             .get(
-                "https://api.weatherapi.com/v1/forecast.json?key=5485e3a637e741aab5b24431210810&q=Seattle&days=5&aqi=no&alerts=yes"
+                "https://api.weatherapi.com/v1/forecast.json?key=5485e3a637e741aab5b24431210810&q=Phoenix&days=5&aqi=no&alerts=yes"
             )
             .then((res) => {
                 setWeatherData(res.data);
@@ -379,12 +381,12 @@ function CurrentWeather() {
                         />
                     </View>
                 ) : null}
-                <View style={styles.middleContainer}>
-                    <View style={styles.opacityMiddleBackground}></View>
+                <View style={HourlyStyles.middleContainer}>
+                    <View style={HourlyStyles.opacityMiddleBackground}></View>
                     <HourlyForecast />
                 </View>
-                {/* <View style={styles.bottomContainer}>
-                    <View style={styles.opacityBottomBackground}></View>
+                {/* <View style={WeeklyStyles.bottomContainer}>
+                    <View style={WeeklyStyles.opacityBottomBackground}></View>
                     <WeeklyForecast />
                 </View> */}
             </View>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView } from "react-native";
 
-import styles from "../assets/style/myStyles";
+import styles from "../assets/style/MyLocations";
 import Partly from "../assets/images/partly.svg";
 
 import { LinearGradient } from "expo-linear-gradient";

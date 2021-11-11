@@ -4,7 +4,7 @@ import { View, SafeAreaView, ScrollView, Dimensions, Text } from "react-native";
 import axios from "axios";
 import moment from "moment";
 
-import styles from "../assets/style/myStyles";
+import styles from "../assets/style/HourlyForcast";
 import Partly from "../assets/images/partly.svg";
 
 const { width } = Dimensions.get("window");
@@ -15,7 +15,7 @@ export default function HourlyForecast() {
     useEffect(() => {
         axios
             .get(
-                "https://api.weatherapi.com/v1/forecast.json?key=5485e3a637e741aab5b24431210810&q=Phoenix&days=5&aqi=no&alerts=no"
+                "https://api.weatherapi.com/v1/forecast.json?key=5485e3a637e741aab5b24431210810&q=Phoenix&days=1&aqi=no&alerts=no"
             )
             .then((res) => {
                 setWeatherData(res.data);

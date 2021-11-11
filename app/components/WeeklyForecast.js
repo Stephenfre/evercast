@@ -4,7 +4,7 @@ import { SafeAreaView, View, Text } from "react-native";
 import axios from "axios";
 import moment from "moment";
 
-import styles from "../assets/style/myStyles";
+import styles from "../assets/style/WeeklyForcast";
 import Partly from "../assets/images/partly.svg";
 
 function WeeklyForecast() {

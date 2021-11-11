@@ -3,51 +3,6 @@ import { StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
-    // ** WEATHER CONDITOION BACKGROUND COLORS //
-    earlyContainer: {
-        flex: 3,
-        height: 1015,
-        width: width,
-        backgroundColor: "rgba(0, 4, 45, 100)",
-        alignItems: "center",
-    },
-    morningContainer: {
-        flex: 3,
-        height: 1015,
-        width: width,
-        backgroundColor: "rgb(255, 106, 60)",
-        alignItems: "center",
-    },
-    afternoonContainer: {
-        flex: 3,
-        height: 1015,
-        width: width,
-        backgroundColor: "rgb(255, 69, 136)",
-        alignItems: "center",
-    },
-    eveningContainer: {
-        flex: 3,
-        height: 1015,
-        width: width,
-        backgroundColor: "rgb(177, 43, 0)",
-        alignItems: "center",
-    },
-    nightContainer: {
-        flex: 3,
-        height: 1015,
-        width: width,
-        backgroundColor: "rgba(0, 4, 45, 100)",
-        alignItems: "center",
-    },
-
-    background: {
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: "100%",
-    },
-
     // * TOP CONTAINER
 
     topContainer: {
@@ -149,7 +104,7 @@ export default StyleSheet.create({
 
     alert: {
         height: 40,
-        marginTop: 20,
+        marginTop: 30,
         width: width - 20,
         // backgroundColor: "red",
         // borderWidth: 1,
@@ -189,7 +144,7 @@ export default StyleSheet.create({
     },
     modalView: {
         margin: 20,
-        backgroundColor: "darkgrey",
+        backgroundColor: "white",
         borderRadius: 20,
         padding: 20,
         alignItems: "center",
@@ -227,7 +182,7 @@ export default StyleSheet.create({
 
     raining: {
         height: 70,
-        marginTop: 15,
+        marginTop: 30,
         width: width - 20,
     },
 
@@ -236,7 +191,7 @@ export default StyleSheet.create({
     middleContainer: {
         height: 100,
         width: width - 20,
-        marginTop: 15,
+        marginTop: 30,
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",

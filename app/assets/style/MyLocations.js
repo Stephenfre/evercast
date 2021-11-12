@@ -5,20 +5,11 @@ const { width, height } = Dimensions.get("window");
 export default StyleSheet.create({
     //* SAVED CONTAINER
 
-    cardBackground: {
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        height: "100%",
-        borderRadius: 20,
-    },
-
     savedContainer: {
         flex: 1,
         height: height,
         width: width,
-        backgroundColor: "black",
+        backgroundColor: "grey",
         alignItems: "center",
     },
 
@@ -47,6 +38,15 @@ export default StyleSheet.create({
         width: width - 30,
         height: 150,
         justifyContent: "space-around",
+    },
+
+    cardBackground: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        height: "100%",
+        borderRadius: 20,
     },
 
     locationCardA: {

@@ -62,4 +62,11 @@ export default StyleSheet.create({
         fontFamily: "Helvetica",
         paddingTop: 5,
     },
+
+    image: {
+        // borderWidth: 1,
+        // borderColor: "red",
+        width: 50,
+        height: 50,
+    },
 });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
 import axios from "axios";
+import moment from "moment";
 
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/CurrentWeather";
@@ -60,7 +61,6 @@ function CurrentWeather() {
             )
             .then((res) => {
                 setOpenWeatherData(res.data);
-                console.log("weather", res.data.current.weather[0].main);
             })
             .catch((error) => {
                 console.error(error);
@@ -68,6 +68,11 @@ function CurrentWeather() {
     }, []);
 
     var hours = new Date().getHours();
+    console.log("hours", hours);
+    // var newHours = moment(new Date().getHours()).format("ha");
+    // console.log("newHours", newHours);
+    // var now = moment().format('LT');
+    // console.log("now", now);
 
     const earlyMorning = hours <= 6;
 

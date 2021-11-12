@@ -6,30 +6,14 @@ import moment from "moment";
 
 import styles from "../assets/style/WeeklyStyles";
 
-function WeeklyForecast() {
-    const [dataImg, setDataImg] = useState([]);
-    const [fiveDayData, setFiveDayData] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get(
-                "https://api.openweathermap.org/data/2.5/onecall?lat=47.75&lon=-120.74&units=imperial&exclude=hourly,minutely&appid=a114b290305980fc2cef5dea978d1021"
-            )
-            .then((res) => {
-                setFiveDayData(res.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
-
-    return fiveDayData.length === 0 ? (
+function WeeklyForecast({ data }) {
+    return data.length === 0 ? (
         <SafeAreaView>
             <Text>loading...</Text>
         </SafeAreaView>
     ) : (
         <View style={styles.bottomContent}>
-            {fiveDayData.daily.map((dates, i) => {
+            {data.daily.map((dates, i) => {
                 return (
                     <View style={styles.weeklyCast}>
                         {dates.pop > 0 ? (

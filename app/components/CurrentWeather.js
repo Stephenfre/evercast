@@ -51,7 +51,7 @@ function CurrentWeather() {
     useEffect(() => {
         axios
             .get(
-                "https://api.openweathermap.org/data/2.5/onecall?lat=47.75&lon=-120.74&units=imperial&exclude=hourly,minutely&appid=7613dff2af161bb376b90a08f6c9d4df"
+                "https://api.openweathermap.org/data/2.5/onecall?lat=47.75&lon=-120.74&units=imperial&exclude=minutely&appid=7613dff2af161bb376b90a08f6c9d4df"
             )
             .then((res) => {
                 setOpenWeatherData(res.data);
@@ -62,7 +62,7 @@ function CurrentWeather() {
     }, []);
 
     var hours = new Date().getHours();
-    console.log("hours", hours);
+    // console.log("hours", hours);
     // var newHours = moment(new Date().getHours()).format("ha");
     // console.log("newHours", newHours);
     // var now = moment().format('LT');
@@ -325,11 +325,11 @@ function CurrentWeather() {
                 ) : null} */}
                 <View style={HourlyStyles.middleContainer}>
                     <View style={HourlyStyles.opacityMiddleBackground}></View>
-                    <HourlyForecast />
+                    <HourlyForecast data={openWeatherData} />
                 </View>
                 <View style={WeeklyStyles.bottomContainer}>
                     <View style={WeeklyStyles.opacityBottomBackground}></View>
-                    <WeeklyForecast />
+                    <WeeklyForecast data={openWeatherData} />
                 </View>
             </View>
         </ScrollView>

@@ -4,7 +4,6 @@ const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
     // * BOTTOM CONTAINER
-
     opacityBottomBackground: {
         height: 480,
         width: "100%",
@@ -38,10 +37,11 @@ export default StyleSheet.create({
     },
 
     dayText: {
+        paddingTop: 5,
         fontSize: 18,
         color: "white",
         fontFamily: "Helvetica",
-        paddingTop: 5,
+        fontWeight: "400",
     },
 
     hiTemp: {

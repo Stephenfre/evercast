@@ -7,7 +7,7 @@ export default StyleSheet.create({
 
     middleContainer: {
         height: 100,
-        width: width - 20,
+        width: width - 40,
         marginTop: 30,
         flexDirection: "row",
         justifyContent: "space-evenly",
@@ -21,17 +21,14 @@ export default StyleSheet.create({
         width: "100%",
         backgroundColor: "#CEB68C",
         position: "absolute",
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
+        borderRadius: 20,
         opacity: 0.2,
     },
 
     middleContent: {
         alignItems: "center",
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 12,
+        paddingRight: 12,
     },
 
     time: {
@@ -52,6 +49,35 @@ export default StyleSheet.create({
 
     image: {
         width: 50,
-        height: 50,
+        height: 40,
+    },
+
+    rainTime: {
+        color: "white",
+        fontSize: 12,
+        fontWeight: "bold",
+        color: "#fff",
+        fontFamily: "Helvetica",
+    },
+
+    rainTemp: {
+        color: "white",
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "#fff",
+        fontFamily: "Helvetica",
+    },
+
+    rainPerc: {
+        color: "white",
+        fontSize: 12,
+        fontWeight: "bold",
+        color: "#73C4FF",
+        fontFamily: "Helvetica",
+    },
+
+    rainImage: {
+        width: 40,
+        height: 30,
     },
 });

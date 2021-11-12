@@ -15,7 +15,7 @@ export default function HourlyForecast() {
     useEffect(() => {
         axios
             .get(
-                "https://api.openweathermap.org/data/2.5/onecall?lat=33.50&lon=-112.04&units=imperial&exclude=daily,minutely&appid=33ba408e617a0d7ec8ae29ea3ad06559"
+                "https://api.openweathermap.org/data/2.5/onecall?lat=47.75&lon=-120.74&units=imperial&exclude=daily,minutely&appid=33ba408e617a0d7ec8ae29ea3ad06559"
             )
             .then((res) => {
                 setWeatherData(res.data);
@@ -33,23 +33,45 @@ export default function HourlyForecast() {
         <ScrollView
             horizontal={true}
             decelerationRate={0}
-            snapToInterval={width - 60}
-            snapToAlignment={"center"}
+            // snapToInterval={width - 60}
+            // snapToAlignment={"center"}
             showsHorizontalScrollIndicator={false}
         >
             {weatherData.hourly.map((hour) => {
                 return (
                     <View style={styles.middleContent}>
-                        <Text style={styles.time}>
-                            {moment(hour.dt * 1000)
-                                .format("ha")
-                                .toUpperCase()}
-                        </Text>
-                        <Image
-                            source={{ uri: "http://openweathermap.org/img/wn/" + hour.weather[0].icon + "@4x.png" }}
-                            style={styles.image}
-                        />
-                        <Text style={styles.temp}>{Math.round(hour.temp)}°</Text>
+                        {hour.pop > 0 ? (
+                            <>
+                                <Text style={styles.rainTime}>
+                                    {moment(hour.dt * 1000)
+                                        .format("ha")
+                                        .toUpperCase()}
+                                </Text>
+                                <Image
+                                    source={{
+                                        uri: "http://openweathermap.org/img/wn/" + hour.weather[0].icon + "@4x.png",
+                                    }}
+                                    style={styles.rainImage}
+                                />
+                                <Text style={styles.rainPerc}>{Math.round(hour.pop * 100)}%</Text>
+                                <Text style={styles.rainTemp}>{Math.round(hour.temp)}°</Text>
+                            </>
+                        ) : (
+                            <>
+                                <Text style={styles.time}>
+                                    {moment(hour.dt * 1000)
+                                        .format("ha")
+                                        .toUpperCase()}
+                                </Text>
+                                <Image
+                                    source={{
+                                        uri: "http://openweathermap.org/img/wn/" + hour.weather[0].icon + "@4x.png",
+                                    }}
+                                    style={styles.image}
+                                />
+                                <Text style={styles.temp}>{Math.round(hour.temp)}°</Text>
+                            </>
+                        )}
                     </View>
                 );
             })}

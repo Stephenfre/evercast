@@ -1,133 +1,56 @@
-import React from "react";
-import { ScrollView, View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, View, Text, Image } from "react-native";
 
-import styles from "../assets/style/myStyles";
+import axios from "axios";
+import moment from "moment";
+
+import styles from "../assets/style/WeeklyForcast";
 import Partly from "../assets/images/partly.svg";
 
-const data = {
-    currentTemp: 88,
-    hiTemp: 92,
-    lowTemp: 66,
-    currentCondition: "Partly Cloudy",
-    currentCity: "Phoenix",
-    currentState: "AZ",
-    currentWind: 12,
-    precipitation: "12%",
-    hourlyForecast: [
-        {
-            id: 1,
-            time: "7am",
-            condition: "partly cloudy",
-            temp: 74,
-        },
-        {
-            id: 2,
-            time: "8am",
-            condition: "partly cloudy",
-            temp: 79,
-        },
-        {
-            id: 3,
-            time: "9am",
-            condition: "partly cloudy",
-            temp: 83,
-        },
-        {
-            id: 4,
-            time: "10am",
-            condition: "partly cloudy",
-            temp: 86,
-        },
-        {
-            id: 5,
-            time: "11am",
-            condition: "partly cloudy",
-            temp: 88,
-        },
-        {
-            id: 6,
-            time: "12pm",
-            condition: "partly cloudy",
-            temp: 91,
-        },
-        {
-            id: 7,
-            time: "1pm",
-            condition: "partly cloudy",
-            temp: 94,
-        },
-        {
-            id: 8,
-            time: "2pm",
-            condition: "partly cloudy",
-            temp: 96,
-        },
-    ],
-    weeklyForecast: [
-        {
-            id: 1,
-            day: "Monday",
-            hiTemp: 85,
-            lowTemp: 68,
-        },
-        {
-            id: 2,
-            day: "Tuesday",
-            hiTemp: 90,
-            lowTemp: 70,
-        },
-        {
-            id: 3,
-            day: "Wednesday",
-            hiTemp: 87,
-            lowTemp: 68,
-        },
-        {
-            id: 4,
-            day: "Thursday",
-            hiTemp: 79,
-            lowTemp: 65,
-        },
-        {
-            id: 5,
-            day: "Friday",
-            hiTemp: 80,
-            lowTemp: 66,
-        },
-        {
-            id: 6,
-            day: "Saturday",
-            hiTemp: 75,
-            lowTemp: 62,
-        },
-    ],
-};
-
 function WeeklyForecast() {
-    return (
+    const [dataImg, setDataImg] = useState([]);
+    const [fiveDayData, setFiveDayData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(
+                "https://api.openweathermap.org/data/2.5/onecall?lat=33.50&lon=-112.04&units=imperial&exclude=hourly,minutely&appid=a114b290305980fc2cef5dea978d1021"
+            )
+            .then((res) => {
+                setFiveDayData(res.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    return fiveDayData.length === 0 ? (
+        <SafeAreaView>
+            <Text>loading...</Text>
+        </SafeAreaView>
+    ) : (
         <View style={styles.bottomContent}>
-            {data.weeklyForecast.map((res) => {
+            {fiveDayData.daily.map((dates, i) => {
                 return (
                     <View style={styles.weeklyCast}>
                         <View style={styles.day}>
-                            <Text style={styles.dayText}>{res.day}</Text>
+                            <Text style={styles.dayText}>{moment(dates.dt * 1000).format("dddd")}</Text>
                         </View>
-                        <Partly width={30} height={30} />
+                        <Image
+                            source={{ uri: "http://openweathermap.org/img/wn/" + dates.weather[0].icon + "@4x.png" }}
+                            style={styles.image}
+                        />
                         <View
                             style={{
                                 flexDirection: "row",
                                 alignItems: "center",
                                 justifyContent: "flex-end",
-                                marginLeft: 100,
-                                // width: 160,
-                                // backgroundColor: "red",
-                                // borderBottomColor: "blue",
-                                // borderBottomWidth: 2,
+                                marginLeft: 99,
                             }}
                         >
-                            <Text style={styles.lowTemp}>{res.lowTemp}</Text>
+                            <Text style={styles.lowTemp}>{Math.round(dates.temp.min)}</Text>
                             <Text style={{ color: "white", fontSize: 20 }}> | </Text>
-                            <Text style={styles.hiTemp}>{res.hiTemp}</Text>
+                            <Text style={styles.hiTemp}>{Math.round(dates.temp.max)}</Text>
                         </View>
                     </View>
                 );

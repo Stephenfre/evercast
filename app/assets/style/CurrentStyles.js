@@ -4,7 +4,6 @@ const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
     // * TOP CONTAINER
-
     topContainer: {
         height: 250,
         width: width - 20,
@@ -55,6 +54,12 @@ export default StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         backgroundColor: "gold",
+    },
+
+    conditionRain: {
+        borderRadius: 10,
+        padding: 10,
+        backgroundColor: "#89A0C5",
     },
 
     conditionText: {

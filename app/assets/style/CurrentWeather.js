@@ -7,7 +7,7 @@ export default StyleSheet.create({
 
     topContainer: {
         height: 250,
-        width: "100%",
+        width: width - 20,
         flexDirection: "column",
         marginTop: 50,
     },
@@ -18,10 +18,7 @@ export default StyleSheet.create({
         backgroundColor: "#CEB68C",
         position: "absolute",
         left: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
+        borderRadius: 20,
         opacity: 0.2,
     },
 

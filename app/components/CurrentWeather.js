@@ -60,7 +60,7 @@ function CurrentWeather() {
             )
             .then((res) => {
                 setOpenWeatherData(res.data);
-                console.log("alert", res.data);
+                console.log("weather", res.data.current.weather[0].main);
             })
             .catch((error) => {
                 console.error(error);
@@ -94,37 +94,25 @@ function CurrentWeather() {
                         ? backgroundStyles.morningContainer
                         : morning && openWeatherData.current.weather[0].main === "Overcast"
                         ? backgroundStyles.morningContainerOvercast
-                        : morning && openWeatherData.current.weather[0].main === "Light rain"
+                        : morning && openWeatherData.current.weather[0].main === "Rain"
                         ? backgroundStyles.morningContainerRain
-                        : morning && openWeatherData.current.weather[0].main === "Heavy rain"
-                        ? backgroundStyles.morningContainerRain
-                        : morning && openWeatherData.current.weather[0].main === "Light snow"
-                        ? backgroundStyles.morningContainerSnow
-                        : morning && openWeatherData.current.weather[0].main === "Heavy snow"
+                        : morning && openWeatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.morningContainerSnow
                         : afternoon && openWeatherData.current.weather[0].main === "Clear"
                         ? backgroundStyles.afternoonContainer
                         : afternoon && openWeatherData.current.weather[0].main === "Overcast"
                         ? backgroundStyles.afternoonContainerOvercast
-                        : afternoon && openWeatherData.current.weather[0].main === "Light rain"
+                        : afternoon && openWeatherData.current.weather[0].main === "Rain"
                         ? backgroundStyles.afternoonContainerRain
-                        : afternoon && openWeatherData.current.weather[0].main === "Heavy rain"
-                        ? backgroundStyles.afternoonContainerRain
-                        : afternoon && openWeatherData.current.weather[0].main === "Light snow"
-                        ? backgroundStyles.afternoonContainerSnow
-                        : afternoon && openWeatherData.current.weather[0].main === "Heavy snow"
+                        : afternoon && openWeatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.afternoonContainerSnow
                         : evening && openWeatherData.current.weather[0].main === "Sunny"
                         ? backgroundStyles.eveningContainer
                         : evening && openWeatherData.current.weather[0].main === "Overcast"
                         ? backgroundStyles.eveningContainerOvercast
-                        : evening && openWeatherData.current.weather[0].main === "Light rain"
+                        : evening && openWeatherData.current.weather[0].main === "Rain"
                         ? backgroundStyles.eveningContainerRain
-                        : evening && openWeatherData.current.weather[0].main === "Heavy rain"
-                        ? backgroundStyles.eveningContainerRain
-                        : evening && openWeatherData.current.weather[0].main === "Light snow"
-                        ? backgroundStyles.eveningContainerSnow
-                        : evening && openWeatherData.current.weather[0].main === "Heavy snow"
+                        : evening && openWeatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.eveningContainerSnow
                         : night
                         ? backgroundStyles.nightContainer
@@ -152,28 +140,14 @@ function CurrentWeather() {
                         colors={["rgba(219, 226, 251, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : morning && openWeatherData.current.weather[0].main === "Light rain" ? (
+                ) : morning && openWeatherData.current.weather[0].main === "Rain" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(204, 215, 255, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : morning && openWeatherData.current.weather[0].main === "Heavy rain" ? (
-                    <LinearGradient
-                        start={{ x: 1, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        colors={["rgba(204, 215, 255, 100)", "transparent"]}
-                        style={backgroundStyles.background}
-                    />
-                ) : morning && weather === "Light snow" ? (
-                    <LinearGradient
-                        start={{ x: 1, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        colors={["rgba(63, 174, 255, 100)", "transparent"]}
-                        style={backgroundStyles.background}
-                    />
-                ) : morning && weather === "Heavy snow" ? (
+                ) : morning && openWeatherData.current.weather[0].main === "Snow" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
@@ -194,28 +168,14 @@ function CurrentWeather() {
                         colors={["rgba(168, 175, 198, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Light rain" ? (
+                ) : afternoon && openWeatherData.current.weather[0].main === "Rain" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(136, 149, 195, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Heavy rain" ? (
-                    <LinearGradient
-                        start={{ x: 1, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        colors={["rgba(136, 149, 195, 100)", "transparent"]}
-                        style={backgroundStyles.background}
-                    />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Light snow" ? (
-                    <LinearGradient
-                        start={{ x: 1, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        colors={["rgba(0, 50, 86, 100)", "transparent"]}
-                        style={backgroundStyles.background}
-                    />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Heavy snow" ? (
+                ) : afternoon && openWeatherData.current.weather[0].main === "Snow" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
@@ -236,32 +196,18 @@ function CurrentWeather() {
                         colors={["rgba(120, 124, 140, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : evening && openWeatherData.current.weather[0].main === "Light rain" ? (
+                ) : evening && openWeatherData.current.weather[0].main === "Rain" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(99, 109, 146, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : evening && openWeatherData.current.weather[0].main === "Heavy rain" ? (
-                    <LinearGradient
-                        start={{ x: 1, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        colors={["rgba(99, 109, 146 ,100)", "transparent"]}
-                        style={backgroundStyles.background}
-                    />
-                ) : evening && openWeatherData.current.weather[0].main === "Light snow" ? (
+                ) : evening && openWeatherData.current.weather[0].main === "Snow" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(0, 24, 41, 100)", "transparent"]}
-                        style={backgroundStyles.background}
-                    />
-                ) : evening && openWeatherData.current.weather[0].main === "Heavy snow" ? (
-                    <LinearGradient
-                        start={{ x: 1, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        colors={["rgba(52, 83, 112, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
                 ) : night ? (
@@ -311,9 +257,13 @@ function CurrentWeather() {
                         }}
                     >
                         <Ionicons name="ios-rainy" color="white" size={15} />
-                        <Text style={styles.details}>
-                            {/* {weatherData.forecast.forecastday[0].day.daily_chance_of_rain} % */}
-                        </Text>
+                        <>
+                            {openWeatherData.daily[0].pop > 0 ? (
+                                <Text style={styles.details}>{Math.round(openWeatherData.daily[0].pop * 100)} %</Text>
+                            ) : (
+                                <Text style={styles.details}>0% </Text>
+                            )}
+                        </>
                     </View>
                     <View
                         style={{

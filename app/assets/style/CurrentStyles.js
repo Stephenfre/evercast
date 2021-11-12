@@ -10,8 +10,6 @@ export default StyleSheet.create({
         width: width - 20,
         flexDirection: "column",
         marginTop: 50,
-        borderWidth: 1,
-        borderColor: "red",
     },
 
     opacityTopBackground: {

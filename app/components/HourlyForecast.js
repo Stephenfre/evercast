@@ -4,31 +4,15 @@ import { View, SafeAreaView, ScrollView, Dimensions, Text, Image } from "react-n
 import axios from "axios";
 import moment from "moment";
 
-import styles from "../assets/style/HourlyForcast";
-import Partly from "../assets/images/partly.svg";
+import styles from "../assets/style/HourlyStyles";
 
 const { width } = Dimensions.get("window");
 
-export default function HourlyForecast() {
-    const [weatherData, setWeatherData] = useState([]);
-
+export default function HourlyForecast({ data }) {
     const now = moment().format("ha");
     console.log("now", now);
 
-    useEffect(() => {
-        axios
-            .get(
-                "https://api.openweathermap.org/data/2.5/onecall?lat=33.45&lon=-112.07&units=imperial&exclude=daily,minutely&appid=33ba408e617a0d7ec8ae29ea3ad06559"
-            )
-            .then((res) => {
-                setWeatherData(res.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }, []);
-
-    return weatherData.length === 0 ? (
+    return data.length === 0 ? (
         <SafeAreaView>
             <Text>loading...</Text>
         </SafeAreaView>
@@ -40,8 +24,8 @@ export default function HourlyForecast() {
             // snapToAlignment={"center"}
             showsHorizontalScrollIndicator={false}
         >
-            {weatherData.hourly.map((hour) => {
-                console.log("hourly", moment(hour.dt * 1000).format("ha") === now);
+            {data.hourly.map((hour) => {
+                // console.log("hourly", moment(hour.dt * 1000).format("ha") === now);
                 // console.log("hourly", moment(hour.dt * 1000).format("ha") === moment().format("h"));
                 // console.log("hourly", moment().format("ha"));
                 return (

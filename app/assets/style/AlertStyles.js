@@ -9,9 +9,6 @@ export default StyleSheet.create({
         height: 40,
         marginTop: 30,
         width: width - 20,
-        // backgroundColor: "red",
-        // borderWidth: 1,
-        // borderColor: "red",
     },
 
     opacityAlertBackground: {
@@ -19,8 +16,6 @@ export default StyleSheet.create({
         width: "100%",
         backgroundColor: "#CEB68C",
         position: "absolute",
-        // top: 5,
-        // left: 10,
         borderTopLeftRadius: 9,
         borderTopRightRadius: 9,
         borderBottomLeftRadius: 9,
@@ -43,7 +38,6 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginTop: 22,
-        // width: width,
     },
     modalView: {
         margin: 20,

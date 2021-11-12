@@ -3,7 +3,7 @@ import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView, TouchableOp
 
 import SearchInput, { createFilter } from "react-native-search-filter";
 
-import styles from "../assets/style/MyLocations";
+import styles from "../assets/style/MyLocationsStyles";
 import Partly from "../assets/images/partly.svg";
 
 import { LinearGradient } from "expo-linear-gradient";

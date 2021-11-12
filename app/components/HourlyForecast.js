@@ -10,7 +10,7 @@ const { width } = Dimensions.get("window");
 
 export default function HourlyForecast({ data }) {
     const now = moment().format("ha");
-    console.log("now", now);
+    // console.log("now", now);
 
     return data.length === 0 ? (
         <SafeAreaView>

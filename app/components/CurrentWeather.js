@@ -62,11 +62,6 @@ function CurrentWeather() {
     }, []);
 
     var hours = new Date().getHours();
-    // console.log("hours", hours);
-    // var newHours = moment(new Date().getHours()).format("ha");
-    // console.log("newHours", newHours);
-    // var now = moment().format('LT');
-    // console.log("now", now);
 
     const earlyMorning = hours <= 6;
 
@@ -224,9 +219,25 @@ function CurrentWeather() {
                         <View style={styles.rightColumn}>
                             <Text style={styles.cityText}>Phoenix</Text>
                             <Text style={styles.rigthTempText}>{Math.round(openWeatherData.current.temp)}°</Text>
-                            <View style={styles.condition}>
-                                <Text style={styles.conditionText}>{openWeatherData.current.weather[0].main}</Text>
-                            </View>
+                            <>
+                                {openWeatherData.current.weather[0].main === "Rain" ? (
+                                    <>
+                                        <View style={styles.conditionRain}>
+                                            <Text style={styles.conditionText}>
+                                                {openWeatherData.current.weather[0].main}
+                                            </Text>
+                                        </View>
+                                    </>
+                                ) : (
+                                    <>
+                                        <View style={styles.condition}>
+                                            <Text style={styles.conditionText}>
+                                                {openWeatherData.current.weather[0].main}
+                                            </Text>
+                                        </View>
+                                    </>
+                                )}
+                            </>
                             <Text style={styles.hiloTemp}>
                                 H: {Math.round(openWeatherData.daily[0].temp.max)}° L:
                                 {Math.round(openWeatherData.daily[0].temp.min)}°

@@ -64,4 +64,17 @@ export default StyleSheet.create({
         width: 50,
         height: 50,
     },
+
+    rainPerc: {
+        color: "white",
+        fontSize: 12,
+        fontWeight: "bold",
+        color: "#73C4FF",
+        fontFamily: "Helvetica",
+    },
+
+    rainImage: {
+        width: 40,
+        height: 30,
+    },
 });

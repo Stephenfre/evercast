@@ -4,8 +4,7 @@ import { View, SafeAreaView, ScrollView, Dimensions, Text, Image } from "react-n
 import axios from "axios";
 import moment from "moment";
 
-import styles from "../assets/style/HourlyForcast";
-import Partly from "../assets/images/partly.svg";
+import styles from "../assets/style/HourlyStyles";
 
 const { width } = Dimensions.get("window");
 
@@ -18,7 +17,7 @@ export default function HourlyForecast() {
     useEffect(() => {
         axios
             .get(
-                "https://api.openweathermap.org/data/2.5/onecall?lat=33.45&lon=-112.07&units=imperial&exclude=daily,minutely&appid=33ba408e617a0d7ec8ae29ea3ad06559"
+                "https://api.openweathermap.org/data/2.5/onecall?lat=47.75&lon=-120.74&units=imperial&exclude=daily,minutely&appid=33ba408e617a0d7ec8ae29ea3ad06559"
             )
             .then((res) => {
                 setWeatherData(res.data);

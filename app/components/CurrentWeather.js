@@ -4,17 +4,11 @@ import axios from "axios";
 import moment from "moment";
 
 import { LineChart } from "react-native-chart-kit";
-import styles from "../assets/style/CurrentWeather";
-import HourlyStyles from "../assets/style/HourlyForcast";
-import WeeklyStyles from "../assets/style/WeeklyForcast";
-import backgroundStyles from "../assets/style/BackgoundColors";
+import styles from "../assets/style/CurrentStyles";
+import HourlyStyles from "../assets/style/HourlyStyles";
+import WeeklyStyles from "../assets/style/WeeklyStyles";
+import backgroundStyles from "../assets/style/BackgroundColors";
 
-import ClearDay from "../assets/images/clear.svg";
-import Partly from "../assets/images/partly.svg";
-import Cloudy from "../assets/images/cloudy.svg";
-import RainLight from "../assets/images/rain.svg";
-import Storm from "../assets/images/storm.svg";
-import Snow from "../assets/images/snow.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 

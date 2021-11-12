@@ -6,32 +6,27 @@ export default StyleSheet.create({
     // * BOTTOM CONTAINER
 
     opacityBottomBackground: {
-        height: 400,
+        height: 480,
         width: "100%",
         backgroundColor: "#CEB68C",
         position: "absolute",
-        top: 20,
-        // left: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
+        borderRadius: 20,
         opacity: 0.2,
     },
 
     bottomContainer: {
-        width: width - 20,
-        height: 68,
+        width: width - 35,
+        height: 400,
+        marginTop: 20,
     },
 
     bottomContent: {
         width: "100%",
-        height: "100%",
+        height: "15%",
     },
 
     weeklyCast: {
         flexDirection: "row",
-        paddingTop: 20,
         height: "100%",
         alignItems: "center",
     },

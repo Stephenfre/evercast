@@ -333,10 +333,10 @@ function CurrentWeather() {
                     <View style={HourlyStyles.opacityMiddleBackground}></View>
                     <HourlyForecast />
                 </View>
-                {/* <View style={WeeklyStyles.bottomContainer}>
+                <View style={WeeklyStyles.bottomContainer}>
                     <View style={WeeklyStyles.opacityBottomBackground}></View>
                     <WeeklyForecast />
-                </View> */}
+                </View>
             </View>
         </ScrollView>
     );

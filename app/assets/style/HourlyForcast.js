@@ -49,4 +49,9 @@ export default StyleSheet.create({
         color: "#fff",
         fontFamily: "Helvetica",
     },
+
+    image: {
+        width: 50,
+        height: 50,
+    },
 });

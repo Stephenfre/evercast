@@ -23,6 +23,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-chart-kit": "^6.11.0",
     "react-native-maps": "0.29.3",
+    "react-native-search-filter": "^0.1.5",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-vector-icons": "^8.1.0",

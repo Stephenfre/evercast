@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView, TouchableOpacity } from "react-native";
+
+import SearchInput, { createFilter } from "react-native-search-filter";
 
 import styles from "../assets/style/MyLocations";
 import Partly from "../assets/images/partly.svg";
@@ -51,13 +53,11 @@ const data = {
 
         {
             id: 8,
-
             city: "Portland, OR",
             country: "USA",
         },
         {
             id: 9,
-
             city: "Seattle, WA",
             country: "USA",
         },
@@ -89,8 +89,15 @@ const data = {
     ],
 };
 
-function SavedLocations(props) {
-    const [text, setText] = useState("");
+function SavedLocations() {
+    const [searchCity, setSearchCity] = useState({});
+
+    // const KEYS_TO_FILTERS = ["data.locations.city", "data.locations.country"];
+
+    // const filteredLocations = data.locations.filter(createFilter(searchCity, KEYS_TO_FILTERS));
+    // const searchChange = () => {
+    //     setSearchCity();
+    // };
 
     return (
         <ScrollView>
@@ -98,9 +105,25 @@ function SavedLocations(props) {
                 <StatusBar barStyle="light-content" />
                 <SafeAreaView>
                     <Text style={styles.header}> My Locations </Text>
-                    <TextInput style={styles.input} onChangeText={setText} value={text} placeholder="Placeholder" />
+                    <TextInput
+                        style={styles.input}
+                        // onChangeText={setSearchCity}
+                        value={searchCity}
+                        placeholder="Placeholder"
+                    />
                 </SafeAreaView>
-                <View style={styles.locations}>
+                {/* <ScrollView>
+                    {filteredLocations.map((res) => {
+                        return (
+                            <View>
+                                <Text>
+                                    {res.city} {res.country}
+                                </Text>
+                            </View>
+                        );
+                    })}
+                </ScrollView> */}
+                {/* <View style={styles.locations}>
                     {data.savedLocations.map((res) => {
                         return (
                             <View key={res.id}>
@@ -164,7 +187,7 @@ function SavedLocations(props) {
                             </View>
                         );
                     })}
-                </View>
+                </View> */}
             </View>
         </ScrollView>
     );

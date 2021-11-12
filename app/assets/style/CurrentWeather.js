@@ -77,10 +77,15 @@ export default StyleSheet.create({
         paddingTop: 12,
     },
 
-    Image: {
+    // Image: {
+    //     width: 200,
+    //     height: 200,
+    //     marginBottom: 20,
+    // },
+
+    image: {
         width: 200,
         height: 200,
-        marginBottom: 20,
     },
 
     currentDetails: {

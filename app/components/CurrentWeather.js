@@ -94,7 +94,7 @@ function CurrentWeather() {
                         ? backgroundStyles.morningContainerSnow
                         : afternoon && openWeatherData.current.weather[0].main === "Clear"
                         ? backgroundStyles.afternoonContainer
-                        : afternoon && openWeatherData.current.weather[0].main === "Overcast"
+                        : afternoon && openWeatherData.current.weather[0].main === "Clouds"
                         ? backgroundStyles.afternoonContainerOvercast
                         : afternoon && openWeatherData.current.weather[0].main === "Rain"
                         ? backgroundStyles.afternoonContainerRain

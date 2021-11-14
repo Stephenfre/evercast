@@ -44,10 +44,8 @@ const chartConfig = {
     fillShadowGradientOpacity: 2,
 };
 
-function CurrentWeather() {
+function NewLocation() {
     const [openWeatherData, setOpenWeatherData] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
-
     useEffect(() => {
         axios
             .get(
@@ -288,52 +286,6 @@ function CurrentWeather() {
                     </View>
                 </View>
 
-                {/*Conditonal Alert Div*/}
-                {/* {openWeatherData.alerts.length === undefined ? null : (
-                <View style={styles.alert}>
-                    <View style={styles.opacityAlertBackground}></View>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                            Alert.alert("Modal has been closed.");
-                            setModalVisible(!modalVisible);
-                        }}
-                    >
-                        <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <Text style={styles.modalText}>{openWeatherData.alerts.alert[1].desc}</Text>
-                                <Pressable
-                                    style={[styles.button, styles.buttonClose]}
-                                    onPress={() => setModalVisible(!modalVisible)}
-                                >
-                                    <Text style={styles.textStyle}>Close</Text>
-                                </Pressable>
-                            </View>
-                        </View>
-                    </Modal>
-                    <Pressable style={styles.alertMessage} onPress={() => setModalVisible(true)}>
-                        <Text style={styles.textStyle}> Alert! {openWeatherData.alerts.alert[1].event}</Text>
-                    </Pressable>
-                </View>
-                )} */}
-
-                {/*Conditonal Rain or Snow Div*/}
-                {/* {weatherData.forecast.forecastday[0].day.daily_chance_of_rain ||
-                weatherData.forecast.forecastday[0].day.daily_chance_of_snow > 0 ? (
-                    <View style={styles.raining}>
-                        <LineChart
-                            data={data}
-                            width={screenWidth - 20}
-                            height={70}
-                            verticalLabelRotation={10}
-                            chartConfig={chartConfig}
-                            style={{ borderRadius: 10 }}
-                            bezier
-                        />
-                    </View>
-                ) : null} */}
                 <View style={HourlyStyles.middleContainer}>
                     <View style={HourlyStyles.opacityMiddleBackground}></View>
                     <HourlyForecast data={openWeatherData} />
@@ -347,4 +299,4 @@ function CurrentWeather() {
     );
 }
 
-export default CurrentWeather;
+export default NewLocation;

@@ -5,93 +5,97 @@ import SearchInput, { createFilter } from "react-native-search-filter";
 
 import styles from "../assets/style/MyLocationsStyles";
 
-import { LinearGradient } from "expo-linear-gradient";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import NewLocation from "./NewLocation";
-
-const data = {
-    locations: [
-        {
-            id: 1,
-            city: "Phoenix, AZ",
-            country: "USA",
-        },
-
-        {
-            id: 2,
-            city: "New York, NY",
-            country: "USA",
-        },
-        {
-            id: 3,
-            city: "Denver, CO",
-            country: "USA",
-        },
-
-        {
-            id: 4,
-            city: "Chicago, IL",
-            country: "USA",
-        },
-        {
-            id: 5,
-            city: "Austin, TX",
-            country: "USA",
-        },
-
-        {
-            id: 6,
-            city: "San Deigo, CA",
-            country: "USA",
-        },
-        {
-            id: 7,
-            city: "Detroit, MI",
-            country: "USA",
-        },
-
-        {
-            id: 8,
-            city: "Portland, OR",
-            country: "USA",
-        },
-        {
-            id: 9,
-            city: "Seattle, WA",
-            country: "USA",
-        },
-
-        {
-            id: 10,
-            city: "Vancouver, WA",
-            country: "Canada",
-        },
-    ],
-    savedLocations: [
-        {
-            id: 1,
-            temp: 88,
-            city: "Phoenix",
-            country: "USA",
-            wind: 12,
-            precip: "60%",
-        },
-
-        {
-            id: 2,
-            temp: 66,
-            city: "New York",
-            country: "USA",
-            wind: 20,
-            precip: "60%",
-        },
-    ],
-};
 
 function SavedLocations() {
     const [searchCity, setSearchCity] = useState({});
     const [modalVisible, setModalVisible] = useState(false);
+    const [data, setData] = useState({
+        locations: [
+            {
+                id: 1,
+                city: "Phoenix, AZ",
+                country: "USA",
+            },
+
+            {
+                id: 2,
+                city: "New York, NY",
+                country: "USA",
+            },
+            {
+                id: 3,
+                city: "Denver, CO",
+                country: "USA",
+            },
+
+            {
+                id: 4,
+                city: "Chicago, IL",
+                country: "USA",
+            },
+            {
+                id: 5,
+                city: "Austin, TX",
+                country: "USA",
+            },
+
+            {
+                id: 6,
+                city: "San Deigo, CA",
+                country: "USA",
+            },
+            {
+                id: 7,
+                city: "Detroit, MI",
+                country: "USA",
+            },
+
+            {
+                id: 8,
+                city: "Portland, OR",
+                country: "USA",
+            },
+            {
+                id: 9,
+                city: "Seattle, WA",
+                country: "USA",
+            },
+
+            {
+                id: 10,
+                city: "Vancouver, WA",
+                country: "Canada",
+            },
+        ],
+        savedLocations: [
+            {
+                id: 1,
+                temp: 88,
+                city: "Phoenix",
+                country: "USA",
+                wind: 12,
+                precip: "60%",
+            },
+
+            {
+                id: 2,
+                temp: 66,
+                city: "New York",
+                country: "USA",
+                wind: 20,
+                precip: "60%",
+            },
+        ],
+    });
+
+    let newArrayData = [];
+    console.log("new data added", data.savedLocations);
+
+    // const onAddClick = () => {
+    //     setSavedCity((old) => [...old, ...newArrayData]);
+    //     console.log("clicked");
+    // };
 
     return (
         <ScrollView>
@@ -119,16 +123,7 @@ function SavedLocations() {
                     >
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <View style={styles.modalButtons}>
-                                    <Pressable style={styles.button} onPress={() => setModalVisible(!modalVisible)}>
-                                        <Text style={styles.textStyle}>Cancel</Text>
-                                    </Pressable>
-                                    <Pressable style={styles.button}>
-                                        <Text style={styles.textStyle}>Add</Text>
-                                    </Pressable>
-                                </View>
-
-                                <NewLocation />
+                                <NewLocation modalVisible={modalVisible} setModalVisible={setModalVisible} />
                             </View>
                         </View>
                     </Modal>

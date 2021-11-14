@@ -44,8 +44,11 @@ const chartConfig = {
     fillShadowGradientOpacity: 2,
 };
 
-function NewLocation() {
+function NewLocation(props) {
     const [openWeatherData, setOpenWeatherData] = useState([]);
+
+    console.log("props", props);
+
     useEffect(() => {
         axios
             .get(
@@ -77,6 +80,14 @@ function NewLocation() {
         </SafeAreaView>
     ) : (
         <ScrollView>
+            <View style={styles.modalButtons}>
+                <Pressable style={styles.button} onPress={() => props.setModalVisible(!props.modalVisible)}>
+                    <Text style={styles.textStyle}>Cancel</Text>
+                </Pressable>
+                <Pressable style={styles.button} onPress={() => setData({ ...data })}>
+                    <Text style={styles.textStyle}>Add</Text>
+                </Pressable>
+            </View>
             <View
                 // TODO: Change to switch cases
                 style={

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView, Pressable, Modal, Alert } from "react-native";
 
 import SearchInput, { createFilter } from "react-native-search-filter";
 
 import styles from "../assets/style/MyLocationsStyles";
-import Partly from "../assets/images/partly.svg";
 
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import NewLocation from "./NewLocation";
 
 const data = {
     locations: [
@@ -91,13 +91,7 @@ const data = {
 
 function SavedLocations() {
     const [searchCity, setSearchCity] = useState({});
-
-    // const KEYS_TO_FILTERS = ["data.locations.city", "data.locations.country"];
-
-    // const filteredLocations = data.locations.filter(createFilter(searchCity, KEYS_TO_FILTERS));
-    // const searchChange = () => {
-    //     setSearchCity();
-    // };
+    const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <ScrollView>
@@ -107,22 +101,45 @@ function SavedLocations() {
                     <Text style={styles.header}> My Locations </Text>
                     <TextInput
                         style={styles.input}
-                        // onChangeText={setSearchCity}
+                        onChangeText={setSearchCity}
                         value={searchCity}
                         placeholder="Placeholder"
                     />
                 </SafeAreaView>
-                {/* <ScrollView>
-                    {filteredLocations.map((res) => {
-                        return (
-                            <View>
-                                <Text>
-                                    {res.city} {res.country}
-                                </Text>
+                <View style={styles.newForecast}>
+                    <View style={styles.opacityForecastBackground}></View>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                            setModalVisible(!modalVisible);
+                        }}
+                    >
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <View style={styles.modalButtons}>
+                                    <Pressable style={styles.button} onPress={() => setModalVisible(!modalVisible)}>
+                                        <Text style={styles.textStyle}>Cancel</Text>
+                                    </Pressable>
+                                    <Pressable style={styles.button}>
+                                        <Text style={styles.textStyle}>Add</Text>
+                                    </Pressable>
+                                </View>
+
+                                <NewLocation />
                             </View>
-                        );
-                    })}
-                </ScrollView> */}
+                        </View>
+                    </Modal>
+                    <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
+                        <Text>
+                            {data.locations[0].city}
+                            {data.locations[0].country}
+                        </Text>
+                    </Pressable>
+                </View>
+
                 {/* <View style={styles.locations}>
                     {data.savedLocations.map((res) => {
                         return (

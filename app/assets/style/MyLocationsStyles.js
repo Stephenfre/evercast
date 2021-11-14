@@ -113,4 +113,85 @@ export default StyleSheet.create({
         fontFamily: "Helvetica",
         fontSize: 12,
     },
+
+    newForecast: {
+        height: 40,
+        marginTop: 30,
+        width: width - 20,
+    },
+
+    opacityForecastBackground: {
+        height: "100%",
+        width: "100%",
+        backgroundColor: "#CEB68C",
+        position: "absolute",
+        borderTopLeftRadius: 9,
+        borderTopRightRadius: 9,
+        borderBottomLeftRadius: 9,
+        borderBottomRightRadius: 9,
+        opacity: 0.2,
+    },
+
+    newForecastInfo: {
+        fontSize: 14,
+        fontWeight: "bold",
+        color: "white",
+        fontFamily: "Helvetica",
+        paddingTop: 12,
+        paddingBottom: 5,
+        paddingLeft: 20,
+    },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+    },
+
+    modalButtons: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        position: "absolute",
+        zIndex: 2,
+        width: "93%",
+        // backgroundColor: "black",
+    },
+
+    button: {
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2,
+    },
+
+    textStyle: {
+        fontSize: 15,
+        fontWeight: "bold",
+        color: "white",
+        fontFamily: "Helvetica",
+    },
+
+    modalView: {
+        position: "absolute",
+        top: 5,
+        margin: 20,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        alignItems: "center",
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 8,
+        width: width,
+        height: height - 125,
+    },
+
+    buttonOpen: {
+        backgroundColor: "black",
+    },
+
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center",
+    },
 });

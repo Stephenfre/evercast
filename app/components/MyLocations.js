@@ -134,8 +134,7 @@ function SavedLocations() {
                     </Modal>
                     <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
                         <Text>
-                            {data.locations[0].city}
-                            {data.locations[0].country}
+                            {data.locations[0].city} {data.locations[0].country}
                         </Text>
                     </Pressable>
                 </View>

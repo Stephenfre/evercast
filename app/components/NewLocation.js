@@ -5,6 +5,7 @@ import moment from "moment";
 
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/CurrentStyles";
+import MyLocationsStyles from "../assets/style/MyLocationsStyles";
 import HourlyStyles from "../assets/style/HourlyStyles";
 import WeeklyStyles from "../assets/style/WeeklyStyles";
 import backgroundStyles from "../assets/style/BackgroundColors";
@@ -80,12 +81,12 @@ function NewLocation(props) {
         </SafeAreaView>
     ) : (
         <ScrollView>
-            <View style={styles.modalButtons}>
-                <Pressable style={styles.button} onPress={() => props.setModalVisible(!props.modalVisible)}>
-                    <Text style={styles.textStyle}>Cancel</Text>
+            <View style={MyLocationsStyles.modalButtons}>
+                <Pressable style={MyLocationsStyles.button} onPress={() => props.setModalVisible(!props.modalVisible)}>
+                    <Text style={MyLocationsStyles.textStyle}>Cancel</Text>
                 </Pressable>
-                <Pressable style={styles.button} onPress={() => setData({ ...data })}>
-                    <Text style={styles.textStyle}>Add</Text>
+                <Pressable style={MyLocationsStyles.button} onPress={() => setData({ ...data })}>
+                    <Text style={MyLocationsStyles.textStyle}>Add</Text>
                 </Pressable>
             </View>
             <View

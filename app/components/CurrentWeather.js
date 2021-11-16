@@ -330,11 +330,11 @@ function CurrentWeather({ weatherData }) {
                 ) : null} */}
                 <View style={HourlyStyles.middleContainer}>
                     <View style={HourlyStyles.opacityMiddleBackground}></View>
-                    <HourlyForecast data={weatherData} />
+                    <HourlyForecast weatherData={weatherData} />
                 </View>
                 <View style={WeeklyStyles.bottomContainer}>
                     <View style={WeeklyStyles.opacityBottomBackground}></View>
-                    <WeeklyForecast data={weatherData} />
+                    <WeeklyForecast weatherData={weatherData} />
                 </View>
             </View>
         </ScrollView>

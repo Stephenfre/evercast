@@ -6,14 +6,14 @@ import moment from "moment";
 
 import styles from "../assets/style/WeeklyStyles";
 
-function WeeklyForecast({ data }) {
-    return data.length === 0 ? (
+function WeeklyForecast({ weatherData }) {
+    return weatherData.length === 0 ? (
         <SafeAreaView>
             <Text>loading...</Text>
         </SafeAreaView>
     ) : (
         <View style={styles.bottomContent}>
-            {data.daily.map((dates, i) => {
+            {weatherData.daily.map((dates, i) => {
                 return (
                     <View style={styles.weeklyCast}>
                         {dates.pop > 0 ? (

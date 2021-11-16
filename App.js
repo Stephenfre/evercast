@@ -1,4 +1,11 @@
 import React from "react";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from "./app/store/reducer";
+
 import { StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { BlurView } from "expo-blur";
@@ -18,47 +25,51 @@ const { height } = Dimensions.get("window");
 
 const Tab = createBottomTabNavigator();
 
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+
 export default function App() {
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={{
-                    tabBarStyle: { backgroundColor: "white" },
-                    tabBarBackground: () => <BlurView tint="dark" intensity={100} />,
-                    headerShown: false,
-                    tabBarShowLabel: false,
-                }}
-            >
-                <Tab.Screen
-                    name="Home"
-                    options={{
-                        tabBarIcon: () => <Ionicons name="ios-home-sharp" color="black" size={30} />,
+        <Provider store={store}>
+            <NavigationContainer>
+                <Tab.Navigator
+                    screenOptions={{
+                        tabBarStyle: { backgroundColor: "white" },
+                        tabBarBackground: () => <BlurView tint="dark" intensity={100} />,
+                        headerShown: false,
+                        tabBarShowLabel: false,
                     }}
-                    component={CurrentWeather}
-                />
-                <Tab.Screen
-                    name="Map"
-                    options={{
-                        tabBarIcon: () => <Ionicons name="ios-map" color="black" size={30} />,
-                    }}
-                    component={WeatherMap}
-                />
-                <Tab.Screen
-                    name="Location"
-                    component={MyLocations}
-                    options={{
-                        tabBarIcon: () => <Ionicons name="heart" color="black" size={30} />,
-                    }}
-                />
-                {/* <Tab.Screen
+                >
+                    <Tab.Screen
+                        name="Home"
+                        options={{
+                            tabBarIcon: () => <Ionicons name="ios-home-sharp" color="black" size={30} />,
+                        }}
+                        component={CurrentWeather}
+                    />
+                    <Tab.Screen
+                        name="Map"
+                        options={{
+                            tabBarIcon: () => <Ionicons name="ios-map" color="black" size={30} />,
+                        }}
+                        component={WeatherMap}
+                    />
+                    <Tab.Screen
+                        name="Location"
+                        component={MyLocations}
+                        options={{
+                            tabBarIcon: () => <Ionicons name="heart" color="black" size={30} />,
+                        }}
+                    />
+                    {/* <Tab.Screen
                     name="Settings"
                     component={Settings}
                     options={{
                         tabBarIcon: () => <Ionicons name="ios-settings-sharp" color="black" size={30} />,
                     }}
                 /> */}
-            </Tab.Navigator>
-        </NavigationContainer>
+                </Tab.Navigator>
+            </NavigationContainer>
+        </Provider>
     );
 }
 

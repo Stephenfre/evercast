@@ -10,7 +10,7 @@ export function getWeatherData() {
 
         return axios
             .get(
-                "https://api.openweathermap.org/data/2.5/onecall?lat=47.75&lon=-120.74&units=imperial&exclude=minutely&appid=7613dff2af161bb376b90a08f6c9d4df"
+                "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-112.07&units=imperial&exclude=minutely&appid=7613dff2af161bb376b90a08f6c9d4df"
             )
             .then((res) => {
                 dispatch({

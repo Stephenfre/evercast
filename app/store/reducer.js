@@ -2,6 +2,7 @@ import {
     GET_ALLWEATHER_DATA,
     GET_ALLWEATHER_DATA_SUCCESS,
     GET_ALLWEATHER_DATA_FAIL,
+    SAVE_LOCATIONS,
     // SEARCHWEATHER_DATA,
     // SEARCHWEATHER_DATA_SUCCESS,
     // SEARCHWEATHER_DATA_FAIL,
@@ -13,6 +14,7 @@ const initialState = {
     fetchingWeatherDataFail: null,
     searchingWeatherData: [],
     searchingWeatherDataFail: null,
+    savedLocations: [],
 };
 
 export default (state = initialState, action) => {
@@ -34,6 +36,13 @@ export default (state = initialState, action) => {
             return {
                 fetchingWeatherData: false,
                 fetchingWeatherDataFail: action.payload,
+            };
+
+        case SAVE_LOCATIONS:
+            location = action.payload;
+            return {
+                ...state,
+                savedLocations: [...state.savedLocations, location],
             };
 
         // case SEARCHWEATHER_DATA:

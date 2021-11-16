@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_ALLWEATHER_DATA = "GET_ALLWEATHER_DATA";
 export const GET_ALLWEATHER_DATA_SUCCESS = "GET_ALLWEATHER_DATA_SUCCESS";
 export const GET_ALLWEATHER_DATA_FAIL = "GET_ALLWEATHER_DATA_FAIL";
+export const SAVE_LOCATIONS = "SAVE_LOCATIONS";
 
 export function getWeatherData() {
     return (dispatch) => {
@@ -25,5 +26,12 @@ export function getWeatherData() {
                 });
                 console.log(err, "something is broken get weather actions");
             });
+    };
+}
+
+export function saveLocation(location) {
+    return {
+        type: SAVE_LOCATIONS,
+        payload: location,
     };
 }

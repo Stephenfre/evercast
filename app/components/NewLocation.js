@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
-import axios from "axios";
-import moment from "moment";
+import { getWeatherData } from "../store/actions";
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/CurrentStyles";
@@ -45,22 +46,13 @@ const chartConfig = {
     fillShadowGradientOpacity: 2,
 };
 
-function NewLocation(props) {
-    const [openWeatherData, setOpenWeatherData] = useState([]);
+function NewLocation({ weatherData, modalVisible, setModalVisible }) {
+    // const [weatherData, setOpenWeatherData] = useState([]);
 
-    console.log("props", props);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        axios
-            .get(
-                "https://api.openweathermap.org/data/2.5/onecall?lat=47.75&lon=-120.74&units=imperial&exclude=minutely&appid=7613dff2af161bb376b90a08f6c9d4df"
-            )
-            .then((res) => {
-                setOpenWeatherData(res.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        dispatch(getWeatherData());
     }, []);
 
     var hours = new Date().getHours();
@@ -75,14 +67,14 @@ function NewLocation(props) {
 
     const night = hours >= 17 && hours <= 24;
 
-    return openWeatherData.length === 0 ? (
+    return weatherData.length === 0 ? (
         <SafeAreaView>
             <Text>loading...</Text>
         </SafeAreaView>
     ) : (
         <ScrollView>
             <View style={MyLocationsStyles.modalButtons}>
-                <Pressable style={MyLocationsStyles.button} onPress={() => props.setModalVisible(!props.modalVisible)}>
+                <Pressable style={MyLocationsStyles.button} onPress={() => setModalVisible(!modalVisible)}>
                     <Text style={MyLocationsStyles.textStyle}>Cancel</Text>
                 </Pressable>
                 <Pressable style={MyLocationsStyles.button} onPress={() => setData({ ...data })}>
@@ -94,29 +86,29 @@ function NewLocation(props) {
                 style={
                     earlyMorning
                         ? backgroundStyles.earlyContainer
-                        : morning && openWeatherData.current.weather[0].main === "Clear"
+                        : morning && weatherData.current.weather[0].main === "Clear"
                         ? backgroundStyles.morningContainer
-                        : morning && openWeatherData.current.weather[0].main === "Overcast"
+                        : morning && weatherData.current.weather[0].main === "Overcast"
                         ? backgroundStyles.morningContainerOvercast
-                        : morning && openWeatherData.current.weather[0].main === "Rain"
+                        : morning && weatherData.current.weather[0].main === "Rain"
                         ? backgroundStyles.morningContainerRain
-                        : morning && openWeatherData.current.weather[0].main === "Snow"
+                        : morning && weatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.morningContainerSnow
-                        : afternoon && openWeatherData.current.weather[0].main === "Clear"
+                        : afternoon && weatherData.current.weather[0].main === "Clear"
                         ? backgroundStyles.afternoonContainer
-                        : afternoon && openWeatherData.current.weather[0].main === "Clouds"
+                        : afternoon && weatherData.current.weather[0].main === "Clouds"
                         ? backgroundStyles.afternoonContainerOvercast
-                        : afternoon && openWeatherData.current.weather[0].main === "Rain"
+                        : afternoon && weatherData.current.weather[0].main === "Rain"
                         ? backgroundStyles.afternoonContainerRain
-                        : afternoon && openWeatherData.current.weather[0].main === "Snow"
+                        : afternoon && weatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.afternoonContainerSnow
-                        : evening && openWeatherData.current.weather[0].main === "Sunny"
+                        : evening && weatherData.current.weather[0].main === "Sunny"
                         ? backgroundStyles.eveningContainer
-                        : evening && openWeatherData.current.weather[0].main === "Clouds"
+                        : evening && weatherData.current.weather[0].main === "Clouds"
                         ? backgroundStyles.eveningContainerOvercast
-                        : evening && openWeatherData.current.weather[0].main === "Rain"
+                        : evening && weatherData.current.weather[0].main === "Rain"
                         ? backgroundStyles.eveningContainerRain
-                        : evening && openWeatherData.current.weather[0].main === "Snow"
+                        : evening && weatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.eveningContainerSnow
                         : night
                         ? backgroundStyles.nightContainer
@@ -130,84 +122,84 @@ function NewLocation(props) {
                         colors={["rgb(0, 0, 0)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : morning && openWeatherData.current.weather[0].main === "Clear" ? (
+                ) : morning && weatherData.current.weather[0].main === "Clear" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(255,184,0,100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : morning && openWeatherData.current.weather[0].main === "Overcast" ? (
+                ) : morning && weatherData.current.weather[0].main === "Overcast" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(219, 226, 251, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : morning && openWeatherData.current.weather[0].main === "Rain" ? (
+                ) : morning && weatherData.current.weather[0].main === "Rain" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(204, 215, 255, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : morning && openWeatherData.current.weather[0].main === "Snow" ? (
+                ) : morning && weatherData.current.weather[0].main === "Snow" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(63, 174, 255, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Clear" ? (
+                ) : afternoon && weatherData.current.weather[0].main === "Clear" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(255, 184, 0, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Overcast" ? (
+                ) : afternoon && weatherData.current.weather[0].main === "Overcast" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(168, 175, 198, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Rain" ? (
+                ) : afternoon && weatherData.current.weather[0].main === "Rain" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(136, 149, 195, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : afternoon && openWeatherData.current.weather[0].main === "Snow" ? (
+                ) : afternoon && weatherData.current.weather[0].main === "Snow" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(0, 50, 86, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : evening && openWeatherData.current.weather[0].main === "Sunny" ? (
+                ) : evening && weatherData.current.weather[0].main === "Sunny" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgb(202, 145, 0)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : evening && openWeatherData.current.weather[0].main === "Clouds" ? (
+                ) : evening && weatherData.current.weather[0].main === "Clouds" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(120, 124, 140, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : evening && openWeatherData.current.weather[0].main === "Rain" ? (
+                ) : evening && weatherData.current.weather[0].main === "Rain" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(99, 109, 146, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : evening && openWeatherData.current.weather[0].main === "Snow" ? (
+                ) : evening && weatherData.current.weather[0].main === "Snow" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
@@ -228,13 +220,13 @@ function NewLocation(props) {
                     <View style={styles.topContent}>
                         <View style={styles.rightColumn}>
                             <Text style={styles.cityText}>Phoenix</Text>
-                            <Text style={styles.rigthTempText}>{Math.round(openWeatherData.current.temp)}°</Text>
+                            <Text style={styles.rigthTempText}>{Math.round(weatherData.current.temp)}°</Text>
                             <>
-                                {openWeatherData.current.weather[0].main === "Rain" ? (
+                                {weatherData.current.weather[0].main === "Rain" ? (
                                     <>
                                         <View style={styles.conditionRain}>
                                             <Text style={styles.conditionText}>
-                                                {openWeatherData.current.weather[0].main}
+                                                {weatherData.current.weather[0].main}
                                             </Text>
                                         </View>
                                     </>
@@ -242,15 +234,15 @@ function NewLocation(props) {
                                     <>
                                         <View style={styles.condition}>
                                             <Text style={styles.conditionText}>
-                                                {openWeatherData.current.weather[0].main}
+                                                {weatherData.current.weather[0].main}
                                             </Text>
                                         </View>
                                     </>
                                 )}
                             </>
                             <Text style={styles.hiloTemp}>
-                                H: {Math.round(openWeatherData.daily[0].temp.max)}° L:
-                                {Math.round(openWeatherData.daily[0].temp.min)}°
+                                H: {Math.round(weatherData.daily[0].temp.max)}° L:
+                                {Math.round(weatherData.daily[0].temp.min)}°
                             </Text>
                         </View>
                         <View style={{ marginBottom: 35, marginLeft: 10 }}>
@@ -258,7 +250,7 @@ function NewLocation(props) {
                                 source={{
                                     uri:
                                         "http://openweathermap.org/img/wn/" +
-                                        openWeatherData.current.weather[0].icon +
+                                        weatherData.current.weather[0].icon +
                                         "@4x.png",
                                 }}
                                 style={styles.image}
@@ -278,8 +270,8 @@ function NewLocation(props) {
                     >
                         <Ionicons name="ios-rainy" color="white" size={15} />
                         <>
-                            {openWeatherData.daily[0].pop > 0 ? (
-                                <Text style={styles.details}>{Math.round(openWeatherData.daily[0].pop * 100)} %</Text>
+                            {weatherData.daily[0].pop > 0 ? (
+                                <Text style={styles.details}>{Math.round(weatherData.daily[0].pop * 100)} %</Text>
                             ) : (
                                 <Text style={styles.details}>0% </Text>
                             )}
@@ -294,21 +286,32 @@ function NewLocation(props) {
                         }}
                     >
                         <MaterialCommunityIcons name="weather-windy-variant" color="white" size={14} />
-                        <Text style={styles.details}>{openWeatherData.current.wind_speed} kh/m</Text>
+                        <Text style={styles.details}>{weatherData.current.wind_speed} kh/m</Text>
                     </View>
                 </View>
 
                 <View style={HourlyStyles.middleContainer}>
                     <View style={HourlyStyles.opacityMiddleBackground}></View>
-                    <HourlyForecast data={openWeatherData} />
+                    <HourlyForecast weatherData={weatherData} />
                 </View>
                 <View style={WeeklyStyles.bottomContainer}>
                     <View style={WeeklyStyles.opacityBottomBackground}></View>
-                    <WeeklyForecast data={openWeatherData} />
+                    <WeeklyForecast weatherData={weatherData} />
                 </View>
             </View>
         </ScrollView>
     );
 }
 
-export default NewLocation;
+const mapStateToProps = (state) => {
+    return {
+        weatherData: state.weatherData,
+        weatherDataFail: state.weatherDataFail,
+    };
+};
+
+const mapDispatchToProps = {
+    getWeatherData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewLocation);

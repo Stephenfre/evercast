@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
-// import axios from "axios";
 import { getWeatherData } from "../store/actions";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";

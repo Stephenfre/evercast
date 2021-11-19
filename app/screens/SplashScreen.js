@@ -2,8 +2,7 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView, Text, View, ActivityIndicator, Image } from "react-native";
 
-function SplashScreen(props) {
-    console.log(props.data);
+function SplashScreen() {
     return (
         <View style={styles.splashContainer}>
             <StatusBar style="light" />

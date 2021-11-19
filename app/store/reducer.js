@@ -18,7 +18,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    console.log("reducer");
     switch (action.type) {
         case GET_ALLWEATHER_DATA:
             return {

@@ -89,9 +89,6 @@ function SavedLocations() {
         ],
     });
 
-    let newArrayData = [];
-    console.log("new data added", data.savedLocations);
-
     // const onAddClick = () => {
     //     setSavedCity((old) => [...old, ...newArrayData]);
     //     console.log("clicked");

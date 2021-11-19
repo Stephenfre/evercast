@@ -38,7 +38,8 @@ export default (state = initialState, action) => {
             };
 
         case SAVE_LOCATIONS:
-            location = action.payload;
+            console.log("added", state.savedLocations);
+            const location = action.payload;
             return {
                 ...state,
                 savedLocations: [...state.savedLocations, location],

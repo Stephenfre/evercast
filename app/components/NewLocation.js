@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
-import { getWeatherData } from "../store/actions";
-import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
+
+import { getWeatherData } from "../store/actions";
+import { saveLocation } from "../store/actions";
 
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/CurrentStyles";
@@ -55,6 +57,17 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
         dispatch(getWeatherData());
     }, []);
 
+    const onPressAdd = () => {
+        console.log("clicked");
+        dispatch(
+            saveLocation({
+                id: 1,
+                city: "Phoenix, AZ",
+                country: "USA",
+            })
+        );
+    };
+
     var hours = new Date().getHours();
 
     const earlyMorning = hours <= 6;
@@ -77,7 +90,7 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                 <Pressable style={MyLocationsStyles.button} onPress={() => setModalVisible(!modalVisible)}>
                     <Text style={MyLocationsStyles.textStyle}>Cancel</Text>
                 </Pressable>
-                <Pressable style={MyLocationsStyles.button} onPress={() => setData({ ...data })}>
+                <Pressable style={MyLocationsStyles.button} onPress={onPressAdd}>
                     <Text style={MyLocationsStyles.textStyle}>Add</Text>
                 </Pressable>
             </View>
@@ -312,6 +325,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     getWeatherData,
+    saveLocation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewLocation);

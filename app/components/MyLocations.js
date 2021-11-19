@@ -89,11 +89,6 @@ function SavedLocations() {
         ],
     });
 
-    // const onAddClick = () => {
-    //     setSavedCity((old) => [...old, ...newArrayData]);
-    //     console.log("clicked");
-    // };
-
     return (
         <ScrollView>
             <View style={styles.savedContainer}>

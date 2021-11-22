@@ -6,6 +6,9 @@ import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Ima
 import { getWeatherData } from "../store/actions";
 import { saveLocation } from "../store/actions";
 
+import HourlyForecast from "./HourlyForecast";
+import WeeklyForecast from "./WeeklyForecast";
+
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/CurrentStyles";
 import MyLocationsStyles from "../assets/style/MyLocationsStyles";
@@ -15,10 +18,7 @@ import backgroundStyles from "../assets/style/BackgroundColors";
 
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import HourlyForecast from "./HourlyForecast";
-import WeeklyForecast from "./WeeklyForecast";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -59,13 +59,19 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
 
     const onPressAdd = () => {
         console.log("clicked");
+
         dispatch(
             saveLocation({
                 id: 1,
-                city: "Phoenix, AZ",
+                city: "Phoenix",
                 country: "USA",
+                temp: "70",
+                rain: "90%",
+                wind: "8",
             })
         );
+
+        setModalVisible(!modalVisible);
     };
 
     var hours = new Date().getHours();

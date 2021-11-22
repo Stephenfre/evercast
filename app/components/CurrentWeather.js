@@ -4,6 +4,9 @@ import { getWeatherData } from "../store/actions";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 
+import HourlyForecast from "./HourlyForecast";
+import WeeklyForecast from "./WeeklyForecast";
+
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/CurrentStyles";
 import HourlyStyles from "../assets/style/HourlyStyles";
@@ -12,10 +15,7 @@ import backgroundStyles from "../assets/style/BackgroundColors";
 
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import HourlyForecast from "./HourlyForecast";
-import WeeklyForecast from "./WeeklyForecast";
 
 const screenWidth = Dimensions.get("window").width;
 

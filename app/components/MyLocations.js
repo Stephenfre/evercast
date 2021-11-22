@@ -1,15 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
 import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView, Pressable, Modal, Alert } from "react-native";
-
 import SearchInput, { createFilter } from "react-native-search-filter";
-
-import styles from "../assets/style/MyLocationsStyles";
 
 import NewLocation from "./NewLocation";
 
-function SavedLocations() {
-    const [searchCity, setSearchCity] = useState({});
+import styles from "../assets/style/MyLocationsStyles";
+
+import { LinearGradient } from "expo-linear-gradient";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+function SavedLocations({ savedLocations }) {
+    const [query, setQuery] = useState("");
+    const [city, setCity] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
+    const focusSearch = useRef(null);
     const [data, setData] = useState({
         locations: [
             {
@@ -89,6 +96,48 @@ function SavedLocations() {
         ],
     });
 
+    useEffect(() => {
+        focusSearch.current.focus();
+    }, []);
+
+    const getCity = async (query) => {
+        const results = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=imperial&appid=7613dff2af161bb376b90a08f6c9d4df`
+        );
+
+        const cityData = await results.json();
+        console.log("data", cityData);
+        return cityData.results;
+    };
+
+    const sleep = (ms) => {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    };
+
+    useEffect(() => {
+        let currentQuery = true;
+        const controller = new AbortController();
+
+        const loadCities = async () => {
+            if (!query) return setCity([]);
+
+            await sleep(450);
+            if (currentQuery) {
+                const city = await getCity(query, controller);
+                setCity(city);
+                console.log("city here", city);
+            }
+        };
+        loadCities();
+
+        return () => {
+            currentQuery = false;
+            controller.abort();
+        };
+    }, [query]);
+
+    console.log("data typed", query);
+
     return (
         <ScrollView>
             <View style={styles.savedContainer}>
@@ -97,9 +146,10 @@ function SavedLocations() {
                     <Text style={styles.header}> My Locations </Text>
                     <TextInput
                         style={styles.input}
-                        onChangeText={setSearchCity}
-                        value={searchCity}
-                        placeholder="Placeholder"
+                        ref={focusSearch}
+                        onChangeText={setQuery}
+                        value={query}
+                        placeholder="Location..."
                     />
                 </SafeAreaView>
                 <View style={styles.newForecast}>
@@ -119,15 +169,17 @@ function SavedLocations() {
                             </View>
                         </View>
                     </Modal>
+
                     <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
-                        <Text>
-                            {data.locations[0].city} {data.locations[0].country}
-                        </Text>
+                        {/* {city.map((cities, i) => {
+                            console.log("cities", cities);
+                            return <Text>{cities.name}</Text>;
+                        })} */}
                     </Pressable>
                 </View>
 
                 {/* <View style={styles.locations}>
-                    {data.savedLocations.map((res) => {
+                    {savedLocations.map((res) => {
                         return (
                             <View key={res.id}>
                                 <View style={res.temp > 66 ? styles.locationCardA : styles.locationCardB}>
@@ -196,4 +248,12 @@ function SavedLocations() {
     );
 }
 
-export default SavedLocations;
+const mapStateToProps = (state) => {
+    return {
+        savedLocations: state.savedLocations,
+    };
+};
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SavedLocations);

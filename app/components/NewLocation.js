@@ -48,8 +48,8 @@ const chartConfig = {
     fillShadowGradientOpacity: 2,
 };
 
-function NewLocation({ weatherData, modalVisible, setModalVisible }) {
-    // const [weatherData, setOpenWeatherData] = useState([]);
+function NewLocation({ city, weatherData, modalVisible, setModalVisible }) {
+    console.log("city", city);
 
     const dispatch = useDispatch();
 
@@ -238,10 +238,10 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                     <View style={styles.opacityTopBackground}></View>
                     <View style={styles.topContent}>
                         <View style={styles.rightColumn}>
-                            <Text style={styles.cityText}>Phoenix</Text>
-                            <Text style={styles.rigthTempText}>{Math.round(weatherData.current.temp)}°</Text>
+                            <Text style={styles.cityText}>{city.name}</Text>
+                            <Text style={styles.rigthTempText}>{Math.round(city.main.temp)}°</Text>
                             <>
-                                {weatherData.current.weather[0].main === "Rain" ? (
+                                {city.weather[0].main === "Rain" ? (
                                     <>
                                         <View style={styles.conditionRain}>
                                             <Text style={styles.conditionText}>
@@ -260,17 +260,13 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                                 )}
                             </>
                             <Text style={styles.hiloTemp}>
-                                H: {Math.round(weatherData.daily[0].temp.max)}° L:
-                                {Math.round(weatherData.daily[0].temp.min)}°
+                                L: {Math.round(city.main.temp_min)}° H: {Math.round(city.main.temp_max)}°
                             </Text>
                         </View>
                         <View style={{ marginBottom: 35, marginLeft: 10 }}>
                             <Image
                                 source={{
-                                    uri:
-                                        "http://openweathermap.org/img/wn/" +
-                                        weatherData.current.weather[0].icon +
-                                        "@4x.png",
+                                    uri: "http://openweathermap.org/img/wn/" + city.weather[0].icon + "@4x.png",
                                 }}
                                 style={styles.image}
                             />
@@ -305,7 +301,7 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                         }}
                     >
                         <MaterialCommunityIcons name="weather-windy-variant" color="white" size={14} />
-                        <Text style={styles.details}>{weatherData.current.wind_speed} kh/m</Text>
+                        <Text style={styles.details}>{city.wind.speed} kh/m</Text>
                     </View>
                 </View>
 

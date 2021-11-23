@@ -15,8 +15,10 @@ function Location(props) {
                 return;
             }
 
-            let location = await Location.getCurrentPositionAsync({});
+            let location = await Location.reverseGeoCodeAsync({ lat, lng });
             setLocation(location);
+
+            console.log("location");
         })();
     }, []);
 

@@ -107,7 +107,7 @@ function SavedLocations({ savedLocations }) {
 
         const cityData = await results.json();
         console.log("data", cityData);
-        return cityData.results;
+        return cityData;
     };
 
     const sleep = (ms) => {
@@ -165,16 +165,17 @@ function SavedLocations({ savedLocations }) {
                     >
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <NewLocation modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                                <NewLocation
+                                    city={city}
+                                    modalVisible={modalVisible}
+                                    setModalVisible={setModalVisible}
+                                />
                             </View>
                         </View>
                     </Modal>
 
                     <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
-                        {/* {city.map((cities, i) => {
-                            console.log("cities", cities);
-                            return <Text>{cities.name}</Text>;
-                        })} */}
+                        <Text>{city.name}</Text>
                     </Pressable>
                 </View>
 

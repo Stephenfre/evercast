@@ -6,7 +6,7 @@ export default StyleSheet.create({
     // ** TIME OF DAY BACKGROUND COLORS //
     earlyContainer: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(0, 0, 0, 100)",
         alignItems: "center",
@@ -14,7 +14,7 @@ export default StyleSheet.create({
 
     morningContainer: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgb(255, 106, 60)",
         alignItems: "center",
@@ -22,7 +22,7 @@ export default StyleSheet.create({
 
     afternoonContainer: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgb(255, 69, 136)",
         alignItems: "center",
@@ -30,7 +30,7 @@ export default StyleSheet.create({
 
     eveningContainer: {
         flex: 3,
-        height: 10,
+        height: height + 175,
         width: width,
         backgroundColor: "rgb(177, 43, 0)",
         alignItems: "center",
@@ -38,7 +38,7 @@ export default StyleSheet.create({
 
     nightContainer: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgb(0, 0, 0)",
         alignItems: "center",
@@ -56,7 +56,7 @@ export default StyleSheet.create({
 
     morningContainerOvercast: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(99, 103, 116, 75)",
         alignItems: "center",
@@ -64,7 +64,7 @@ export default StyleSheet.create({
 
     afternoonContainerOvercast: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(80, 83, 95, 88)",
         alignItems: "center",
@@ -72,7 +72,7 @@ export default StyleSheet.create({
 
     eveningContainerOvercast: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(46, 48, 54, 100)",
         alignItems: "center",
@@ -80,7 +80,7 @@ export default StyleSheet.create({
 
     morningContainerRain: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(22, 38, 95, 75)",
         alignItems: "center",
@@ -88,7 +88,7 @@ export default StyleSheet.create({
 
     afternoonContainerRain: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(12, 25, 68, 88)",
         alignItems: "center",
@@ -96,7 +96,7 @@ export default StyleSheet.create({
 
     eveningContainerRain: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(6, 11, 30, 100)",
         alignItems: "center",
@@ -104,7 +104,7 @@ export default StyleSheet.create({
 
     morningContainerSnow: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(167, 213, 255, 100)",
         alignItems: "center",
@@ -112,7 +112,7 @@ export default StyleSheet.create({
 
     afternoonContainerSnow: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(82, 128, 171, 100)",
         alignItems: "center",
@@ -120,7 +120,7 @@ export default StyleSheet.create({
 
     eveningContainerSnow: {
         flex: 3,
-        height: height + 70,
+        height: height + 175,
         width: width,
         backgroundColor: "rgba(52, 83, 112, 100)",
         alignItems: "center",

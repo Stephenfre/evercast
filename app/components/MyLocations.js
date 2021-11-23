@@ -1,8 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { Text, View, TextInput, SafeAreaView, StatusBar, ScrollView, Pressable, Modal, Alert } from "react-native";
-import SearchInput, { createFilter } from "react-native-search-filter";
+import {
+    Text,
+    View,
+    TextInput,
+    SafeAreaView,
+    StatusBar,
+    ScrollView,
+    Pressable,
+    Modal,
+    Alert,
+    Dimensions,
+} from "react-native";
 
 import NewLocation from "./NewLocation";
 
@@ -96,6 +106,8 @@ function SavedLocations({ savedLocations }) {
         ],
     });
 
+    const { width, height } = Dimensions.get("window");
+
     useEffect(() => {
         focusSearch.current.focus();
     }, []);
@@ -144,42 +156,111 @@ function SavedLocations({ savedLocations }) {
                 <StatusBar barStyle="light-content" />
                 <SafeAreaView>
                     <Text style={styles.header}> My Locations </Text>
-                    <TextInput
-                        style={styles.input}
-                        ref={focusSearch}
-                        onChangeText={setQuery}
-                        value={query}
-                        placeholder="Location..."
-                    />
-                </SafeAreaView>
-                <View style={styles.newForecast}>
-                    <View style={styles.opacityForecastBackground}></View>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                            Alert.alert("Modal has been closed.");
-                            setModalVisible(!modalVisible);
-                        }}
-                    >
-                        <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <NewLocation
-                                    city={city}
-                                    modalVisible={modalVisible}
-                                    setModalVisible={setModalVisible}
+                    {query ? (
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                height: 65,
+                                width: width - 20,
+                            }}
+                        >
+                            {!query ? (
+                                <TextInput
+                                    style={styles.input}
+                                    ref={focusSearch}
+                                    onChangeText={setQuery}
+                                    value={query}
+                                    placeholder="Search for a city"
                                 />
-                            </View>
+                            ) : (
+                                <TextInput
+                                    style={styles.inputActive}
+                                    ref={focusSearch}
+                                    onChangeText={setQuery}
+                                    value={query}
+                                    placeholder="Search for a city"
+                                />
+                            )}
+                            {query ? (
+                                <Pressable
+                                    // style={MyLocationsStyles.button}
+                                    onPress={() => setQuery(!query)}
+                                >
+                                    <Text
+                                        style={{
+                                            fontSize: 20,
+                                            // fontWeight: "bold",
+                                            color: "#fff",
+                                            fontFamily: "Helvetica",
+                                            // marginLeft: 10,
+                                        }}
+                                    >
+                                        Cancel
+                                    </Text>
+                                </Pressable>
+                            ) : null}
                         </View>
-                    </Modal>
+                    ) : (
+                        <View
+                            style={{
+                                height: 75,
+                                width: width - 20,
+                            }}
+                        >
+                            {!query ? (
+                                <TextInput
+                                    style={styles.input}
+                                    ref={focusSearch}
+                                    onChangeText={setQuery}
+                                    value={query}
+                                    placeholder="Search for a city"
+                                />
+                            ) : (
+                                <TextInput
+                                    style={styles.inputActive}
+                                    ref={focusSearch}
+                                    onChangeText={setQuery}
+                                    value={query}
+                                    placeholder="Search for a city"
+                                />
+                            )}
+                        </View>
+                    )}
+                </SafeAreaView>
+                {query ? (
+                    <SafeAreaView style={styles.newForecast}>
+                        <View style={styles.opacityForecastBackground}></View>
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisible}
+                            onRequestClose={() => {
+                                Alert.alert("Modal has been closed.");
+                                setModalVisible(!modalVisible);
+                            }}
+                        >
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <NewLocation
+                                        city={city}
+                                        modalVisible={modalVisible}
+                                        setModalVisible={setModalVisible}
+                                    />
+                                </View>
+                            </View>
+                        </Modal>
 
-                    <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
-                        <Text>{city.name}</Text>
-                    </Pressable>
-                </View>
+                        <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
+                            <Text style={{ fontSize: 14, fontWeight: "bold", color: "white", fontFamily: "Helvetica" }}>
+                                {city.name}
+                            </Text>
+                        </Pressable>
+                    </SafeAreaView>
+                ) : null}
 
-                {/* <View style={styles.locations}>
+                <View style={styles.locations}>
                     {savedLocations.map((res) => {
                         return (
                             <View key={res.id}>
@@ -207,9 +288,9 @@ function SavedLocations({ savedLocations }) {
                                             <Text style={styles.locationCountry}>{res.country}</Text>
                                         </View>
 
-                                        <View>
+                                        {/* <View>
                                             <Partly width={50} height={50} />
-                                        </View>
+                                        </View> */}
                                     </View>
                                     <View style={styles.locationDetails}>
                                         <View
@@ -243,7 +324,7 @@ function SavedLocations({ savedLocations }) {
                             </View>
                         );
                     })}
-                </View> */}
+                </View>
             </View>
         </ScrollView>
     );

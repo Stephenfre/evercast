@@ -49,25 +49,32 @@ const chartConfig = {
 };
 
 function NewLocation({ city, weatherData, modalVisible, setModalVisible }) {
-    console.log("city", city);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getWeatherData());
     }, []);
 
+    var max = 2;
+
+    var random = Math.floor(Math.random() * max);
+
+    var newId = random.toString();
+
+    // console.log("newid", newId);
+
     const onPressAdd = () => {
         console.log("clicked");
 
         dispatch(
             saveLocation({
-                id: 1,
-                city: "Phoenix",
-                country: "USA",
-                temp: "70",
+                // id: newId,
+                city: city.name,
+                country: city.country,
+                temp: city.main.temp,
+                img: city.weather[0].icon,
                 rain: "90%",
-                wind: "8",
+                wind: city.wind.speed,
             })
         );
 

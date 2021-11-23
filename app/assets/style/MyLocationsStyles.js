@@ -107,7 +107,7 @@ export default StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "flex-end",
         width: "90%",
-        height: 60,
+        height: 50,
         paddingTop: 5,
         paddingBottom: 5,
         // backgroundColor: "red",

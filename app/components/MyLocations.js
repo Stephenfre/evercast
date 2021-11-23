@@ -12,11 +12,13 @@ import {
     Modal,
     Alert,
     Dimensions,
+    Image,
 } from "react-native";
 
 import NewLocation from "./NewLocation";
 
 import styles from "../assets/style/MyLocationsStyles";
+import currentStyles from "../assets/style/CurrentStyles";
 
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -148,8 +150,6 @@ function SavedLocations({ savedLocations }) {
         };
     }, [query]);
 
-    console.log("data typed", query);
-
     return (
         <ScrollView>
             <View style={styles.savedContainer}>
@@ -261,9 +261,9 @@ function SavedLocations({ savedLocations }) {
                 ) : null}
 
                 <View style={styles.locations}>
-                    {savedLocations.map((res) => {
+                    {savedLocations.map((res, index) => {
                         return (
-                            <View key={res.id}>
+                            <View key={index}>
                                 <View style={res.temp > 66 ? styles.locationCardA : styles.locationCardB}>
                                     {res.temp > 66 ? (
                                         <LinearGradient
@@ -283,14 +283,19 @@ function SavedLocations({ savedLocations }) {
 
                                     <View style={styles.topCard}>
                                         <View style={styles.savedCity}>
-                                            <Text style={styles.locationTemp}>{res.temp}</Text>
+                                            <Text style={styles.locationTemp}>{Math.round(res.temp)}</Text>
                                             <Text style={styles.locationCity}>{res.city}</Text>
                                             <Text style={styles.locationCountry}>{res.country}</Text>
                                         </View>
 
-                                        {/* <View>
-                                            <Partly width={50} height={50} />
-                                        </View> */}
+                                        <View>
+                                            <Image
+                                                source={{
+                                                    uri: "http://openweathermap.org/img/wn/" + res.img + "@4x.png",
+                                                }}
+                                                style={{ width: 60, height: 80 }}
+                                            />
+                                        </View>
                                     </View>
                                     <View style={styles.locationDetails}>
                                         <View

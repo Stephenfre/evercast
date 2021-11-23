@@ -38,7 +38,7 @@ function WeeklyForecast({ weatherData }) {
                                         flexDirection: "row",
                                         alignItems: "center",
                                         justifyContent: "flex-end",
-                                        marginLeft: 99,
+                                        marginLeft: 60,
                                     }}
                                 >
                                     <Text style={styles.lowTemp}>{Math.round(dates.temp.min)}</Text>
@@ -52,19 +52,24 @@ function WeeklyForecast({ weatherData }) {
                                     <Text style={styles.dayText}>{moment(dates.dt * 1000).format("dddd")}</Text>
                                 </View>
 
-                                <Image
-                                    source={{
-                                        uri: "http://openweathermap.org/img/wn/" + dates.weather[0].icon + "@4x.png",
-                                    }}
-                                    style={styles.image}
-                                />
+                                <View
+                                    style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}
+                                >
+                                    <Image
+                                        source={{
+                                            uri:
+                                                "http://openweathermap.org/img/wn/" + dates.weather[0].icon + "@4x.png",
+                                        }}
+                                        style={styles.image}
+                                    />
+                                </View>
 
                                 <View
                                     style={{
                                         flexDirection: "row",
                                         alignItems: "center",
                                         justifyContent: "flex-end",
-                                        marginLeft: 99,
+                                        marginLeft: 50,
                                     }}
                                 >
                                     <Text style={styles.lowTemp}>{Math.round(dates.temp.min)}</Text>

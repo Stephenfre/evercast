@@ -38,7 +38,10 @@ export default (state = initialState, action) => {
             };
 
         case SAVE_LOCATIONS:
-            location = action.payload;
+            // if id is already added don't add
+            // save to async storage
+
+            const location = action.payload;
             return {
                 ...state,
                 savedLocations: [...state.savedLocations, location],

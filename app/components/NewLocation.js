@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
-import { getWeatherData } from "../store/actions";
-import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
+
+import { getWeatherData } from "../store/actions";
+import { saveLocation } from "../store/actions";
+
+import HourlyForecast from "./HourlyForecast";
+import WeeklyForecast from "./WeeklyForecast";
 
 import { LineChart } from "react-native-chart-kit";
 import styles from "../assets/style/CurrentStyles";
@@ -13,10 +18,7 @@ import backgroundStyles from "../assets/style/BackgroundColors";
 
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import HourlyForecast from "./HourlyForecast";
-import WeeklyForecast from "./WeeklyForecast";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -46,14 +48,31 @@ const chartConfig = {
     fillShadowGradientOpacity: 2,
 };
 
-function NewLocation({ weatherData, modalVisible, setModalVisible }) {
-    // const [weatherData, setOpenWeatherData] = useState([]);
+function NewLocation({ city, weatherData, modalVisible, setModalVisible }) {
+    console.log("city", city);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getWeatherData());
     }, []);
+
+    const onPressAdd = () => {
+        console.log("clicked");
+
+        dispatch(
+            saveLocation({
+                id: 1,
+                city: "Phoenix",
+                country: "USA",
+                temp: "70",
+                rain: "90%",
+                wind: "8",
+            })
+        );
+
+        setModalVisible(!modalVisible);
+    };
 
     var hours = new Date().getHours();
 
@@ -77,7 +96,7 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                 <Pressable style={MyLocationsStyles.button} onPress={() => setModalVisible(!modalVisible)}>
                     <Text style={MyLocationsStyles.textStyle}>Cancel</Text>
                 </Pressable>
-                <Pressable style={MyLocationsStyles.button} onPress={() => setData({ ...data })}>
+                <Pressable style={MyLocationsStyles.button} onPress={onPressAdd}>
                     <Text style={MyLocationsStyles.textStyle}>Add</Text>
                 </Pressable>
             </View>
@@ -219,10 +238,10 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                     <View style={styles.opacityTopBackground}></View>
                     <View style={styles.topContent}>
                         <View style={styles.rightColumn}>
-                            <Text style={styles.cityText}>Phoenix</Text>
-                            <Text style={styles.rigthTempText}>{Math.round(weatherData.current.temp)}°</Text>
+                            <Text style={styles.cityText}>{city.name}</Text>
+                            <Text style={styles.rigthTempText}>{Math.round(city.main.temp)}°</Text>
                             <>
-                                {weatherData.current.weather[0].main === "Rain" ? (
+                                {city.weather[0].main === "Rain" ? (
                                     <>
                                         <View style={styles.conditionRain}>
                                             <Text style={styles.conditionText}>
@@ -241,17 +260,13 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                                 )}
                             </>
                             <Text style={styles.hiloTemp}>
-                                H: {Math.round(weatherData.daily[0].temp.max)}° L:
-                                {Math.round(weatherData.daily[0].temp.min)}°
+                                L: {Math.round(city.main.temp_min)}° H: {Math.round(city.main.temp_max)}°
                             </Text>
                         </View>
                         <View style={{ marginBottom: 35, marginLeft: 10 }}>
                             <Image
                                 source={{
-                                    uri:
-                                        "http://openweathermap.org/img/wn/" +
-                                        weatherData.current.weather[0].icon +
-                                        "@4x.png",
+                                    uri: "http://openweathermap.org/img/wn/" + city.weather[0].icon + "@4x.png",
                                 }}
                                 style={styles.image}
                             />
@@ -286,7 +301,7 @@ function NewLocation({ weatherData, modalVisible, setModalVisible }) {
                         }}
                     >
                         <MaterialCommunityIcons name="weather-windy-variant" color="white" size={14} />
-                        <Text style={styles.details}>{weatherData.current.wind_speed} kh/m</Text>
+                        <Text style={styles.details}>{city.wind.speed} kh/m</Text>
                     </View>
                 </View>
 
@@ -312,6 +327,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     getWeatherData,
+    saveLocation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewLocation);

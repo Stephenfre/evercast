@@ -7,9 +7,9 @@ export default StyleSheet.create({
 
     savedContainer: {
         flex: 1,
-        height: height,
+        height: height - 80,
         width: width,
-        backgroundColor: "grey",
+        backgroundColor: "black",
         alignItems: "center",
     },
 
@@ -23,11 +23,20 @@ export default StyleSheet.create({
     },
 
     input: {
-        height: 30,
-        margin: 12,
-        marginBottom: 30,
-        width: width - 75,
+        height: 35,
+        marginTop: 15,
+        // marginBottom: 30,
+        width: width - 20,
         // borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: "white",
+    },
+
+    inputActive: {
+        height: 35,
+        marginRight: 10,
+        width: width - 93,
         padding: 10,
         borderRadius: 10,
         backgroundColor: "white",
@@ -98,7 +107,7 @@ export default StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "flex-end",
         width: "90%",
-        height: 60,
+        height: 50,
         paddingTop: 5,
         paddingBottom: 5,
         // backgroundColor: "red",
@@ -115,30 +124,29 @@ export default StyleSheet.create({
     },
 
     newForecast: {
-        height: 40,
-        marginTop: 30,
-        width: width - 20,
+        position: "relative",
+        zIndex: 1,
+        height: height,
+        // marginTop: 30,
+        width: width,
+        backgroundColor: "black",
     },
 
-    opacityForecastBackground: {
-        height: "100%",
-        width: "100%",
-        backgroundColor: "#CEB68C",
-        position: "absolute",
-        borderTopLeftRadius: 9,
-        borderTopRightRadius: 9,
-        borderBottomLeftRadius: 9,
-        borderBottomRightRadius: 9,
-        opacity: 0.2,
-    },
+    // opacityForecastBackground: {
+    //     height: "100%",
+    //     width: "100%",
+    //     backgroundColor: "red",
+    //     position: "absolute",
+    //     borderTopLeftRadius: 9,
+    //     borderTopRightRadius: 9,
+    //     borderBottomLeftRadius: 9,
+    //     borderBottomRightRadius: 9,
+    //     opacity: 0.2,
+    // },
 
     newForecastInfo: {
-        fontSize: 14,
-        fontWeight: "bold",
-        color: "white",
-        fontFamily: "Helvetica",
         paddingTop: 12,
-        paddingBottom: 5,
+        paddingBottom: 12,
         paddingLeft: 20,
     },
 

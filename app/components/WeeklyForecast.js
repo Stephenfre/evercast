@@ -27,6 +27,7 @@ function WeeklyForecast({ weatherData }) {
                                         justifyContent: "center",
                                         alignItems: "center",
                                         marginLeft: 5,
+                                        marginRight: 10,
                                     }}
                                 >
                                     <Image
@@ -58,7 +59,12 @@ function WeeklyForecast({ weatherData }) {
                                 </View>
 
                                 <View
-                                    style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}
+                                    style={{
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        marginRight: 10,
+                                    }}
                                 >
                                     <Image
                                         source={{

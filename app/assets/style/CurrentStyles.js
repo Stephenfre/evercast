@@ -79,14 +79,14 @@ export default StyleSheet.create({
         paddingTop: 12,
     },
 
-    // Image: {
-    //     width: 200,
-    //     height: 200,
-    //     marginBottom: 20,
-    // },
+    imageContainer: {
+        width: 200,
+        height: 200,
+        marginBottom: 20,
+    },
 
     image: {
-        width: 200,
+        width: 150,
         height: 200,
     },
 

@@ -236,7 +236,7 @@ function CurrentWeather({ weatherData }) {
                                 {Math.round(weatherData.daily[0].temp.min)}°
                             </Text>
                         </View>
-                        <View style={{ marginBottom: 35, marginLeft: 10 }}>
+                        <View style={styles.imageContainer}>
                             <Image
                                 source={{
                                     uri:

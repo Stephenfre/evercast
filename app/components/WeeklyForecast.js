@@ -22,7 +22,13 @@ function WeeklyForecast({ weatherData }) {
                                     <Text style={styles.dayText}>{moment(dates.dt * 1000).format("dddd")}</Text>
                                 </View>
                                 <View
-                                    style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}
+                                    style={{
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        marginLeft: 5,
+                                        marginRight: 10,
+                                    }}
                                 >
                                     <Image
                                         source={{
@@ -38,7 +44,7 @@ function WeeklyForecast({ weatherData }) {
                                         flexDirection: "row",
                                         alignItems: "center",
                                         justifyContent: "flex-end",
-                                        marginLeft: 60,
+                                        marginLeft: 55,
                                     }}
                                 >
                                     <Text style={styles.lowTemp}>{Math.round(dates.temp.min)}</Text>
@@ -53,7 +59,12 @@ function WeeklyForecast({ weatherData }) {
                                 </View>
 
                                 <View
-                                    style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}
+                                    style={{
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        marginRight: 10,
+                                    }}
                                 >
                                     <Image
                                         source={{

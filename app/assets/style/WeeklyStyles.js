@@ -32,7 +32,7 @@ export default StyleSheet.create({
 
     day: {
         marginLeft: 20,
-        marginRight: 50,
+        marginRight: 40,
         width: 100,
     },
 

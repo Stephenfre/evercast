@@ -247,6 +247,8 @@ function SavedLocations({ savedLocations }) {
                                         city={city}
                                         modalVisible={modalVisible}
                                         setModalVisible={setModalVisible}
+                                        query={query}
+                                        setQuery={setQuery}
                                     />
                                 </View>
                             </View>
@@ -259,6 +261,10 @@ function SavedLocations({ savedLocations }) {
                         </Pressable>
                     </SafeAreaView>
                 ) : null}
+
+                {/* 
+                    SAVED WEATHERS CARDS ARE BELOW
+                */}
 
                 <View style={styles.locations}>
                     {savedLocations.map((res, index) => {

@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
 import { SafeAreaView, Text, View, Pressable, Dimensions, ScrollView, Modal, Image } from "react-native";
 
-import { getWeatherData } from "../store/actions";
-import { saveLocation } from "../store/actions";
+import { getWeatherData } from "../redux/actions";
+import { saveLocation } from "../redux/actions";
 
 import HourlyForecast from "./HourlyForecast";
 import WeeklyForecast from "./WeeklyForecast";

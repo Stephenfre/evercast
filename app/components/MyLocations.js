@@ -309,7 +309,7 @@ function SavedLocations({ savedLocations }) {
                                                 justifyContent: "center",
                                                 alignItems: "center",
                                                 flexDirection: "row",
-                                                paddingRight: 5,
+                                                paddingRight: 40,
                                             }}
                                         >
                                             <Ionicons name="ios-rainy" color="white" size={13} />

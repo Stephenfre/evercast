@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import rootReducer from "./app/store/reducer";
+import rootReducer from "./app/redux/reducer";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PersistGate } from "redux-persist/integration/react";

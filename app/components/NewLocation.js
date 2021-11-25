@@ -48,27 +48,18 @@ const chartConfig = {
     fillShadowGradientOpacity: 2,
 };
 
-function NewLocation({ city, weatherData, modalVisible, setModalVisible }) {
+function NewLocation({ city, weatherData, modalVisible, setModalVisible, query, setQuery }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getWeatherData());
     }, []);
 
-    var max = 2;
-
-    var random = Math.floor(Math.random() * max);
-
-    var newId = random.toString();
-
-    // console.log("newid", newId);
-
     const onPressAdd = () => {
         console.log("clicked");
 
         dispatch(
             saveLocation({
-                // id: newId,
                 city: city.name,
                 country: city.country,
                 temp: city.main.temp,
@@ -79,6 +70,7 @@ function NewLocation({ city, weatherData, modalVisible, setModalVisible }) {
         );
 
         setModalVisible(!modalVisible);
+        setQuery(!query);
     };
 
     var hours = new Date().getHours();
@@ -108,7 +100,6 @@ function NewLocation({ city, weatherData, modalVisible, setModalVisible }) {
                 </Pressable>
             </View>
             <View
-                // TODO: Change to switch cases
                 style={
                     earlyMorning
                         ? backgroundStyles.earlyContainer

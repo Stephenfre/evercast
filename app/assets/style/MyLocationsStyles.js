@@ -45,8 +45,9 @@ export default StyleSheet.create({
     locations: {
         flexDirection: "row",
         width: width - 30,
-        height: 150,
-        justifyContent: "space-around",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        flexWrap: "wrap",
     },
 
     cardBackground: {
@@ -59,15 +60,16 @@ export default StyleSheet.create({
     },
 
     locationCardA: {
-        width: 150,
-        height: "100%",
+        width: 170,
+        height: 160,
         backgroundColor: "rgb(255, 48, 123)",
         borderRadius: 20,
+        marginBottom: 20,
     },
 
     locationCardB: {
-        width: 150,
-        height: "100%",
+        width: 170,
+        height: 160,
         backgroundColor: "rgb(27,0,24)",
         borderRadius: 20,
     },

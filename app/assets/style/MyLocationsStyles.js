@@ -42,12 +42,24 @@ export default StyleSheet.create({
         backgroundColor: "white",
     },
 
-    locations: {
-        flexDirection: "row",
-        width: width - 30,
-        justifyContent: "space-between",
-        alignItems: "flex-start",
-        flexWrap: "wrap",
+    locationCardA: {
+        width: width - 20,
+        height: 115,
+        backgroundColor: "rgb(255, 48, 123)",
+        borderRadius: 20,
+        marginBottom: 20,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    locationCardB: {
+        width: width - 20,
+        height: 115,
+        backgroundColor: "rgb(27,0,24)",
+        borderRadius: 20,
+        marginBottom: 20,
+        justifyContent: "center",
+        alignItems: "center",
     },
 
     cardBackground: {
@@ -59,31 +71,22 @@ export default StyleSheet.create({
         borderRadius: 20,
     },
 
-    locationCardA: {
-        width: 170,
-        height: 160,
-        backgroundColor: "rgb(255, 48, 123)",
-        borderRadius: 20,
-        marginBottom: 20,
-    },
-
-    locationCardB: {
-        width: 170,
-        height: 160,
-        backgroundColor: "rgb(27,0,24)",
-        borderRadius: 20,
-    },
-
     topCard: {
         flexDirection: "row",
-        justifyContent: "space-evenly",
+        justifyContent: "space-between",
         alignItems: "center",
-        width: "100%",
+        width: "90%",
         paddingTop: 10,
         paddingBottom: 10,
+        height: 75,
     },
 
-    savedCity: {},
+    locations: {
+        flexDirection: "column",
+        width: width - 30,
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+    },
 
     locationTemp: {
         fontSize: 35,
@@ -106,14 +109,9 @@ export default StyleSheet.create({
 
     locationDetails: {
         flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "flex-end",
         width: "90%",
-        height: 50,
-        paddingTop: 5,
+        height: 30,
         paddingBottom: 5,
-        // backgroundColor: "red",
-        marginLeft: 11,
     },
 
     savedDetails: {

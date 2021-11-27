@@ -67,7 +67,7 @@ function SavedLocations({ savedLocations }) {
     }, [query]);
 
     return (
-        <ScrollView>
+        <>
             <View style={styles.savedContainer}>
                 <StatusBar barStyle="light-content" />
                 <SafeAreaView>
@@ -180,7 +180,7 @@ function SavedLocations({ savedLocations }) {
 
                 <WeatherCards />
             </View>
-        </ScrollView>
+        </>
     );
 }
 

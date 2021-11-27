@@ -82,10 +82,12 @@ export default StyleSheet.create({
     },
 
     locations: {
+        borderWidth: 1,
+        borderColor: "red",
         flexDirection: "column",
-        width: width - 30,
-        justifyContent: "space-between",
-        alignItems: "flex-start",
+        width: width,
+        justifyContent: "center",
+        alignItems: "center",
     },
 
     locationTemp: {
@@ -132,18 +134,6 @@ export default StyleSheet.create({
         backgroundColor: "black",
     },
 
-    // opacityForecastBackground: {
-    //     height: "100%",
-    //     width: "100%",
-    //     backgroundColor: "red",
-    //     position: "absolute",
-    //     borderTopLeftRadius: 9,
-    //     borderTopRightRadius: 9,
-    //     borderBottomLeftRadius: 9,
-    //     borderBottomRightRadius: 9,
-    //     opacity: 0.2,
-    // },
-
     newForecastInfo: {
         paddingTop: 12,
         paddingBottom: 12,
@@ -164,7 +154,6 @@ export default StyleSheet.create({
         position: "absolute",
         zIndex: 2,
         width: "93%",
-        // backgroundColor: "black",
     },
 
     button: {

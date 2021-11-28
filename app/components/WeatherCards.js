@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Text, View, Image, TouchableHighlight, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableHighlight, TouchableOpacity, Pressable } from "react-native";
 
 import styles from "../assets/style/MyLocationsStyles";
 
@@ -26,12 +26,16 @@ function WeatherCards({ savedLocations }) {
         if (rowMap[rowKey]) {
             rowMap[rowKey].closeRow();
         }
+        console.log("close pressed");
     };
 
     const deleteRow = (rowMap, rowKey) => {
-        if (rowMap[rowKey]) {
-            rowMap[rowKey].deleteRow();
-        }
+        closeRow(rowMap, rowKey);
+        const newData = [...data];
+        const prevIndex = data.findIndex((item) => item.key === rowKey);
+        newData.splice(prevIndex, 1);
+        setData(newData);
+        console.log("delete pressed");
     };
 
     const VisableItem = (props) => {
@@ -106,8 +110,8 @@ function WeatherCards({ savedLocations }) {
         return <VisableItem data={data} />;
     };
 
-    const HiddenItemsWithActions = (props) => {
-        const { onClose, onDelete } = props;
+    const renderHiddenItem = (data, rowMap) => {
+        // const { onClose, onDelete } = props;
 
         return (
             <View
@@ -124,7 +128,7 @@ function WeatherCards({ savedLocations }) {
                     marginLeft: 230,
                 }}
             >
-                <TouchableOpacity
+                <Pressable
                     style={{
                         backgroundColor: "grey",
                         width: "50%",
@@ -134,11 +138,10 @@ function WeatherCards({ savedLocations }) {
                         borderTopLeftRadius: "20px",
                         borderBottomLeftRadius: "20px",
                     }}
+                    onPress={() => closeRow(rowMap, data.item.key)}
                 >
-                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }} onPress={onClose}>
-                        Close
-                    </Text>
-                </TouchableOpacity>
+                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }}>Close</Text>
+                </Pressable>
                 <TouchableOpacity
                     style={{
                         backgroundColor: "red",
@@ -149,25 +152,24 @@ function WeatherCards({ savedLocations }) {
                         borderTopRightRadius: "20px",
                         borderBottomRightRadius: "20px",
                     }}
+                    onPress={() => deleteRow(rowMap, data.item.key)}
                 >
-                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }} onPress={onDelete}>
-                        Delete
-                    </Text>
+                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }}>Delete</Text>
                 </TouchableOpacity>
             </View>
         );
     };
 
-    const renderHiddenItem = (data, rowMap) => {
-        return (
-            <HiddenItemsWithActions
-                data={data}
-                rowMap={rowMap}
-                closeRow={() => closeRow(rowMap, data.item.key)}
-                deleteRow={() => deletRow(rowMap, data.item.key)}
-            />
-        );
-    };
+    // const renderHiddenItem = (data, rowMap) => {
+    //     return (
+    //         <HiddenItemsWithActions
+    //             data={data}
+    //             rowMap={rowMap}
+    //             closeRow={() => closeRow(rowMap, data.item.key)}
+    //             deleteRow={() => deleteRow(rowMap, data.item.key)}
+    //         />
+    //     );
+    // };
 
     return (
         <View style={styles.locations}>

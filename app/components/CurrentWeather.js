@@ -101,7 +101,7 @@ function CurrentWeather({ weatherData }) {
                         ? backgroundStyles.afternoonContainerRain
                         : afternoon && weatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.afternoonContainerSnow
-                        : evening && weatherData.current.weather[0].main === "Sunny"
+                        : evening && weatherData.current.weather[0].main === "Clear"
                         ? backgroundStyles.eveningContainer
                         : evening && weatherData.current.weather[0].main === "Clouds"
                         ? backgroundStyles.eveningContainerOvercast
@@ -209,7 +209,7 @@ function CurrentWeather({ weatherData }) {
                         colors={["rgba(0, 50, 86, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : evening && weatherData.current.weather[0].main === "Sunny" ? (
+                ) : evening && weatherData.current.weather[0].main === "Clear" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
@@ -267,15 +267,7 @@ function CurrentWeather({ weatherData }) {
                             <Text style={styles.cityText}>Phoenix</Text>
                             <Text style={styles.rigthTempText}>{Math.round(weatherData.current.temp)}°</Text>
                             <>
-                                {weatherData.current.weather[0].main === "Rain" ? (
-                                    <>
-                                        <View style={styles.conditionRain}>
-                                            <Text style={styles.conditionText}>
-                                                {weatherData.current.weather[0].main}
-                                            </Text>
-                                        </View>
-                                    </>
-                                ) : (
+                                {weatherData.current.weather[0].main === "Clear" ? (
                                     <>
                                         <View style={styles.condition}>
                                             <Text style={styles.conditionText}>
@@ -283,7 +275,47 @@ function CurrentWeather({ weatherData }) {
                                             </Text>
                                         </View>
                                     </>
-                                )}
+                                ) : weatherData.current.weather[0].main === "Clouds" ? (
+                                    <>
+                                        <View style={styles.conditionCkouds}>
+                                            <Text style={styles.conditionText}>
+                                                {weatherData.current.weather[0].main}
+                                            </Text>
+                                        </View>
+                                    </>
+                                ) : weatherData.current.weather[0].main === "Drizzle" ? (
+                                    <>
+                                        <View style={styles.conditionRain}>
+                                            <Text style={styles.conditionText}>
+                                                {weatherData.current.weather[0].main}
+                                            </Text>
+                                        </View>
+                                    </>
+                                ) : weatherData.current.weather[0].main === "Rain" ? (
+                                    <>
+                                        <View style={styles.conditionRain}>
+                                            <Text style={styles.conditionText}>
+                                                {weatherData.current.weather[0].main}
+                                            </Text>
+                                        </View>
+                                    </>
+                                ) : weatherData.current.weather[0].main === "ThunderStorm" ? (
+                                    <>
+                                        <View style={styles.conditionRain}>
+                                            <Text style={styles.conditionText}>
+                                                {weatherData.current.weather[0].main}
+                                            </Text>
+                                        </View>
+                                    </>
+                                ) : weatherData.current.weather[0].main === "Snow" ? (
+                                    <>
+                                        <View style={styles.conditionSnow}>
+                                            <Text style={styles.conditionText}>
+                                                {weatherData.current.weather[0].main}
+                                            </Text>
+                                        </View>
+                                    </>
+                                ) : null}
                             </>
                             <Text style={styles.hiloTemp}>
                                 H: {Math.round(weatherData.daily[0].temp.max)}° L:

@@ -53,10 +53,22 @@ export default StyleSheet.create({
     condition: {
         borderRadius: 10,
         padding: 10,
-        backgroundColor: "gold",
+        backgroundColor: "#FFCA05",
+    },
+
+    conditionCloudy: {
+        borderRadius: 10,
+        padding: 10,
+        backgroundColor: "#848484",
     },
 
     conditionRain: {
+        borderRadius: 10,
+        padding: 10,
+        backgroundColor: "#2E394D",
+    },
+
+    conditionSnow: {
         borderRadius: 10,
         padding: 10,
         backgroundColor: "#89A0C5",

@@ -82,8 +82,8 @@ export default StyleSheet.create({
     },
 
     locations: {
-        borderWidth: 1,
-        borderColor: "red",
+        // borderWidth: 1,
+        // borderColor: "red",
         flexDirection: "column",
         width: width,
         justifyContent: "center",

@@ -60,6 +60,7 @@ function NewLocation({ city, weatherData, modalVisible, setModalVisible, query, 
 
         dispatch(
             saveLocation({
+                // id: city.id,
                 city: city.name,
                 country: city.country,
                 temp: city.main.temp,

@@ -44,13 +44,18 @@ export default (state = initialState, action) => {
             };
 
         case DELETE_LOCATIONS:
-            // const location = action.payload;
+            state.savedLocations.splice(action.payload, 1);
             return {
                 ...state,
-                savedLocations: state.savedLocations.filter((location) => location.id === action.payload.id),
+                savedLocations: [...state.savedLocations],
             };
 
         default:
             return state;
     }
 };
+
+// if (action.type === REMOVE_ITEM) {
+//     state.baskeitems.splice(action.payload, 1);
+//     return { ...state, baskeitems: [...state.baskeitems] };
+// }

@@ -14,6 +14,7 @@ import { SwipeListView } from "react-native-swipe-list-view";
 function WeatherCards({ savedLocations }) {
     const data = savedLocations.map((location, index) => ({
         key: `${index}`,
+        id: location.id,
         temp: location.temp,
         city: location.city,
         country: location.country,
@@ -21,6 +22,8 @@ function WeatherCards({ savedLocations }) {
         rain: location.precip,
         wind: location.wind,
     }));
+
+    console.log("data", data);
 
     const dispatch = useDispatch();
 
@@ -33,12 +36,7 @@ function WeatherCards({ savedLocations }) {
 
     const deleteRow = (rowMap, rowKey) => {
         closeRow(rowMap, rowKey);
-        // const newData = [...data];
-        const prevIndex = data.findIndex((item) => item.key === rowKey);
-        // newData.splice(prevIndex, 1);
-        // setData(newData);
-        // console.log("delete pressed", rowKey);
-        // dispatch(deleteLocation(prevIndex));
+        dispatch(deleteLocation(rowKey));
     };
 
     const VisableItem = (props) => {

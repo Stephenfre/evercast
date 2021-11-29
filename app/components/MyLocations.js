@@ -25,7 +25,6 @@ function SavedLocations({ savedLocations }) {
         );
 
         const cityData = await results.json();
-        console.log("data", cityData.length !== 0);
         return cityData;
     };
 
@@ -44,7 +43,6 @@ function SavedLocations({ savedLocations }) {
             if (currentQuery) {
                 const city = await getCity(query, controller);
                 setCity(city);
-                console.log("city here", city);
             }
         };
         loadCities();

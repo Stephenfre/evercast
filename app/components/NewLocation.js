@@ -56,11 +56,8 @@ function NewLocation({ city, weatherData, modalVisible, setModalVisible, query, 
     }, []);
 
     const onPressAdd = () => {
-        console.log("clicked");
-
         dispatch(
             saveLocation({
-                // id: city.id,
                 city: city.name,
                 country: city.country,
                 temp: city.main.temp,

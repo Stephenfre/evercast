@@ -23,15 +23,12 @@ function WeatherCards({ savedLocations }) {
         wind: location.wind,
     }));
 
-    console.log("data", data);
-
     const dispatch = useDispatch();
 
     const closeRow = (rowMap, rowKey) => {
         if (rowMap[rowKey]) {
             rowMap[rowKey].closeRow();
         }
-        console.log("close pressed");
     };
 
     const deleteRow = (rowMap, rowKey) => {

@@ -318,8 +318,8 @@ function CurrentWeather({ weatherData }) {
                                 ) : null}
                             </>
                             <Text style={styles.hiloTemp}>
-                                H: {Math.round(weatherData.daily[0].temp.max)}° L:
-                                {Math.round(weatherData.daily[0].temp.min)}°
+                                L: {Math.round(weatherData.daily[0].temp.min)}° H:{" "}
+                                {Math.round(weatherData.daily[0].temp.max)}°
                             </Text>
                         </View>
                         <View style={{ marginBottom: 35, marginLeft: 10 }}>

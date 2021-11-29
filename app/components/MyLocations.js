@@ -1,17 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import {
-    Text,
-    View,
-    TextInput,
-    SafeAreaView,
-    StatusBar,
-    ScrollView,
-    Pressable,
-    Modal,
-    Alert,
-    Dimensions,
-} from "react-native";
+import { Text, View, TextInput, SafeAreaView, StatusBar, Pressable, Modal, Alert, Dimensions } from "react-native";
 
 import NewLocation from "./NewLocation";
 import WeatherCards from "./WeatherCards";
@@ -100,10 +89,7 @@ function SavedLocations({ savedLocations }) {
                                 />
                             )}
                             {query ? (
-                                <Pressable
-                                    // style={MyLocationsStyles.button}
-                                    onPress={() => setQuery(!query)}
-                                >
+                                <Pressable onPress={() => setQuery(!query)}>
                                     <Text
                                         style={{
                                             fontSize: 20,

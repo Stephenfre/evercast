@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Text, View, Image, TouchableHighlight, TouchableOpacity } from "react-native";
+import { connect, useDispatch } from "react-redux";
+import { Text, View, Image, TouchableHighlight, TouchableOpacity, Pressable, ScrollView } from "react-native";
+
+import { deleteLocation } from "../redux/actions";
 
 import styles from "../assets/style/MyLocationsStyles";
 
@@ -10,28 +12,33 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { SwipeListView } from "react-native-swipe-list-view";
 
 function WeatherCards({ savedLocations }) {
-    const [data, setData] = useState(
-        savedLocations.map((location, index) => ({
-            key: `${index}`,
-            temp: location.temp,
-            city: location.city,
-            country: location.country,
-            image: location.img,
-            rain: location.precip,
-            wind: location.wind,
-        }))
-    );
+    const data = savedLocations.map((location, index) => ({
+        key: `${index}`,
+        temp: location.temp,
+        city: location.city,
+        country: location.country,
+        image: location.img,
+        rain: location.precip,
+        wind: location.wind,
+    }));
+
+    const dispatch = useDispatch();
 
     const closeRow = (rowMap, rowKey) => {
         if (rowMap[rowKey]) {
             rowMap[rowKey].closeRow();
         }
+        console.log("close pressed");
     };
 
     const deleteRow = (rowMap, rowKey) => {
-        if (rowMap[rowKey]) {
-            rowMap[rowKey].deleteRow();
-        }
+        closeRow(rowMap, rowKey);
+        // const newData = [...data];
+        const prevIndex = data.findIndex((item) => item.key === rowKey);
+        // newData.splice(prevIndex, 1);
+        // setData(newData);
+        // console.log("delete pressed", rowKey);
+        // dispatch(deleteLocation(prevIndex));
     };
 
     const VisableItem = (props) => {
@@ -102,12 +109,12 @@ function WeatherCards({ savedLocations }) {
         );
     };
 
-    const renderItem = (data, rowMap) => {
+    const renderItem = (data) => {
         return <VisableItem data={data} />;
     };
 
-    const HiddenItemsWithActions = (props) => {
-        const { onClose, onDelete } = props;
+    const renderHiddenItem = (data, rowMap) => {
+        // const { onClose, onDelete } = props;
 
         return (
             <View
@@ -124,7 +131,7 @@ function WeatherCards({ savedLocations }) {
                     marginLeft: 230,
                 }}
             >
-                <TouchableOpacity
+                <Pressable
                     style={{
                         backgroundColor: "grey",
                         width: "50%",
@@ -134,11 +141,10 @@ function WeatherCards({ savedLocations }) {
                         borderTopLeftRadius: "20px",
                         borderBottomLeftRadius: "20px",
                     }}
+                    onPress={() => closeRow(rowMap, data.item.key)}
                 >
-                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }} onPress={onClose}>
-                        Close
-                    </Text>
-                </TouchableOpacity>
+                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }}>Close</Text>
+                </Pressable>
                 <TouchableOpacity
                     style={{
                         backgroundColor: "red",
@@ -149,36 +155,37 @@ function WeatherCards({ savedLocations }) {
                         borderTopRightRadius: "20px",
                         borderBottomRightRadius: "20px",
                     }}
+                    onPress={() => deleteRow(rowMap, data.item.key)}
                 >
-                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }} onPress={onDelete}>
-                        Delete
-                    </Text>
+                    <Text style={{ color: "white", fontSize: 18, fontFamily: "Helvetica" }}>Delete</Text>
                 </TouchableOpacity>
             </View>
         );
     };
 
-    const renderHiddenItem = (data, rowMap) => {
-        return (
-            <HiddenItemsWithActions
-                data={data}
-                rowMap={rowMap}
-                closeRow={() => closeRow(rowMap, data.item.key)}
-                deleteRow={() => deletRow(rowMap, data.item.key)}
-            />
-        );
-    };
+    // const renderHiddenItem = (data, rowMap) => {
+    //     return (
+    //         <HiddenItemsWithActions
+    //             data={data}
+    //             rowMap={rowMap}
+    //             closeRow={() => closeRow(rowMap, data.item.key)}
+    //             deleteRow={() => deleteRow(rowMap, data.item.key)}
+    //         />
+    //     );
+    // };
 
     return (
-        <View style={styles.locations}>
-            <SwipeListView
-                data={data}
-                renderItem={renderItem}
-                renderHiddenItem={renderHiddenItem}
-                // leftOpenValue={150}
-                rightOpenValue={-150}
-            />
-        </View>
+        <ScrollView>
+            <View style={styles.locations}>
+                <SwipeListView
+                    data={data}
+                    renderItem={renderItem}
+                    renderHiddenItem={renderHiddenItem}
+                    // leftOpenValue={150}
+                    rightOpenValue={-150}
+                />
+            </View>
+        </ScrollView>
     );
 }
 
@@ -188,6 +195,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    deleteLocation,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherCards);

@@ -4,6 +4,7 @@ export const GET_ALLWEATHER_DATA = "GET_ALLWEATHER_DATA";
 export const GET_ALLWEATHER_DATA_SUCCESS = "GET_ALLWEATHER_DATA_SUCCESS";
 export const GET_ALLWEATHER_DATA_FAIL = "GET_ALLWEATHER_DATA_FAIL";
 export const SAVE_LOCATIONS = "SAVE_LOCATIONS";
+export const DELETE_LOCATIONS = "DELETE_LOCATIONS";
 
 export function getWeatherData() {
     return (dispatch) => {
@@ -32,6 +33,13 @@ export function getWeatherData() {
 export function saveLocation(location) {
     return {
         type: SAVE_LOCATIONS,
+        payload: location,
+    };
+}
+
+export function deleteLocation(location) {
+    return {
+        type: DELETE_LOCATIONS,
         payload: location,
     };
 }

@@ -169,7 +169,14 @@ function SavedLocations({ savedLocations }) {
                         </Modal>
 
                         <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
-                            <Text style={{ fontSize: 14, fontWeight: "bold", color: "white", fontFamily: "Helvetica" }}>
+                            <Text
+                                style={{
+                                    fontSize: 14,
+                                    fontWeight: "bold",
+                                    color: "white",
+                                    fontFamily: "Helvetica",
+                                }}
+                            >
                                 {city.name}
                             </Text>
                         </Pressable>

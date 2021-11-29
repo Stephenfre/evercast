@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
-import { Text, View, Image, TouchableHighlight, TouchableOpacity, Pressable } from "react-native";
+import { Text, View, Image, TouchableHighlight, TouchableOpacity, Pressable, ScrollView } from "react-native";
 
 import { deleteLocation } from "../redux/actions";
 
@@ -175,15 +175,17 @@ function WeatherCards({ savedLocations }) {
     // };
 
     return (
-        <View style={styles.locations}>
-            <SwipeListView
-                data={data}
-                renderItem={renderItem}
-                renderHiddenItem={renderHiddenItem}
-                // leftOpenValue={150}
-                rightOpenValue={-150}
-            />
-        </View>
+        <ScrollView>
+            <View style={styles.locations}>
+                <SwipeListView
+                    data={data}
+                    renderItem={renderItem}
+                    renderHiddenItem={renderHiddenItem}
+                    // leftOpenValue={150}
+                    rightOpenValue={-150}
+                />
+            </View>
+        </ScrollView>
     );
 }
 

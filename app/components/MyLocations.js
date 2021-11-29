@@ -107,10 +107,8 @@ function SavedLocations({ savedLocations }) {
                                     <Text
                                         style={{
                                             fontSize: 20,
-                                            // fontWeight: "bold",
                                             color: "#fff",
                                             fontFamily: "Helvetica",
-                                            // marginLeft: 10,
                                         }}
                                     >
                                         Cancel

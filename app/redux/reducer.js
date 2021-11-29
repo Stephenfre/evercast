@@ -1,4 +1,10 @@
-import { GET_ALLWEATHER_DATA, GET_ALLWEATHER_DATA_SUCCESS, GET_ALLWEATHER_DATA_FAIL, SAVE_LOCATIONS } from "./actions";
+import {
+    GET_ALLWEATHER_DATA,
+    GET_ALLWEATHER_DATA_SUCCESS,
+    GET_ALLWEATHER_DATA_FAIL,
+    SAVE_LOCATIONS,
+    DELETE_LOCATIONS,
+} from "./actions";
 
 const initialState = {
     weatherData: [],
@@ -35,6 +41,13 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 savedLocations: [...state.savedLocations, location],
+            };
+
+        case DELETE_LOCATIONS:
+            // const location = action.payload;
+            return {
+                ...state,
+                savedLocations: state.savedLocations.filter((location) => location.id === action.payload.id),
             };
 
         default:

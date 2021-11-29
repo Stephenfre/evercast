@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Text, View, Image, TouchableHighlight, TouchableOpacity, Pressable } from "react-native";
+
+import { deleteLocation } from "../redux/actions";
 
 import styles from "../assets/style/MyLocationsStyles";
 
@@ -10,17 +12,17 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { SwipeListView } from "react-native-swipe-list-view";
 
 function WeatherCards({ savedLocations }) {
-    const [data, setData] = useState(
-        savedLocations.map((location, index) => ({
-            key: `${index}`,
-            temp: location.temp,
-            city: location.city,
-            country: location.country,
-            image: location.img,
-            rain: location.precip,
-            wind: location.wind,
-        }))
-    );
+    const data = savedLocations.map((location, index) => ({
+        key: `${index}`,
+        temp: location.temp,
+        city: location.city,
+        country: location.country,
+        image: location.img,
+        rain: location.precip,
+        wind: location.wind,
+    }));
+
+    const dispatch = useDispatch();
 
     const closeRow = (rowMap, rowKey) => {
         if (rowMap[rowKey]) {
@@ -31,11 +33,12 @@ function WeatherCards({ savedLocations }) {
 
     const deleteRow = (rowMap, rowKey) => {
         closeRow(rowMap, rowKey);
-        const newData = [...data];
+        // const newData = [...data];
         const prevIndex = data.findIndex((item) => item.key === rowKey);
-        newData.splice(prevIndex, 1);
-        setData(newData);
-        console.log("delete pressed");
+        // newData.splice(prevIndex, 1);
+        // setData(newData);
+        // console.log("delete pressed", rowKey);
+        // dispatch(deleteLocation(prevIndex));
     };
 
     const VisableItem = (props) => {
@@ -106,7 +109,7 @@ function WeatherCards({ savedLocations }) {
         );
     };
 
-    const renderItem = (data, rowMap) => {
+    const renderItem = (data) => {
         return <VisableItem data={data} />;
     };
 
@@ -190,6 +193,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    deleteLocation,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeatherCards);

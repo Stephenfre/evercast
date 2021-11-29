@@ -79,9 +79,13 @@ function CurrentWeather({ weatherData }) {
                         ? backgroundStyles.earlyContainer
                         : morning && weatherData.current.weather[0].main === "Clear"
                         ? backgroundStyles.morningContainer
-                        : morning && weatherData.current.weather[0].main === "Overcast"
+                        : morning && weatherData.current.weather[0].main === "Clouds"
                         ? backgroundStyles.morningContainerOvercast
+                        : morning && weatherData.current.weather[0].main === "Drizzle"
+                        ? backgroundStyles.morningContainerRain
                         : morning && weatherData.current.weather[0].main === "Rain"
+                        ? backgroundStyles.morningContainerRain
+                        : morning && weatherData.current.weather[0].main === "Thunderstorm"
                         ? backgroundStyles.morningContainerRain
                         : morning && weatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.morningContainerSnow
@@ -89,7 +93,11 @@ function CurrentWeather({ weatherData }) {
                         ? backgroundStyles.afternoonContainer
                         : afternoon && weatherData.current.weather[0].main === "Clouds"
                         ? backgroundStyles.afternoonContainerOvercast
+                        : afternoon && weatherData.current.weather[0].main === "Drizzle"
+                        ? backgroundStyles.afternoonContainerRain
                         : afternoon && weatherData.current.weather[0].main === "Rain"
+                        ? backgroundStyles.afternoonContainerRain
+                        : afternoon && weatherData.current.weather[0].main === "Thunderstorm"
                         ? backgroundStyles.afternoonContainerRain
                         : afternoon && weatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.afternoonContainerSnow
@@ -97,7 +105,11 @@ function CurrentWeather({ weatherData }) {
                         ? backgroundStyles.eveningContainer
                         : evening && weatherData.current.weather[0].main === "Clouds"
                         ? backgroundStyles.eveningContainerOvercast
+                        : evening && weatherData.current.weather[0].main === "Drizzle"
+                        ? backgroundStyles.eveningContainerRain
                         : evening && weatherData.current.weather[0].main === "Rain"
+                        ? backgroundStyles.eveningContainerRain
+                        : evening && weatherData.current.weather[0].main === "Thunderstorm"
                         ? backgroundStyles.eveningContainerRain
                         : evening && weatherData.current.weather[0].main === "Snow"
                         ? backgroundStyles.eveningContainerSnow
@@ -120,14 +132,28 @@ function CurrentWeather({ weatherData }) {
                         colors={["rgba(255,184,0,100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : morning && weatherData.current.weather[0].main === "Overcast" ? (
+                ) : morning && weatherData.current.weather[0].main === "Clouds" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(219, 226, 251, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
+                ) : morning && weatherData.current.weather[0].main === "Drizzle" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(204, 215, 255, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
                 ) : morning && weatherData.current.weather[0].main === "Rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(204, 215, 255, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : morning && weatherData.current.weather[0].main === "Thunderstorm" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
@@ -148,14 +174,28 @@ function CurrentWeather({ weatherData }) {
                         colors={["rgba(255, 184, 0, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
-                ) : afternoon && weatherData.current.weather[0].main === "Overcast" ? (
+                ) : afternoon && weatherData.current.weather[0].main === "Clouds" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
                         colors={["rgba(168, 175, 198, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
+                ) : afternoon && weatherData.current.weather[0].main === "Drizzle" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(136, 149, 195, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
                 ) : afternoon && weatherData.current.weather[0].main === "Rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(136, 149, 195, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : afternoon && weatherData.current.weather[0].main === "Thunderstorm" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}
@@ -183,7 +223,21 @@ function CurrentWeather({ weatherData }) {
                         colors={["rgba(120, 124, 140, 100)", "transparent"]}
                         style={backgroundStyles.background}
                     />
+                ) : evening && weatherData.current.weather[0].main === "Drizzle" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(99, 109, 146, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
                 ) : evening && weatherData.current.weather[0].main === "Rain" ? (
+                    <LinearGradient
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+                        colors={["rgba(99, 109, 146, 100)", "transparent"]}
+                        style={backgroundStyles.background}
+                    />
+                ) : evening && weatherData.current.weather[0].main === "Thunderstorm" ? (
                     <LinearGradient
                         start={{ x: 1, y: 0 }}
                         end={{ x: 0, y: 1 }}

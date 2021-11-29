@@ -25,7 +25,7 @@ function SavedLocations({ savedLocations }) {
         );
 
         const cityData = await results.json();
-        console.log("data", cityData);
+        console.log("data", cityData.length !== 0);
         return cityData;
     };
 
@@ -153,19 +153,43 @@ function SavedLocations({ savedLocations }) {
                                 </View>
                             </View>
                         </Modal>
-
-                        <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
-                            <Text
-                                style={{
-                                    fontSize: 14,
-                                    fontWeight: "bold",
-                                    color: "white",
-                                    fontFamily: "Helvetica",
-                                }}
-                            >
-                                {city.name}
-                            </Text>
-                        </Pressable>
+                        {city.message === "city not found" ? (
+                            <View style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
+                                <Text
+                                    style={{
+                                        fontSize: 14,
+                                        fontWeight: "bold",
+                                        color: "white",
+                                        fontFamily: "Helvetica",
+                                    }}
+                                >
+                                    No Results
+                                </Text>
+                                <Text
+                                    style={{
+                                        fontSize: 14,
+                                        fontWeight: "bold",
+                                        color: "white",
+                                        fontFamily: "Helvetica",
+                                    }}
+                                >
+                                    {city.message}
+                                </Text>
+                            </View>
+                        ) : (
+                            <Pressable style={styles.newForecastInfo} onPress={() => setModalVisible(true)}>
+                                <Text
+                                    style={{
+                                        fontSize: 14,
+                                        fontWeight: "bold",
+                                        color: "white",
+                                        fontFamily: "Helvetica",
+                                    }}
+                                >
+                                    {city.name}
+                                </Text>
+                            </Pressable>
+                        )}
                     </SafeAreaView>
                 ) : null}
 

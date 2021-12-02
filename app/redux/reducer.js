@@ -2,6 +2,9 @@ import {
     GET_ALLWEATHER_DATA,
     GET_ALLWEATHER_DATA_SUCCESS,
     GET_ALLWEATHER_DATA_FAIL,
+    GET_MAP_DATA,
+    GET_MAP_DATA_SUCCESS,
+    GET_MAP_DATA_FAIL,
     SAVE_LOCATIONS,
     DELETE_LOCATIONS,
 } from "./actions";
@@ -11,10 +14,33 @@ const initialState = {
     fetchingWeatherData: null,
     fetchingWeatherDataFail: null,
     savedLocations: [],
+    location: null,
+    fetchingLocation: null,
+    fetchingLocationFail: null,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case GET_MAP_DATA:
+            return {
+                ...state,
+                fetchingLocation: true,
+            };
+
+        case GET_MAP_DATA_SUCCESS:
+            return {
+                ...state,
+                location: action.payload,
+                fetchingLocation: false,
+            };
+
+        case GET_MAP_DATA_FAIL:
+            return {
+                ...state,
+                fetchingLocationFail: true,
+                fetchingLocation: false,
+            };
+
         case GET_ALLWEATHER_DATA:
             return {
                 ...state,
